@@ -17,7 +17,8 @@ def chat():
 @socketio.on('message')
 def handle_message(data):
     print('received message: ' + data)
-    return 'one'
+    emit('announcements', 'hii',broadcast=True) # OVAKO SALJEMO I DI SALJEMO
+
     
 @socketio.on('connect')
 def test_connect():
