@@ -1,3 +1,3 @@
 FLASK_ENV=production
-export FLASK_APP=lask.py
-FLASK_APP=main.py
+export FLASK_APP=nisto.py
+FLASK_APP=nisto.py
