@@ -17,6 +17,7 @@ def chat():
 @socketio.on('message')
 def handle_message(data):
     print('received message: ' + data)
+    return 'one'
     
 @socketio.on('connect')
 def test_connect():
