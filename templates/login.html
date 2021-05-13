@@ -8,15 +8,18 @@
     <link rel="stylesheet" href="login.css">
 </head>
 <body>
+    {% if error  %}
+        <p>{{ error }}</p>
+    {% endif %}
     <div class="sve-kont">
         <div class="login-kont">
             <h1>Login</h1>
             <input type="text" class="username" placeholder="Usename">
             <input type="password" class="pass" placeholder="Password">
             <button type="submit">LOGIN</button>
-            <p>Haven't made acc? <a href="file:///C:/Users/Korisnik/Desktop/teplalets%20uza%20njega/signup.html">Sign Up</a></p>
+            <p>Haven't made acc? <a href="/signup">Sign Up</a></p>
         </div>
     </div>
-    <a href="/index">Main</a>
+    <a href="/">Main</a>
 </body>
 </html>
