@@ -15,16 +15,19 @@
     <div class="sve-kont">
         <div class="login-kont">
             <h1>Sign Up</h1>
-            <form action = "/signupTry" method = "post">
+            <form class="form">
                 <input type="text" class="username" placeholder="First Name" name="name">
                 <input type="text" class="username" placeholder="Preffered Username" name="username">
                 <input type="email" class="username" placeholder="Email" name="email">
-                <input type="password" class="pass" placeholder="Password" name="password">
-                <input type="password" class="pass" placeholder="Repeat Password">
+                <h4 class="pass-err"></h4>
+                <input type="password" class="pass pass1" placeholder="Password" name="password">
+                <input type="password" class="pass pass2" placeholder="Repeat Password">
                 <button type="submit">SIGN UP</button>
+                </form>
             </form>
         </div>
     </div>
     <a href="/index">Main</a>
+    <script src="/static/js/signup.js"></script>
 </body>
 </html>
