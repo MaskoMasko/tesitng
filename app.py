@@ -26,10 +26,20 @@ def chat():
 def signup():
   return render_template("signup.html")
 
+@app.route('/signout')
+def signout():
+  resp = make_response(redirect('/login'))
+  resp.set_cookie('logStat', 'Signed Out')
+  resp.set_cookie('User', "None")
+  return resp      
+
 @app.route('/login')
 def login():
   logStatus = request.cookies.get('logStat')
-  return render_template("login.html")
+  if logStatus == "Logged In":
+    return redirect("/chat")
+  else:
+    return render_template("login.html")
 
 @app.route('/signupTry', methods = ['POST'])  
 def signupTry():
