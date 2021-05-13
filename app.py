@@ -29,6 +29,11 @@ def chat():
 def signup():
   return render_template("signup.html")
 
+@app.route('/nist')
+def nisto():
+  return render_template("signup.html")
+
+
 @app.route('/signout')
 def signout():
   resp = make_response(redirect('/login'))
