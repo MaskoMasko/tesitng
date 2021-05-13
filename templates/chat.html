@@ -33,9 +33,10 @@
                     <li class="mess2">Nhijova poruka</li>
                     <div class="mess2-thing"></div>
             </ul>
-        </div>
-            <input type="text" class="upis"><button type="submit" class="send">Send</button>
-        </div>
+            <form action="">
+                <input type="text" class="upis" id="heil">
+                <button type="submit" class="send">Submit</button>
+            </form>
     </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
 <script type="text/javascript" charset="utf-8">
@@ -54,10 +55,6 @@
         console.log(k);
     });     // OVAKO PRIMAMO STVARI,PRVA JE KAO ID
 </script>
-<form action="">
-    <input type="text" id="heil">
-    <button type="submit">Submit</button>
-</form>
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script src="chat.js"></script>
 </body>
