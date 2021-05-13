@@ -21,7 +21,7 @@ def handle_message(data):
   print('received message: ' + data)
   data = data +"///"+ str(ip_address)
   emit('announcements', data,broadcast=True) # OVAKO SALJEMO I DI SALJEMO
-  dodajNaKraj(data,"poruke.json")
+  dodajNaKraj("poruke.json",data)
 @socketio.on('connect')
 def test_connect():
   pass
