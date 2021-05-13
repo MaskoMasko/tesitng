@@ -13,7 +13,9 @@
     <div class="chat-konta">
         <div class="users">
             <div class="naslov">
-            <h1>Useri</h1>
+            <h1>{% if logStatus == "Logged In" %}
+                {{ username }}
+                {% endif %}</h1>
         </div>
         <ul class="names">
             <li>user1</li>
