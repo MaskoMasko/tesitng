@@ -11,19 +11,35 @@ socketio = SocketIO(app)
 
 @app.route('/')
 def home():
-  return render_template("index.html")
+  logStatus = request.cookies.get('logStat')
+  username = request.cookies.get('User')
+  return render_template("index.html",logStatus=logStatus,username=username)
 
 @app.route('/chat')
 def chat():
-  return render_template("chat.html")
+  logStatus = request.cookies.get('logStat')
+  username = request.cookies.get('User')
+  print(username)
+  return render_template("chat.html",logStatus=logStatus,username=username)
 
 @app.route('/signup')
 def signup():
   return render_template("signup.html")
 
+@app.route('/signout')
+def signout():
+  resp = make_response(redirect('/login'))
+  resp.set_cookie('logStat', 'Signed Out')
+  resp.set_cookie('User', "None")
+  return resp      
+
 @app.route('/login')
 def login():
-  return render_template("login.html")
+  logStatus = request.cookies.get('logStat')
+  if logStatus == "Logged In":
+    return redirect("/chat")
+  else:
+    return render_template("login.html")
 
 @app.route('/signupTry', methods = ['POST'])  
 def signupTry():
@@ -81,7 +97,9 @@ def loginTry():
         myresult = myresult[0][0]
         if password == myresult:
           resp = make_response(redirect('/chat'))
-          resp.set_cookie('userID', 'Logged In')
+          resp.set_cookie('logStat', 'Logged In')
+          print(username)
+          resp.set_cookie('User', username)
           return resp      
         else:
           flash("Wrong password")
