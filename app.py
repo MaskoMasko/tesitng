@@ -20,7 +20,10 @@ def chat():
   logStatus = request.cookies.get('logStat')
   username = request.cookies.get('User')
   print(username)
-  return render_template("chat.html",logStatus=logStatus,username=username)
+  if logStatus != "Logged In":
+    return redirect("/login")
+  else:
+    return render_template("chat.html",logStatus=logStatus,username=username)
 
 @app.route('/signup')
 def signup():
