@@ -13,7 +13,7 @@ socketio = SocketIO(app)
 def home():
   logStatus = request.cookies.get('logStat')
   username = request.cookies.get('User')
-  return render_template("index.html",logStatus=logStatus,username=username)
+  return render_template("main.html",logStatus=logStatus,username=username)
 
 @app.route('/chat')
 def chat():
