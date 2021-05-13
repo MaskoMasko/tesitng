@@ -21,6 +21,10 @@ def chat():
 def signup():
   return render_template("signup.html")
 
+@app.route('/login')
+def login():
+  return render_template("login.html")
+
 @app.route('/signupTry', methods = ['POST'])  
 def signupTry():
   if request.method == 'POST':
@@ -58,6 +62,32 @@ def signupTry():
         print("MySQL connection is closed")
         return render_template("login.html",error = "A user with this email already exists, would you like to log in")
 
+@app.route('/loginTry', methods = ['POST'])  
+def loginTry():
+  if request.method == 'POST':
+    username = request.form.get('name') #dela
+    password = request.form.get('password') #dela
+
+    connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
+    if connection.is_connected():
+      mycursor = connection.cursor()
+      mycursor.execute(f"SELECT password FROM usersss WHERE username='{username}'")
+      myresult = mycursor.fetchall()
+      duzina = len(myresult)
+      if duzina == 0:
+        print("That username does not exist")
+        return render_template("signup.html",error = "A user with that name doesn not exis, would you like to sign up")
+      elif duzina > 0:
+        myresult = myresult[0][0]
+        if password == myresult:
+          resp = make_response(redirect('/chat'))
+          resp.set_cookie('userID', 'Logged In')
+          return resp      
+        else:
+          flash("Wrong password")
+          return redirect('/login')
+    print(username, password,myresult)
+    return redirect('/')
 
 @socketio.on('message')
 def handle_message(data):
