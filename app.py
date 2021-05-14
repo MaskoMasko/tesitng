@@ -138,6 +138,10 @@ def handle_message(data):
   emit('announcements', data,broadcast=True) # OVAKO SALJEMO I DI SALJEMO
   dodajNaKraj("poruke.json",data)
 
+@socketio.on('online')
+def online():
+    username = request.cookies.get('User')
+    emit('status_change', username, broadcast=True)
 
 @socketio.on('connect')
 def test_connect():
@@ -146,6 +150,8 @@ def test_connect():
 @socketio.on('disconnect')
 def test_disconnect():
   print('Client disconnected')
+  username = request.cookies.get('User')
+  emit('status_change_negative', username, broadcast=True)
 
 if __name__ == '__main__':
     socketio.run(app)
