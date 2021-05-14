@@ -66,16 +66,30 @@ def signupTry():
       mycursor.execute(f"SELECT email FROM usersss WHERE email='{email}'")
       myresult = mycursor.fetchall()
       duzina = len(myresult)
-
+      mycursor.execute(f"SELECT email FROM usersss WHERE email='{email}'")
+      myresult2 = mycursor.fetchall()
+      duzina2 = len(myresult2)
       if duzina == 0:     # NEMA VEC U DATABAZI
-        print(myresult)
-        mycursor.execute(sql, val)
-        print("dodano u databasusu ")
-        connection.commit()
-        mycursor.close()
-        connection.close()
-        print("MySQL connection is closed")
-        return redirect('/')
+        mycursor.execute(f"SELECT username FROM usersss WHERE username='{username}'")
+        myresult2 = mycursor.fetchall()
+        duzina2 = len(myresult2)
+        if duzina2 == 0:
+          print(myresult)
+          mycursor.execute(sql, val)
+          print("dodano u databasusu ")
+          connection.commit()
+          mycursor.close()
+          connection.close()
+          print("MySQL connection is closed")
+          return redirect('/')
+        elif duzina2 > 0:
+          heresult = myresult2[0][0]
+          print(heresult+" already exists")
+          connection.commit()
+          mycursor.close()
+          connection.close()
+          print("MySQL connection is closed")
+          return render_template("login.html",error = "A user with this username already exists, would you like to log in")
 
       elif duzina > 0: # VEC IMA U DATABAZI
         myresult = myresult[0][0]
@@ -117,9 +131,10 @@ def loginTry():
 
 @socketio.on('message')
 def handle_message(data):
-  ip_address = request.remote_addr
+  logStatus = request.cookies.get('logStat')
+  username = request.cookies.get('User')
   print('received message: ' + data)
-  data = data +"///"+ str(ip_address)
+  data = data +"///"+ str(username)
   emit('announcements', data,broadcast=True) # OVAKO SALJEMO I DI SALJEMO
   dodajNaKraj("poruke.json",data)
 
