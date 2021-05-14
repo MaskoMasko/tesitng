@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 
-
+onlinePeople = []
 @app.route('/')
 def home():
   logStatus = request.cookies.get('logStat')
@@ -29,10 +29,9 @@ def chat():
 def signup():
   return render_template("signup.html")
 
-@app.route('/nist')
-def nisto():
-  return render_template("signup.html")
-
+@app.route('/online')
+def online():
+  return render_template("onlinePeoples.html",peeps=onlinePeople)
 
 @app.route('/signout')
 def signout():
@@ -141,6 +140,8 @@ def handle_message(data):
 @socketio.on('online')
 def online():
     username = request.cookies.get('User')
+    onlinePeople.append(username)
+    username = username + "///online"
     emit('status_change', username, broadcast=True)
 
 @socketio.on('connect')
@@ -151,7 +152,10 @@ def test_connect():
 def test_disconnect():
   print('Client disconnected')
   username = request.cookies.get('User')
-  emit('status_change_negative', username, broadcast=True)
+  onlinePeople.remove(username)
+  username = username + "///offline"
+  emit('status_change', username, broadcast=True)
 
 if __name__ == '__main__':
+    
     socketio.run(app)
