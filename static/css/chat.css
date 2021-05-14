@@ -55,8 +55,9 @@ background: radial-gradient(circle, rgba(92,0,41,1) 0%, rgba(97,48,75,1) 100%);h
 }
 
 
-
-
+.komms{
+    width: 200px;
+}
 
 .chat-box{
     width: 100%;
@@ -88,9 +89,14 @@ background: radial-gradient(circle, rgba(92,0,41,1) 0%, rgba(97,48,75,1) 100%);h
 }
 .mess-box{
     width:81.5%;
-    height: 85%;
+    height: 100%;
     margin-left: auto;
     margin-right: auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    flex-direction: column-reverse;
+    overflow-y: scroll;
     margin-top: 30px;
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
@@ -112,8 +118,10 @@ background: radial-gradient(circle, rgba(92,0,41,1) 0%, rgba(97,48,75,1) 100%);h
 }
 .mess1{
     margin-left: 605px;
+    background-color: green;
 }
 .mess2{
+    transform: translateX(-500px);
     background-color: rgb(189, 163, 81) !important;
 }
 .mess1-thing, .mess2-thing{
