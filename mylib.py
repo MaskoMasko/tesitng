@@ -9,7 +9,10 @@ def procitaj(gdje):     # funkcija samo za citanje
 def dodajNaKraj(sto,koji):
     with open(sto, "r+") as file:
         data = json.load(file)
+        zadnjiBroj = list(data.keys())[-1]
+        zadnjiBroj = str(int(zadnjiBroj) + 1)
         k = koji.split('///')
-        data.update({k[1]:k[0]})
+        jeje = {zadnjiBroj:{k[1]:k[0]}}
+        data.update(jeje)
         file.seek(0)
         json.dump(data, file)
