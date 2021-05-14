@@ -18,11 +18,11 @@
                 {% endif %}</h1>
         </div>
         <ul class="names">
-            <li id="0">user1</li>
-            <li id="1">user2</li>
-            <li id="2">user3</li>
-            <li id="3">user4</li>
-            <li id="4">user5</li>
+            <li id="1">user1</li>
+            <li id="2">user2</li>
+            <li id="3">user3</li>
+            <li id="4">user4</li>
+            <li id="5">user5</li>
         </ul>
         </div>
         <div class="chat-box">
@@ -48,8 +48,7 @@
     'use strict';
     var socket = io();
     socket.emit('online');
-    var list=new Array;
-    var i;
+    
     addEventListener('submit', function(e) {
         e.preventDefault();
         var inputt = document.getElementById('heil').value;
@@ -63,7 +62,7 @@
         var poruka = k[0];
         var sender = k[1];
         var cookieSender = getCookie('User');
-        alert(cookieSender);
+        alert(poruka+" "+ sender);
         if (sender == cookieSender){
             var strana = "desno";
         }else{
@@ -72,34 +71,13 @@
         //masovaFunkcija(poruka,sender,strana);
     });     // OVAKO PRIMAMO STVARI,PRVA JE KAO ID
     
-    socket.on('status_change', function(data) {
-        var k = data.split("///");
-        alert(k[0]+" is "+k[1]);
-        if (k[1] == "online"){
-            list.push(k[0])
-            alert(list+" is/are online");
-            makeNames();
-        }else{
-            var index = list.indexOf(k[0]);
-            if (index > -1) {
-            list.splice(index, 1);
-            }
-            alert(list+" is/are online");
-            makeNames();
-        }
-    });
-    function makeNames(){
-        alert("WABBA KUBBA");
-        for (i = 0; i < list.length; i++) {
-            alert(i);
-            document.getElementById(i).innerHTML = "Vibecheck";
-        }
-    }
+
     function getCookie(name) {
         const value = `; ${document.cookie}`;
         const parts = value.split(`; ${name}=`);
         if (parts.length === 2) return parts.pop().split(';').shift();
       }
+      document.getElementById("1").innerHTML = "Vibecheck";
 </script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script src="chat.js"></script>
