@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 
-onlinePeople = []
+onlin = []
 @app.route('/')
 def home():
   logStatus = request.cookies.get('logStat')
@@ -139,7 +139,7 @@ def handle_message(data):
 
 @socketio.on('online')
 def online():
-    pass
+  onlin.append(request.cookies.get('User'))
 
 @socketio.on('connect')
 def test_connect():
@@ -147,7 +147,9 @@ def test_connect():
 
 @socketio.on('disconnect')
 def test_disconnect():
-  pass
+  onlin.remove(request.cookies.get('User'))
+
+
 
 if __name__ == '__main__':
     
