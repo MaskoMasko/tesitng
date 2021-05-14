@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">
     <title>Document</title>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <link rel="stylesheet" href="/static/css/chat.css">
 </head>
 <body>
@@ -27,11 +28,33 @@
         </div>
         <div class="chat-box">
             <div class="mess-box">
+                <div class="komms">
+                <div v-if="kom2">
+                  <ul class="messes">
+                  <li v-for="comment in tvoji" :key="comment.id" class="mess1"><h3 v-html="comment"></h3></li>
+                  <div class="mess1-thing"></div>
+                  </ul>  
+                  <div class="formovi">    
+                  <input type="text" placeholder="komentar" class="upis" v-model="ti">
+                  <button type="submit" @click="subKom()" class="send">Send</button>
+                </div>
+              </div>
+              <div v-if="kom3">
                 <ul class="messes">
-                    <!--iF YOU-->
+                <li v-for="comment in njihovi" :key="comment.id" class="mess2"><h3 v-html="comment"></h3></li>
+                <div class="mess2-thing"></div>
+                </ul> 
+                <div class="formovi">     
+                <input type="text" class="upis" id="heil" placeholder="komentar" v-model="oni">
+                <button type="submit" class="send" @click="subKom2()">Send</button>
+            </div>
+            </div>
+          </div>
+        </div>
+            <!-- <div class="mess-box">
+                <ul class="messes">
                     <li class="mess1">Tvoja poruka</li>
                     <div class="mess1-thing"></div>
-                    <!--ELSE-->
                     <li class="mess2">Nhijova poruka</li>
                     <div class="mess2-thing"></div>
             </ul>
@@ -39,13 +62,37 @@
                 <input type="text" class="upis" id="heil">
                 <button type="submit" class="send">Submit</button>
             </form>
-    </div>
+    </div> -->
     <div>
         <h1><a href="/signout">LOG OUT</a></h1>
     </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
 <script type="text/javascript" charset="utf-8">
-    'use strict';
+var app = new Vue({
+  el:".komms",
+  data:{
+      objaviKom:false,
+      objaviKomOni:false,
+      kom2:false,
+      kom3:true,
+      ti:"",
+      oni:"",
+      kom:"ja2",
+      tvoji:[],
+      njihovi:[]
+  },
+  methods:{
+    subKom(){
+      this.objaviKom=true;
+      this.tvoji.push(this.ti)
+    },
+    subKom2(){
+      this.objaviKomOni=true;
+      this.njihovi.push(this.oni)
+    },
+  }
+})
+    // 'use strict';
     var socket = io();
     socket.emit('online');
     
@@ -79,7 +126,7 @@
       }
       document.getElementById("1").innerHTML = "Vibecheck";
 </script>
-<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script> -->
 <script src="chat.js"></script>
 </body>
 </html>
