@@ -139,10 +139,7 @@ def handle_message(data):
 
 @socketio.on('online')
 def online():
-    username = request.cookies.get('User')
-    onlinePeople.append(username)
-    username = username + "///online"
-    emit('status_change', username, broadcast=True)
+    pass
 
 @socketio.on('connect')
 def test_connect():
@@ -150,11 +147,7 @@ def test_connect():
 
 @socketio.on('disconnect')
 def test_disconnect():
-  print('Client disconnected')
-  username = request.cookies.get('User')
-  onlinePeople.remove(username)
-  username = username + "///offline"
-  emit('status_change', username, broadcast=True)
+  pass
 
 if __name__ == '__main__':
     
