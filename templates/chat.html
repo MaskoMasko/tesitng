@@ -49,6 +49,7 @@
     var socket = io();
     socket.emit('online');
     var list=new Array;
+    var i;
     addEventListener('submit', function(e) {
         e.preventDefault();
         var inputt = document.getElementById('heil').value;
@@ -88,9 +89,10 @@
         }
     });
     function makeNames(){
-        var duzina = list.length;
-        for(var i=0;i < duzina,i++;){
-            
+        alert("WABBA KUBBA");
+        for (i = 0; i < list.length; i++) {
+            alert(i);
+            document.getElementById(i).innerHTML = "Vibecheck";
         }
     }
     function getCookie(name) {
@@ -98,7 +100,6 @@
         const parts = value.split(`; ${name}=`);
         if (parts.length === 2) return parts.pop().split(';').shift();
       }
-      document.getElementById("1").innerHTML = "Vibecheck";
 </script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script src="chat.js"></script>
