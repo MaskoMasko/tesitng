@@ -18,11 +18,11 @@
                 {% endif %}</h1>
         </div>
         <ul class="names">
-            <li>user1</li>
-            <li>user2</li>
-            <li>user3</li>
-            <li>user4</li>
-            <li>user5</li>
+            <li id="0">user1</li>
+            <li id="1">user2</li>
+            <li id="2">user3</li>
+            <li id="3">user4</li>
+            <li id="4">user5</li>
         </ul>
         </div>
         <div class="chat-box">
@@ -48,7 +48,7 @@
     'use strict';
     var socket = io();
     socket.emit('online');
-
+    var list=new Array;
     addEventListener('submit', function(e) {
         e.preventDefault();
         var inputt = document.getElementById('heil').value;
@@ -72,19 +72,33 @@
     });     // OVAKO PRIMAMO STVARI,PRVA JE KAO ID
     
     socket.on('status_change', function(data) {
-        alert(data);
-        alert(" has come online");
+        var k = data.split("///");
+        alert(k[0]+" is "+k[1]);
+        if (k[1] == "online"){
+            list.push(k[0])
+            alert(list+" is/are online");
+            makeNames();
+        }else{
+            var index = list.indexOf(k[0]);
+            if (index > -1) {
+            list.splice(index, 1);
+            }
+            alert(list+" is/are online");
+            makeNames();
+        }
     });
-    socket.on('status_change_negative', function(data) {
-        alert(data);
-        alert(" has gone offline");
-    });
-
+    function makeNames(){
+        var duzina = list.length;
+        for(var i=0;i < duzina,i++;){
+            
+        }
+    }
     function getCookie(name) {
         const value = `; ${document.cookie}`;
         const parts = value.split(`; ${name}=`);
         if (parts.length === 2) return parts.pop().split(';').shift();
       }
+      document.getElementById("1").innerHTML = "Vibecheck";
 </script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script src="chat.js"></script>
