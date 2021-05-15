@@ -3,7 +3,7 @@ from flask import *
 from flask_socketio import *
 from json import *
 import mysql.connector
-
+import os
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
@@ -75,6 +75,44 @@ def profile():
       return render_template("profile.html",username=username,name = name,surname = surname, picture=picture,followers=followers,following=following,bio=bio,objave=objave)
   else:
     return render_template("login.html")
+
+@app.route('/cust')
+def cust():
+  logStatus = request.cookies.get('logStat')
+  if logStatus == "Logged In":
+    username = request.cookies.get('User')
+    connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
+    if connection.is_connected():
+      mycursor = connection.cursor()
+      mycursor.execute(f"SELECT name,surname,picture,followers,following,bio,objave FROM userssss WHERE username='{username}'")
+      myresult = mycursor.fetchall()
+      myresult = myresult[0]
+      print(myresult)
+      name = myresult[0]
+      surname = myresult[1]
+      picture = myresult[2]
+      followers = myresult[3]
+      following = myresult[4]
+      bio = myresult[5]
+      objave = myresult[6]
+      # sljedece je: CUSTOMZIANJE TJ DA UPISES ONO CA FALI UDATABAZI,
+      # DA DISPLAYA TO MALO LIPSE, FOLLOWERE FOLOWERSE I OBJACE TREA COUNTAT NE DISPLAYAT
+      # YEAH NO BIGGIE
+      return render_template("customize.html",username=username,name = name,surname = surname, picture=picture,followers=followers,following=following,bio=bio,objave=objave)
+  else:
+    return render_template("login.html")
+
+@app.route('/custo', methods = ['POST'])  
+def custo():
+  if request.method == 'POST':
+      slika = request.files['file']
+      name = request.form.get('name') #dela
+      surname = request.form.get('surname') #dela
+      username = request.form.get('username') #dela
+      bio = request.form.get('bio') #dela
+      pat = os.path.join("static/images",name+slika.filename) # LOS SOLUTION ZA OVO
+      slika.save(pat)
+      return redirect('/profile')
 
 @app.route('/signupTry', methods = ['POST'])  
 def signupTry():
