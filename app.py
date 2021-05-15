@@ -8,7 +8,15 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 
-onlin = []
+def dbGet(username):
+  connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
+  if connection.is_connected():
+    mycursor = connection.cursor()
+    mycursor.execute(f"SELECT name,surname,picture,followers,following,bio,objave FROM userssss WHERE username='{username}'")
+    myresult = mycursor.fetchall()
+    myresult = myresult[0]
+    return myresult
+
 @app.route('/')
 def home():
   logStatus = request.cookies.get('logStat')
@@ -55,24 +63,19 @@ def profile():
   logStatus = request.cookies.get('logStat')
   if logStatus == "Logged In":
     username = request.cookies.get('User')
-    connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
-    if connection.is_connected():
-      mycursor = connection.cursor()
-      mycursor.execute(f"SELECT name,surname,picture,followers,following,bio,objave FROM userssss WHERE username='{username}'")
-      myresult = mycursor.fetchall()
-      myresult = myresult[0]
-      print(myresult)
-      name = myresult[0]
-      surname = myresult[1]
-      picture = myresult[2]
-      followers = myresult[3]
-      following = myresult[4]
-      bio = myresult[5]
-      objave = myresult[6]
-      # sljedece je: CUSTOMZIANJE TJ DA UPISES ONO CA FALI UDATABAZI,
-      # DA DISPLAYA TO MALO LIPSE, FOLLOWERE FOLOWERSE I OBJACE TREA COUNTAT NE DISPLAYAT
-      # YEAH NO BIGGIE
-      return render_template("profile.html",username=username,name = name,surname = surname, picture=picture,followers=followers,following=following,bio=bio,objave=objave)
+    myresult = dbGet(username)
+    print(myresult)
+    name = myresult[0]
+    surname = myresult[1]
+    picture = myresult[2]
+    followers = myresult[3]
+    following = myresult[4]
+    bio = myresult[5]
+    objave = myresult[6]
+    # sljedece je: CUSTOMZIANJE TJ DA UPISES ONO CA FALI UDATABAZI,
+    # DA DISPLAYA TO MALO LIPSE, FOLLOWERE FOLOWERSE I OBJACE TREA COUNTAT NE DISPLAYAT
+    # YEAH NO BIGGIE
+    return render_template("profile.html",username=username,name = name,surname = surname, picture=picture,followers=followers,following=following,bio=bio,objave=objave)
   else:
     return render_template("login.html")
 
@@ -81,24 +84,18 @@ def cust():
   logStatus = request.cookies.get('logStat')
   if logStatus == "Logged In":
     username = request.cookies.get('User')
-    connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
-    if connection.is_connected():
-      mycursor = connection.cursor()
-      mycursor.execute(f"SELECT name,surname,picture,followers,following,bio,objave FROM userssss WHERE username='{username}'")
-      myresult = mycursor.fetchall()
-      myresult = myresult[0]
-      print(myresult)
-      name = myresult[0]
-      surname = myresult[1]
-      picture = myresult[2]
-      followers = myresult[3]
-      following = myresult[4]
-      bio = myresult[5]
-      objave = myresult[6]
-      # sljedece je: CUSTOMZIANJE TJ DA UPISES ONO CA FALI UDATABAZI,
-      # DA DISPLAYA TO MALO LIPSE, FOLLOWERE FOLOWERSE I OBJACE TREA COUNTAT NE DISPLAYAT
-      # YEAH NO BIGGIE
-      return render_template("customize.html",username=username,name = name,surname = surname, picture=picture,followers=followers,following=following,bio=bio,objave=objave)
+    myresult = dbGet(username)
+    name = myresult[0]
+    surname = myresult[1]
+    picture = myresult[2]
+    followers = myresult[3]
+    following = myresult[4]
+    bio = myresult[5]
+    objave = myresult[6]
+    # sljedece je: CUSTOMZIANJE TJ DA UPISES ONO CA FALI UDATABAZI,
+    # DA DISPLAYA TO MALO LIPSE, FOLLOWERE FOLOWERSE I OBJACE TREA COUNTAT NE DISPLAYAT
+    # YEAH NO BIGGIE
+    return render_template("customize.html",username=username,name = name,surname = surname, picture=picture,followers=followers,following=following,bio=bio,objave=objave)
   else:
     return render_template("login.html")
 
@@ -206,17 +203,6 @@ def handle_message(data):
   emit('announcements', data,broadcast=True) # OVAKO SALJEMO I DI SALJEMO
   dodajNaKraj("poruke.json",data)
 
-@socketio.on('online')
-def online():
-  onlin.append(request.cookies.get('User'))
-
-@socketio.on('connect')
-def test_connect():
-  pass
-
-@socketio.on('disconnect')
-def test_disconnect():
-  onlin.remove(request.cookies.get('User'))
 
 
 
