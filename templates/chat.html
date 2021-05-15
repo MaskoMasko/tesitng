@@ -47,7 +47,7 @@
                 <div class="formovi">   
                 <form>
                 <input type="text" class="upis" id="heil" placeholder="komentar" v-model="oni">
-                <input type="submit" class="send">Send
+                <input type="submit" class="send">
                 </form>
              <!--   <button type="submit" class="send" @click="subKom2()">Send</button>-->
             </div>
@@ -87,19 +87,21 @@ var app = new Vue({
   methods:{
     subKom(text){
       this.objaviKom=true;
-      this.tvoji.push(this.ti)
+      this.tvoji.push(this.ti);
+      this.ti = '';
     },
     subKom2(text){
       this.objaviKomOni=true;
-      this.njihovi.push(this.oni)
+      this.njihovi.push(this.oni);
     },
     zaTebe(poruka, cijaJe){
+      alert(poruka);
       this.ti = poruka;
       this.kom2 = cijaJe; //ako je true si ti
+      this.tvoji.push(poruka);
     }
   }
 })
-  app.zaTebe()
     // 'use strict';
     var socket = io();
     socket.emit('online');
@@ -119,11 +121,11 @@ var app = new Vue({
         var cookieSender = getCookie('User');
         alert(poruka+" "+ sender);
         if (sender == cookieSender){
-            var strana = "desno";
+            var strana = true;
         }else{
-            var strana = "lijevo";
+            var strana = false;
         }
-        
+        app.zaTebe(poruka,strana)
         // ODAVDJE CALLAM
         //masovaFunkcija(poruka,sender,strana);
     });     // OVAKO PRIMAMO STVARI,PRVA JE KAO ID
