@@ -93,12 +93,13 @@ var app = new Vue({
       this.objaviKomOni=true;
       this.njihovi.push(this.oni)
     },
-    zaTebe(poruka, sender, cijaJe){
-        this.ti = poruka
+    zaTebe(poruka, cijaJe){
+      this.ti = poruka;
+      this.kom2 = cijaJe; //ako je true si ti
     }
   }
 })
-
+  app.zaTebe()
     // 'use strict';
     var socket = io();
     socket.emit('online');
