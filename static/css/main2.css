@@ -50,13 +50,19 @@ display: flex;
 }
 /* STORIES */
 .stories{
-width: 600px;
-height: 100px;
-background: blue;
-margin: 30px;
-margin-left: auto;
-margin-right: auto;
-}
+    width: 600px;
+    height: 100px;
+    background: blue;
+    overflow-x: scroll;
+    margin: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    }
+    .stor-konta{
+        width: 1000px;
+        height: 100%;
+        background: linear-gradient(to left, #333, #333 50%, #eee 100%);
+    }
 
 /* NAVBAR */
 /* .nav-kont{
