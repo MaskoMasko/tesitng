@@ -93,6 +93,8 @@ var app = new Vue({
     subKom2(text){
       this.objaviKomOni=true;
       this.njihovi.push(this.oni);
+      this.oni = '';
+
     },
     zaTebe(poruka, cijaJe){
       alert(poruka);
@@ -108,9 +110,9 @@ var app = new Vue({
     
     addEventListener('submit', function(e) {
         e.preventDefault();
-        var inputt = document.getElementById('heil').value;
+        var inputt = document.querySelector('#heil').value;
         socket.emit('message', inputt);
-        document.getElementById('heil').value = '';
+        document.querySelector('#heil').value = '';
       });
 
 
