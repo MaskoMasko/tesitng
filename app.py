@@ -12,7 +12,7 @@ def dbGet(username):
   connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
   if connection.is_connected():
     mycursor = connection.cursor()
-    mycursor.execute(f"SELECT name,surname,picture,followers,following,bio,objave FROM userssss WHERE username='{username}'")
+    mycursor.execute(f"SELECT name,surname,picture,followers,following,bio,objave,id FROM userssss WHERE username='{username}'")
     myresult = mycursor.fetchall()
     myresult = myresult[0]
     return myresult
@@ -107,8 +107,11 @@ def custo():
       surname = request.form.get('surname') #dela
       username = request.form.get('username') #dela
       bio = request.form.get('bio') #dela
-      pat = os.path.join("static/images",name+slika.filename) # LOS SOLUTION ZA OVO
+      usernam = request.cookies.get('User')
+      myresult = dbGet(usernam)
+      pat = os.path.join("static/images",myresult[7]) # LOS SOLUTION ZA OVO
       slika.save(pat)
+      # STAO SAM OVDJE 16.5, ZNACI DOBIO SAM VALUE TREBAM IH SADA STAVI/UPDATEAT U DATABASSU GL SOLDIER
       return redirect('/profile')
 
 @app.route('/signupTry', methods = ['POST'])  
