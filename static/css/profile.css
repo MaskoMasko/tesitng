@@ -1,0 +1,41 @@
+.main-konta{
+    margin-top: 30px;
+    width: 1200px;
+    height: auto;
+    background: rebeccapurple;
+    margin-left: auto;
+    margin-right: auto;
+}
+.onaj-dio{
+    width: 100%;
+    height: 300px;
+    background: rgb(179, 172, 172);
+        display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.onaj-dio img{
+    width: 200px;
+    height: 200px;
+    margin-left: 150px;
+    background: beige;
+}
+.username, .foll{
+    display: flex;
+}
+.username h1, .foll h4, .desc{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.username button{
+    height: 20px;
+    margin-top: 40px;
+}
+.yes-lista{
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+}
