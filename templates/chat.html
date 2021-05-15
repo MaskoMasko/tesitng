@@ -90,8 +90,12 @@ var app = new Vue({
       this.objaviKomOni=true;
       this.njihovi.push(this.oni)
     },
+    zaTebe(poruka, sender, cijaJe){
+        this.ti = poruka
+    }
   }
 })
+
     // 'use strict';
     var socket = io();
     socket.emit('online');
