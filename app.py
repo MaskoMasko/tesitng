@@ -15,6 +15,10 @@ def home():
   username = request.cookies.get('User')
   return render_template("main.html",logStatus=logStatus,username=username)
 
+# @app.route('/main2')
+# def signup():
+#   return render_template("main2.html")
+
 @app.route('/chat')
 def chat():
   logStatus = request.cookies.get('logStat')
