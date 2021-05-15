@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main2</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <link rel="stylesheet" href="/static/css/main2.css">
+</head>
+<body>
+    <!-- NAVABR -->
+    <div class="nav-kont">
+        <div class="nav">
+            <div class="nav-menu">
+                <a href="/main"><img src="" alt=""></a>
+                <input type="text" placeholder="Search">
+                <ul class="nav-lista">
+                    <li><a class="za-ref" href="/">Home</a></li>
+                    <li><a to="/chat" class="za-ref">Chat</a></li>
+                    <li @click="zaProfil" class="prof">Profile</li>
+                     <div v-if="profile" class="prof-drop" @mouseleave="zaProfDrp()">
+                        <div class="taj-thing"></div>
+                        <h3><a href="/profile" class="za-ref">Profile</a></h3>
+                    </div> 
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- STORIES-->
+          <div class="stories">
+
+        </div>
+        <!-- OBJAVE -->
+    <div class="objava" id="commApp">
+        <div class="user">
+          <h5>Avatar</h5>
+          <h3>HE_WAS_FUNNY_MEMES</h3>
+        </div>
+          <img src="" alt="">
+          <div class="rate">
+            <ul>
+              <li>Like</li>
+              <li>Share</li>
+              <li @click="zaKom()">Comm</li>
+            </ul>
+            <div v-if="kom">
+            <input type="text" placeholder="komentar" v-model="prazan1">
+            <button type="submit" @click="subKom()">Relsee</button>
+            </div>
+            <p>Bookmark</p>
+          </div>
+          <p>3333 likes</p>
+          <div>
+            <ul class="komms">
+              <li v-for="comment in comms" :key="comment.id"><h3>{{comment.user}}</h3><p>{{comment.comm}}</p></li>
+              <div v-if="objaviKom">
+              <li v-for="comment in prazan" :key="comment.id"><h3>Your Username</h3><p>{{comment}}</p></li>
+              </div>
+            </ul>
+          </div>
+      </div>
+      <script>
+    var commApp = new Vue({
+        el:"#commApp",
+        data:{
+        comms:[
+        {
+            user:"Ivan",
+            comm:"great pic"
+        },
+        {
+            user:"Ivana",
+            comm:"great inage"
+        },
+        {
+            user:"Petar",
+            comm:"fk u"
+        },
+        {
+            user:"Boban",
+            comm:"Nice cock bro!"
+        },
+        {
+            user:"Morty",
+            comm:"nice one mazte"
+        },
+        ],
+        kom:false,
+        objaviKom:false,
+        prazan1:"",
+        prazan:[],
+        },
+    methods:{
+        zaKom(){
+        this.kom = true;
+        },
+        subKom(){
+        this.objaviKom=true;
+        this.prazan.push(this.prazan1)
+        },
+    }
+})
+var zaNav = new Vue({
+    el:".nav",
+    data:{
+        profile:false,
+        activity:false,
+    },
+    methods:{
+        zaProfil(){
+            this.profile = true;
+        },
+        zaProfDrp(){
+            this.profile= false;
+        },
+        zaActy(){
+            this.activity = true;
+        },
+        zaActyDrp(){
+            this.activity = false;
+        }
+    }
+})
+      </script>
+</body>
+</html>
