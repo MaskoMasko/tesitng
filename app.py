@@ -58,9 +58,21 @@ def profile():
     connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
     if connection.is_connected():
       mycursor = connection.cursor()
-      mycursor.execute(f"SELECT email FROM userssss WHERE username='{username}'")
+      mycursor.execute(f"SELECT name,surname,picture,followers,following,bio,objave FROM userssss WHERE username='{username}'")
       myresult = mycursor.fetchall()
-      return render_template("profile.html",username=username,email=myresult)
+      myresult = myresult[0]
+      print(myresult)
+      name = myresult[0]
+      surname = myresult[1]
+      picture = myresult[2]
+      followers = myresult[3]
+      following = myresult[4]
+      bio = myresult[5]
+      objave = myresult[6]
+      # sljedece je: CUSTOMZIANJE TJ DA UPISES ONO CA FALI UDATABAZI,
+      # DA DISPLAYA TO MALO LIPSE, FOLLOWERE FOLOWERSE I OBJACE TREA COUNTAT NE DISPLAYAT
+      # YEAH NO BIGGIE
+      return render_template("profile.html",username=username,name = name,surname = surname, picture=picture,followers=followers,following=following,bio=bio,objave=objave)
   else:
     return render_template("login.html")
 
@@ -81,7 +93,7 @@ def signupTry():
       mycursor.execute(f"SELECT email FROM userssss WHERE email='{email}'")
       myresult = mycursor.fetchall()
       duzina = len(myresult)
-      mycursor.execute(f"SELECT email FROM userssss WHERE email='{email}'")
+      mycursor.execute(f"SELECT username FROM userssss WHERE username='{username}'")
       myresult2 = mycursor.fetchall()
       duzina2 = len(myresult2)
       if duzina == 0:     # NEMA VEC U DATABAZI
