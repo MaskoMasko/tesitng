@@ -19,9 +19,6 @@ def home():
 def mainTu():
   return render_template("main2.html")
 
-@app.route('/profile')
-def profile():
-  return render_template("profile.html")
 
 @app.route('/chat')
 def chat():
@@ -50,6 +47,20 @@ def login():
   logStatus = request.cookies.get('logStat')
   if logStatus == "Logged In":
     return redirect("/chat")
+  else:
+    return render_template("login.html")
+
+@app.route('/profile')
+def profile():
+  logStatus = request.cookies.get('logStat')
+  if logStatus == "Logged In":
+    username = request.cookies.get('User')
+    connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
+    if connection.is_connected():
+      mycursor = connection.cursor()
+      mycursor.execute(f"SELECT email FROM userssss WHERE username='{username}'")
+      myresult = mycursor.fetchall()
+      return render_template("profile.html",username=username,email=myresult)
   else:
     return render_template("login.html")
 
@@ -122,7 +133,7 @@ def loginTry():
       elif duzina > 0:
         myresult = myresult[0][0]
         if password == myresult:
-          resp = make_response(redirect('/chat'))
+          resp = make_response(redirect('/'))
           resp.set_cookie('logStat', 'Logged In')
           print(username)
           resp.set_cookie('User', username)
@@ -132,6 +143,9 @@ def loginTry():
           return redirect('/login')
     print(username, password,myresult)
     return redirect('/')
+
+
+
 
 @socketio.on('message')
 def handle_message(data):
