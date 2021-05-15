@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>customize</title>
+  <meta name="description" content="Description Goes Here">
+  <style>
+        img{
+            width: 50px;
+            height: auto;
+        }
+</style>
+</head>
+<body>
+    <div id = "tvoje">
+        <p><h1>{{ ime }}</h1></p>
+        <p><img src="static/images/cover3.jpg" alt=""></p>
+    </div><br /><br /><br />
+    
+    <form action = "/custo" method = "post" enctype="multipart/form-data">  
+        <p>Slika<input type="file" name="slika" /><br /></p>
+        <p>Ime<input type="text" name="name" placeholder="{{ name }}" /><br /></p>
+        <p>Prezime<input type="text" name="surname" placeholder="{{ surname }}" /><br /></p>
+        <p>Username<input type="text" name="username" placeholder="{{ username }}" /><br /></p>
+        <p>bio<input type="text" name="bio" placeholder="{{ bios }}" /><br /></p>
+        <p><input type = "submit" value="Upload">  </p>
+    </form>
+</body>
+</html>
