@@ -19,6 +19,10 @@ def home():
 # def signup():
 #   return render_template("main2.html")
 
+# @app.route('/profile')
+# def signup():
+#   return render_template("profile.html")
+
 @app.route('/chat')
 def chat():
   logStatus = request.cookies.get('logStat')
