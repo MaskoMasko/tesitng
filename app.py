@@ -15,13 +15,13 @@ def home():
   username = request.cookies.get('User')
   return render_template("main.html",logStatus=logStatus,username=username)
 
-# @app.route('/main2')
-# def signup():
-#   return render_template("main2.html")
+@app.route('/mainTu')
+def mainTu():
+  return render_template("main2.html")
 
-# @app.route('/profile')
-# def signup():
-#   return render_template("profile.html")
+@app.route('/profile')
+def profile():
+  return render_template("profile.html")
 
 @app.route('/chat')
 def chat():
