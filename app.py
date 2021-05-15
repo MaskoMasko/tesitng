@@ -37,9 +37,6 @@ def chat():
 def signup():
   return render_template("signup.html")
 
-@app.route('/online')
-def online():
-  return render_template("onlinePeoples.html",peeps=onlinePeople)
 
 @app.route('/signout')
 def signout():
@@ -63,21 +60,21 @@ def signupTry():
     username = request.form.get('username') #dela
     email = request.form.get('email') #dela
     password = request.form.get('password') #dela
+    surname = request.form.get('surname') #dela
 
-
-    val = (username,password,email,name)
+    val = (username,password,email,name,surname)
     connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
     if connection.is_connected():
       mycursor = connection.cursor()
-      sql = "INSERT INTO usersss (username,password,email,name) VALUES (%s, %s,%s,%s)"           
-      mycursor.execute(f"SELECT email FROM usersss WHERE email='{email}'")
+      sql = "INSERT INTO userssss (username,password,email,name,surname) VALUES (%s, %s,%s,%s,%s)"           
+      mycursor.execute(f"SELECT email FROM userssss WHERE email='{email}'")
       myresult = mycursor.fetchall()
       duzina = len(myresult)
-      mycursor.execute(f"SELECT email FROM usersss WHERE email='{email}'")
+      mycursor.execute(f"SELECT email FROM userssss WHERE email='{email}'")
       myresult2 = mycursor.fetchall()
       duzina2 = len(myresult2)
       if duzina == 0:     # NEMA VEC U DATABAZI
-        mycursor.execute(f"SELECT username FROM usersss WHERE username='{username}'")
+        mycursor.execute(f"SELECT username FROM userssss WHERE username='{username}'")
         myresult2 = mycursor.fetchall()
         duzina2 = len(myresult2)
         if duzina2 == 0:
@@ -116,12 +113,12 @@ def loginTry():
     connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
     if connection.is_connected():
       mycursor = connection.cursor()
-      mycursor.execute(f"SELECT password FROM usersss WHERE username='{username}'")
+      mycursor.execute(f"SELECT password FROM userssss WHERE username='{username}'")
       myresult = mycursor.fetchall()
       duzina = len(myresult)
       if duzina == 0:
         print("That username does not exist")
-        return render_template("signup.html",error = "A user with that name doesn not exis, would you like to sign up")
+        return render_template("signup.html",error = "A user with that name does not exist, would you like to sign up")
       elif duzina > 0:
         myresult = myresult[0][0]
         if password == myresult:
