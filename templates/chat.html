@@ -30,14 +30,22 @@
             <div class="mess-box">
                 <div class="komms">
                 <div>
-                  <ul v-if="kom3" class="messes">
+                  <div v-if="kom3" class="messes mojsije">
+                    <h3 v-for="comment in tvoji" :key="comment.id" class="mess1" v-html="comment"></h3>
+                  <div class="mess1-thing"></div>
+                  </div>
+                  <div v-else class="messes mojsije">
+                    <h2 v-for="comment in tvoji" :key="comment.id" class="mess2" v-html="comment"></h2>
+                    <div class="mess2-thing"></div>
+                    </div>  
+                  <!-- <ul v-if="kom3" class="messes">
                   <li v-for="comment in tvoji" :key="comment.id" class="mess1"><h3 v-html="comment"></h3></li>
                   <div class="mess1-thing"></div>
                   </ul>  
                   <ul v-else class="messes">
-                    <li v-for="comment in tvoji" :key="comment.id" class="mess2"><h3 v-html="comment"></h3></li>
+                    <li v-for="comment in tvoji" :key="comment.id" class="mess2"><h2 v-html="comment"></h2></li>
                     <div class="mess2-thing"></div>
-                    </ul>  
+                    </ul>   -->
                   <div class="formovi">    
                     <form action="">
                       <input type="text" class="upis" id="heil">
@@ -74,7 +82,7 @@ var app = new Vue({
       objaviKom:false,
       objaviKomOni:false,
       kom2:true,
-      kom3:true,
+      kom3:false,
       ti:"",
       oni:"",
       kom:"ja2",
