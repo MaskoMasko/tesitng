@@ -117,7 +117,7 @@ background: radial-gradient(circle, rgba(92,0,41,1) 0%, rgba(97,48,75,1) 100%);h
     border-radius: 15px;
 }
 .mess1{
-    margin-left: 605px;
+    transform: translate(-30px, -5px);
     background-color: green;
 }
 .mess2{
@@ -127,15 +127,15 @@ background: radial-gradient(circle, rgba(92,0,41,1) 0%, rgba(97,48,75,1) 100%);h
 .mess1-thing, .mess2-thing{
     width: 20px;
     height: 20px;
-    transform: rotate(45deg);
 }
 .mess1-thing{
     background-color: green;
     margin-top: -30px;
- margin-left: 790px;   
+ transform: translateX(150px) rotate(45deg); 
 }
 .mess2-thing{
     background-color: rgb(189, 163, 81);
+ transform: translateX(-500px) rotate(45deg); 
     margin-top: -30px;
     margin-left: -5px;
 }
