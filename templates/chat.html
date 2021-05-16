@@ -30,27 +30,20 @@
             <div class="mess-box">
                 <div class="komms">
                 <div v-if="kom2">
-                  <ul class="messes">
+                  <ul v-if="kom3" class="messes">
                   <li v-for="comment in tvoji" :key="comment.id" class="mess1"><h3 v-html="comment"></h3></li>
                   <div class="mess1-thing"></div>
                   </ul>  
+                  <ul v-else class="messes">
+                    <li v-for="comment in tvoji" :key="comment.id" class="mess2"><h3 v-html="comment"></h3></li>
+                    <div class="mess2-thing"></div>
+                    </ul>  
                   <div class="formovi">    
                   <input type="text" placeholder="komentar" class="upis" v-model="ti">
                   <button type="submit" @click="subKom()" class="send">Send</button>
                 </div>
               </div>
-              <div v-if="kom3">
-                <ul class="messes">
-                <li v-for="comment in njihovi" :key="comment.id" class="mess2"><h3 v-html="comment"></h3></li>
-                <div class="mess2-thing"></div>
-                </ul>
-                <div class="formovi">   
-                <form>
-                <input type="text" class="upis" id="heil" placeholder="komentar" v-model="oni">
-                <input type="submit" class="send">
-                </form>
              <!--   <button type="submit" class="send" @click="subKom2()">Send</button>-->
-            </div>
             </div>
           </div>
         </div>
@@ -76,8 +69,8 @@ var app = new Vue({
   data:{
       objaviKom:false,
       objaviKomOni:false,
-      kom2:false,
-      kom3:true,
+      kom2:true,
+      kom3:false,
       ti:"",
       oni:"",
       kom:"ja2",
@@ -99,7 +92,7 @@ var app = new Vue({
     zaTebe(poruka, cijaJe){
       alert(poruka);
       this.ti = poruka;
-      this.kom2 = cijaJe; //ako je true si ti
+      this.kom3 = cijaJe; //ako je true si ti
       this.tvoji.push(poruka);
     }
   }
