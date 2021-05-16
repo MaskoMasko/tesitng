@@ -1,15 +1,23 @@
+*{
+    font-family: 'Lato', sans-serif;
+}
+body{
+    margin: 0;
+}
 .main-konta{
-    margin-top: 30px;
+    padding-top: 30px;
     width: 1200px;
     height: auto;
-    background: rebeccapurple;
+    background: rgba(234, 232, 235, 0.4);
     margin-left: auto;
     margin-right: auto;
 }
 .onaj-dio{
     width: 100%;
+    padding-top: 30px;
     height: 300px;
-    background: rgb(179, 172, 172);
+    background: rgba(234, 232, 235, 0.4);
+
         display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -22,6 +30,9 @@
 }
 .username, .foll{
     display: flex;
+}
+.foll{
+    height: 100px;
 }
 .username h1, .foll h4, .desc{
     margin-left: 20px;
@@ -38,4 +49,30 @@
     list-style: none;
     display: flex;
     justify-content: space-around;
+}
+.yes-lista li:hover{
+    background-color: rgb(206, 199, 199);
+    cursor: pointer;
+}
+.da{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.da h2{
+    margin-bottom: -10px;
+}
+.edit{
+    height: 20px;
+    border-radius: 5px;
+    margin-top: 35px;
+    padding: 5px;
+    /* background-color: rgb(206, 199, 199); */
+    background-color: rgb(226, 219, 219);
+    border: .3px solid black;
+}
+.edit:hover{
+    background-color: rgb(206, 199, 199);
+    cursor: pointer;
 }
