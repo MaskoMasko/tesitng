@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link rel="stylesheet" href="/static/css/profile.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+        </style>
 </head>
 <body>
     <div class="main-konta">
@@ -15,15 +18,24 @@
           <div class="info-dio">
               <div class="username">
                   <h1>{{ username }}</h1>
-                  <button>Edit profile</button>
+                  <div class="edit">Edit profile</div>
               </div>
               <div class="foll">
-                  <h4>0 posts</h4>
-                  <h4>0 follo</h4>
-                  <h4>0 fololow</h4>
+                  <div class="da">
+                  <h2>0</h2>
+                  <h4>posts</h4>
+                </div>
+                <div class="da">
+                  <h2>0</h2>
+                  <h4>followers</h4>
+                </div>
+                <div class="da">
+                  <h2>0</h2>
+                  <h4>following</h4>
+                </div>
               </div>
               <div class="desc">
-                  <p>{{ bio }}</p>
+                  <h5>{{ bio }}</h5>
               </div>
           </div>
         </div>
