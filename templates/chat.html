@@ -32,10 +32,13 @@
                 <div>
                   <div v-if="kom3" class="messes mojsije">
                     <h3 v-for="comment in tvoji" :key="comment.id" class="mess1" v-html="comment"></h3>
+                    <h2 v-for="comment in njihovi" :key="comment.id" class="mess2" v-html="comment"></h2>
+                    <h2 v-for="comment in nasi" :key="comment.id" :class="[nasi.cije == 'moja' ? mess1 : mess2]" v-html="nasi.pop()"></h2>
                   <div class="mess1-thing"></div>
                   </div>
                   <div v-else class="messes mojsije">
-                    <h2 v-for="comment in tvoji" :key="comment.id" class="mess2" v-html="comment"></h2>
+                    <h3 v-for="comment in tvoji" :key="comment.id" class="mess1" v-html="comment"></h3>
+                    <h2 v-for="comment in njihovi" :key="comment.id" class="mess2" v-html="comment"></h2>
                     <div class="mess2-thing"></div>
                     </div>  
                   <!-- <ul v-if="kom3" class="messes">
@@ -79,33 +82,32 @@
 var app = new Vue({
   el:".komms",
   data:{
-      objaviKom:false,
-      objaviKomOni:false,
       kom2:true,
       kom3:true,
       ti:"",
       oni:"",
       kom:"ja2",
       tvoji:[],
-      njihovi:[]
+      njihovi:[],
+      nasi:[{cije:""}]
   }, 
   methods:{
-    subKom(text){
-      this.objaviKom=true;
-      this.tvoji.push(this.ti);
-      this.ti = '';
-    },
-    subKom2(text){
-      this.objaviKomOni=true;
-      this.njihovi.push(this.oni);
-      this.oni = '';
-
-    },
     zaTebe(poruka, cijaJe){
-      alert(poruka);
       this.ti = poruka;
       this.kom3 = cijaJe; //ako je true si ti
-      this.tvoji.push(poruka);
+      if (cijaJe){
+        this.tvoji.push(poruka);
+        this.nasi.cije = "moja"
+        this.nasi.push(poruka)
+        alert(this.nasi.cije)
+        alert(this.nasi)
+      }else{
+        this.njihovi.push(poruka);
+        this.nasi.cije = "tvoja"
+        this.nasi.push(poruka)
+        alert(this.nasi.cije)
+        alert(this.nasi)
+      }
     }
   }
 })
