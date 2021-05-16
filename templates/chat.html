@@ -29,7 +29,7 @@
         <div class="chat-box">
             <div class="mess-box">
                 <div class="komms">
-                <div v-if="kom2">
+                <div>
                   <ul v-if="kom3" class="messes">
                   <li v-for="comment in tvoji" :key="comment.id" class="mess1"><h3 v-html="comment"></h3></li>
                   <div class="mess1-thing"></div>
@@ -96,7 +96,7 @@ var app = new Vue({
     zaTebe(poruka, cijaJe){
       alert(poruka);
       this.ti = poruka;
-      this.kom2 = cijaJe; //ako je true si ti
+      this.kom3 = cijaJe; //ako je true si ti
       this.tvoji.push(poruka);
     }
   }
