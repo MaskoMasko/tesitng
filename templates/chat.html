@@ -30,17 +30,22 @@
             <div class="mess-box">
                 <div class="komms">
                 <div>
-                  <div v-if="kom3" class="messes mojsije">
+                  <!-- <div v-if="kom3" class="messes mojsije">
                     <h3 v-for="comment in tvoji" :key="comment.id" class="mess1" v-html="comment"></h3>
                     <h2 v-for="comment in njihovi" :key="comment.id" class="mess2" v-html="comment"></h2>
-                    <h2 v-for="comment in nasi" :key="comment.id" :class="[nasi.cije == 'moja' ? mess1 : mess2]" v-html="nasi.pop()"></h2>
                   <div class="mess1-thing"></div>
                   </div>
                   <div v-else class="messes mojsije">
                     <h3 v-for="comment in tvoji" :key="comment.id" class="mess1" v-html="comment"></h3>
                     <h2 v-for="comment in njihovi" :key="comment.id" class="mess2" v-html="comment"></h2>
                     <div class="mess2-thing"></div>
-                    </div>  
+                    </div>   -->
+                    <div>
+                      <div v-for="comment in nasi" :key="comment.id">
+                      <h3 v-if="comment.strana =='desno'" class="mess1" v-html="comment.tekst"></h3>
+                      <h3 v-else class="mess2" v-html="comment.tekst"></h3>
+                    </div>
+                      </div>  
                   <!-- <ul v-if="kom3" class="messes">
                   <li v-for="comment in tvoji" :key="comment.id" class="mess1"><h3 v-html="comment"></h3></li>
                   <div class="mess1-thing"></div>
@@ -83,30 +88,27 @@ var app = new Vue({
   el:".komms",
   data:{
       kom2:true,
-      kom3:true,
+      kom3:false,
       ti:"",
       oni:"",
       kom:"ja2",
       tvoji:[],
       njihovi:[],
-      nasi:[{cije:""}]
+      nasi:[],
+      mess1:"mess1",
+      mess2:"mess2"
   }, 
   methods:{
     zaTebe(poruka, cijaJe){
       this.ti = poruka;
       this.kom3 = cijaJe; //ako je true si ti
-      if (cijaJe){
-        this.tvoji.push(poruka);
-        this.nasi.cije = "moja"
-        this.nasi.push(poruka)
-        alert(this.nasi.cije)
+      if(cijaJe){
+        this.nasi.push({strana:"desno", tekst:poruka});
         alert(this.nasi)
       }else{
-        this.njihovi.push(poruka);
-        this.nasi.cije = "tvoja"
-        this.nasi.push(poruka)
-        alert(this.nasi.cije)
-        alert(this.nasi)
+        this.nasi.push({strana:"livo", tekst:poruka});
+        alert("livo")
+
       }
     }
   }
