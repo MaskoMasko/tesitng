@@ -4,26 +4,90 @@
   <meta charset="utf-8">
   <title>customize</title>
   <meta name="description" content="Description Goes Here">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">
   <style>
+      body{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 98vw;
+          height: 98vh;
+          color: #04080F;
+          font-family: 'Lato', sans-serif;
+          background-color: #DAE3E5;
+          font-size: 17px;
+      }
+      .cust-dio{
+          width: 500px;
+          height: 500px;
+          display: flex;
+          align-items: center;
+            flex-direction: column;
+          text-align:left;
+          background-color: #A1C6EA;
+          border-radius: 20px;
+          border: 2px solid #507DBC;
+      }
+      input{
+          padding: 5px;
+          margin: 5px;
+          border-radius: 10px;
+          border: 1px solid #507DBC;
+      }
         img{
             width: 50px;
             height: auto;
         }
+        .tvoje{
+            margin-bottom: 30px;
+        }
+        .edit div{
+            display: flex;
+        }
+        .edit p{
+            width: 100px !important;
+        }
+        .in-slika{
+            border: none;
+            border-radius: none;
+        }
+        .btns{
+            margin-top: 50px;
+            padding: 15px !important;
+            border: none;
+            border-radius: 15px !important;
+            border: 1px solid black;
+        }
+        .btns:hover{
+            cursor: pointer;
+            background-color: #a2a9b1;
+        }
+        form{
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .za-marg{
+            margin-left: 75px;
+        }
 </style>
 </head>
 <body>
+    <div class="cust-dio">
     <div id = "tvoje">
         <p><h1>{{ ime }}</h1></p>
         <p><img src="static/images/{{ picture }}.jpg" alt=""></p>
-    </div><br /><br /><br />
+    </div>
     
-    <form action = "/custo" method = "post" enctype="multipart/form-data">  
-        <p>Slika<input type="file" name="slika" /><br /></p>
-        <p>Ime<input type="text" name="name" placeholder="{{ name }}" /><br /></p>
-        <p>Prezime<input type="text" name="surname" placeholder="{{ surname }}" /><br /></p>
-        <p>Username<input type="text" name="username" placeholder="{{ username }}" /><br /></p>
-        <p>bio<input type="text" name="bio" placeholder="{{ bios }}" /><br /></p>
-        <p><input type = "submit" value="Upload">  </p>
+    <form action = "/custo" method = "post" enctype="multipart/form-data" class="edit">  
+        <div><p class="za-marg">Slika</p><input class="in-slika" type="file" name="slika"/><br /></div>
+        <div><p>Ime</p><input type="text" name="name" placeholder="{{ name }}" /><br /></div>
+        <div><p>Prezime</p><input type="text" name="surname" placeholder="{{ surname }}" /><br /></div>
+        <div><p>Username</p><input type="text" name="username" placeholder="{{ username }}" /><br /></div>
+        <div><p>Bio</p><input type="text" name="bio" placeholder="{{ bios }}" /><br /></div>
+        <input type = "submit" value="Upload" class="btns">
     </form>
+</div>
 </body>
 </html>
