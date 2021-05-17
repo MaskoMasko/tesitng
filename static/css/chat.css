@@ -3,11 +3,11 @@
     font-family: 'Lato', sans-serif;
     padding: 0%;
     box-sizing: border-box;
-    color: rgb(216, 204, 204);
+    color: rgb(238, 232, 232);
 }
 html{
-    background: rgb(92,0,41);
-background: radial-gradient(circle, rgba(92,0,41,1) 0%, rgba(97,48,75,1) 100%);height: 100%;
+    background: #507DBC;
+background: radial-gradient(circle, #507DBC 0%, #435b7c 100%);height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,7 +15,7 @@ background: radial-gradient(circle, rgba(92,0,41,1) 0%, rgba(97,48,75,1) 100%);h
 .chat-konta{
     width: 1300px;
     height: 700px;
-    background: #857C8D;
+    background: #8ca9c5;
     box-shadow: 5px 5px 15px rgb(54, 54, 54);
     border-radius: 25px;
     display: flex;
@@ -23,7 +23,7 @@ background: radial-gradient(circle, rgba(92,0,41,1) 0%, rgba(97,48,75,1) 100%);h
 .users{
     width: 400px;
     height: 100%;
-    background-color: #61304B;
+    background-color: #354863;
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
     display: flex;
@@ -38,7 +38,7 @@ background: radial-gradient(circle, rgba(92,0,41,1) 0%, rgba(97,48,75,1) 100%);h
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-bottom:5px solid  #94BFBE;
+    border-bottom:5px solid  #A1C6EA;
     margin-bottom: 20px;
 }
 .names{
@@ -51,7 +51,7 @@ background: radial-gradient(circle, rgba(92,0,41,1) 0%, rgba(97,48,75,1) 100%);h
     color: white;
     padding:15px;
     margin: 5px;
-    background-color: #94BFBE;
+    background-color: #A1C6EA;
 }
 
 
@@ -100,9 +100,9 @@ background: radial-gradient(circle, rgba(92,0,41,1) 0%, rgba(97,48,75,1) 100%);h
     margin-top: 30px;
     padding-bottom: 40px;
     border-top-left-radius: 25px;
-    background-color: #ACF7C1;
+    background-color: #BBD1EA;
 }
-.mess-box::-webkit-scrollbar{width:6px;border:5px solid #94BFBE;}
+.mess-box::-webkit-scrollbar{width:6px;border:5px solid #A1C6EA;}
 ::-webkit-scrollbar-thumb{background-color:#434a52;}
 .messes{
     width: 100%;
@@ -115,12 +115,12 @@ background: radial-gradient(circle, rgba(92,0,41,1) 0%, rgba(97,48,75,1) 100%);h
     width: 200px;
     height: auto;
     padding: 15px;
-    background-color: green;
+    background-color: #434a52;
     border-radius: 15px;
 }
 .mess1{
     transform: translate(-30px, 10px);
-    background-color: green;
+    background-color: #434a52;
     padding: 10px;
     border-radius: 15px;
     margin-bottom: 10px;
@@ -130,7 +130,7 @@ background: radial-gradient(circle, rgba(92,0,41,1) 0%, rgba(97,48,75,1) 100%);h
 }
 .mess2{
     transform: translate(-500px, 10px);
-    background-color: rgb(189, 163, 81) !important;
+    background-color: #a3a7a8 !important;
     padding: 10px;
     border-radius: 15px;
     margin-bottom: 10px;
@@ -145,12 +145,12 @@ background: radial-gradient(circle, rgba(92,0,41,1) 0%, rgba(97,48,75,1) 100%);h
     height: 20px;
 }
 .mess1-thing{
-    background-color: green;
+    background-color: #434a52;
     margin-top: -30px;
  transform: translateX(153px) rotate(45deg); 
 }
 .mess2-thing{
-    background-color: rgb(189, 163, 81);
+    background-color: #a3a7a8;
  transform: translateX(-500px) rotate(45deg); 
     margin-top: -30px;
     margin-left: -5px;
