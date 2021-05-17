@@ -18,6 +18,7 @@
           font-size: 17px;
       }
       .cust-dio{
+          z-index: 10;
           width: 500px;
           height: 500px;
           display: flex;
@@ -33,6 +34,7 @@
           margin: 5px;
           border-radius: 10px;
           border: 1px solid #507DBC;
+          outline-color: #507DBC;
       }
         img{
             width: 50px;
@@ -71,9 +73,39 @@
         .za-marg{
             margin-left: 75px;
         }
+        .kr1{
+            position: absolute;
+            top: 13%;
+            left: 55%;
+            z-index: 0;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(80, 125, 188, .7);
+        }
+        .kr2{
+            position: absolute;
+            top: 63%;
+            left: 32%;
+            z-index: 0;
+            width: 200px;
+            height: 200px; 
+            border-radius: 50%;
+            background: rgba(80, 125, 188, .7); 
+        }
+        .val{
+            position: absolute;
+            left: 0%;
+            bottom: 0%;
+        }
 </style>
 </head>
 <body>
+    <div class="kr1"></div>
+    <div class="kr2"></div>
+    <svg xmlns="http://www.w3.org/2000/svg" class="val" viewBox="0 0 1440 320">
+        <path fill="rgba(80, 125, 188, .7)" fill-opacity="1" d="M0,192L34.3,202.7C68.6,213,137,235,206,250.7C274.3,267,343,277,411,277.3C480,277,549,267,617,240C685.7,213,754,171,823,176C891.4,181,960,235,1029,240C1097.1,245,1166,203,1234,165.3C1302.9,128,1371,96,1406,80L1440,64L1440,320L1405.7,320C1371.4,320,1303,320,1234,320C1165.7,320,1097,320,1029,320C960,320,891,320,823,320C754.3,320,686,320,617,320C548.6,320,480,320,411,320C342.9,320,274,320,206,320C137.1,320,69,320,34,320L0,320Z"></path>
+      </svg>
     <div class="cust-dio">
     <div id = "tvoje">
         <p><h1>{{ ime }}</h1></p>
