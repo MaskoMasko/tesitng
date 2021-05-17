@@ -102,16 +102,23 @@ def cust():
 @app.route('/custo', methods = ['POST'])  
 def custo():
   if request.method == 'POST':
-      slika = request.files['file']
+      slika = request.files['slika']
       name = request.form.get('name') #dela
       surname = request.form.get('surname') #dela
       username = request.form.get('username') #dela
       bio = request.form.get('bio') #dela
       usernam = request.cookies.get('User')
       myresult = dbGet(usernam)
-      pat = os.path.join("static/images",myresult[7]) # LOS SOLUTION ZA OVO
+      id = str(myresult[7])
+      pat = os.path.join("static/images",id+".jpg") # LOS SOLUTION ZA OVO
       slika.save(pat)
       # STAO SAM OVDJE 16.5, ZNACI DOBIO SAM VALUE TREBAM IH SADA STAVI/UPDATEAT U DATABASSU GL SOLDIER
+      connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
+      if connection.is_connected():
+        mycursor = connection.cursor()
+        print("yeah yeah")
+        mycursor.execute(f"UPDATE userssss SET picture='{id}', name='{name}', surname='{surname}', bio='{bio}'  WHERE id='{id}'")
+      # OVAJ DIO GORE NE DELA, 16.5 GREN SPIT
       return redirect('/profile')
 
 @app.route('/signupTry', methods = ['POST'])  
