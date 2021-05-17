@@ -117,7 +117,9 @@ def custo():
       if connection.is_connected():
         mycursor = connection.cursor()
         print("yeah yeah")
-        mycursor.execute(f"UPDATE userssss SET picture='{id}', name='{name}', surname='{surname}', bio='{bio}'  WHERE id='{id}'")
+        print(id)
+        mycursor.execute(f"UPDATE userssss SET picture='{id}', name='{name}', surname='{surname}', bio='{bio}'  WHERE id='{id}';")
+        connection.commit()
       # OVAJ DIO GORE NE DELA, 16.5 GREN SPIT
       return redirect('/profile')
 
