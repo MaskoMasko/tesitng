@@ -112,6 +112,7 @@ def profile():
     # sljedece je: CUSTOMZIANJE TJ DA UPISES ONO CA FALI UDATABAZI,
     # DA DISPLAYA TO MALO LIPSE, FOLLOWERE FOLOWERSE I OBJACE TREA COUNTAT NE DISPLAYAT
     # YEAH NO BIGGIE
+    print(objave)
     try:
       brojObjava = objave.split(" , ")
       brojObjava = len(brojObjava)
