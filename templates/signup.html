@@ -24,11 +24,30 @@
                 <input type="password" class="pass pass1" placeholder="Password" name="password" required>
                 <input type="password" class="pass pass2" placeholder="Repeat Password" required>
                 <button type="submit">SIGN UP</button>
-                </form>
             </form>
         </div>
     </div>
     <a href="/">Main</a>
-    <script src="/static/js/signup.js"></script>
+    <script>
+        var pass1 = document.querySelector(".pass1")
+        var pass2 = document.querySelector(".pass2")
+        var form = document.querySelector(".form")
+        var btn = document.querySelector("button")
+        var errmsg = document.querySelector(".pass-err")
+        form.addEventListener("submit", (e)=>{
+            e.returnValue = true;
+            if(pass1.value == "" || pass2.value == ""){
+                errmsg.innerHTML = "ENTER PASSWORD"
+                e.preventDefault()
+            }
+            if(pass1.value == pass2.value){
+                form.setAttribute("action", "/signupTry")
+                form.setAttribute("method", "POST")
+            }else{
+                errmsg.innerHTML = "ONE OF PASSWORDS IS INCORRECT"
+                    e.preventDefault()
+            }
+        })
+    </script>
 </body>
 </html>
