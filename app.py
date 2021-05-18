@@ -112,11 +112,11 @@ def profile():
     # sljedece je: CUSTOMZIANJE TJ DA UPISES ONO CA FALI UDATABAZI,
     # DA DISPLAYA TO MALO LIPSE, FOLLOWERE FOLOWERSE I OBJACE TREA COUNTAT NE DISPLAYAT
     # YEAH NO BIGGIE
-    try:
-      brojObjava = objave.split(" , ")
-      brojObjava = len(brojObjava)
-    except:
+    if objave == None:
       brojObjava = 0
+    else:
+      brojObjava = objave.split(" , ")
+      brojObjava = len(brojObjava) -1
     print(brojObjava)
     return render_template("profile.html",username=username,name = name,surname = surname, picture=picture,followers=followers,following=following,bio=bio,objave=brojObjava)
   else:
