@@ -53,17 +53,21 @@ def novaObjava():
 @app.route('/novaObjavaTry', methods = ['POST'])
 def novaObjavaTry():
   if request.method == 'POST':
+    username = request.cookies.get('User')
     slika = request.files['slika']
     opis = str(request.form.get('opis')) #dela
     connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
     if connection.is_connected():
       mycursor = connection.cursor()
-      mycursor.execute(f"INSERT INTO objave (opis) VALUES ('{opis}'')")
-      connection.commit()
-      mycursor.execute(f"UPDATE userssss SET picture='{id}', name='{name}', surname='{surname}', bio='{bio}'  WHERE id='{id}';")
+      mycursor.execute(f"INSERT INTO objave (opis) VALUES ('{opis}')")
       connection.commit()
       mycursor.execute(f"SELECT LAST_INSERT_ID();")
       id = str(mycursor.fetchall()[0][0])
+      mycursor.execute(f"SELECT objave FROM userssss WHERE username='{username}'")
+      bivseObjave = str(mycursor.fetchall()[0][0])
+      sveObjave = bivseObjave + " , " + id
+      mycursor.execute(f"UPDATE userssss SET objave = ('{sveObjave}') WHERE username='{username}';")
+      connection.commit()
       pat = os.path.join("static/objave",id+".jpg") # LOS SOLUTION ZA OVO
       slika.save(pat)
 
