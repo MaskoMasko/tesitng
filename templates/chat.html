@@ -12,6 +12,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type=text/javascript>
   var k;
+  var poruka = [];
     $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
     function deg(){
           $.getJSON($SCRIPT_ROOT + '/testTry', function(data) {
@@ -28,13 +29,14 @@
               }else{
                 cijaJee = "tvoja";
               }
-              alert(senderr);
               let yoMama = {
-                sender:  senderr,
-                poruka: porukaa,
-                cijaJe: cijaJee
+                sender:  senderr[0],
+                poruka: porukaa[0],
+                cijaJe: cijaJee,
+                rednjiBroj: i
               };
-              alert(yoMama);
+              poruka.push(yoMama);
+              console.log(poruka);
             }
           });
           return false;
