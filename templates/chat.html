@@ -25,21 +25,22 @@
               var porukaa = Object.values(k[i]);
               var cookieSender = getCookie('User');
               if (cookieSender == senderr){
-                cijaJee = true;
+                cijaJee = "desno";
               }else{
-                cijaJee = false;
+                cijaJee = "livo";
               }
               var yoMama = {
                 sender:  senderr[0],
                 poruka: porukaa[0],
-                cijaJe: cijaJee,
+                strana: cijaJee,
                 rednjiBroj: i
               };
               poruka.push(yoMama);
               
             }
           });
-          console.log(poruka);
+          app.messes = poruka
+          console.log(app.messes);
           return false;
         }
     
@@ -75,6 +76,10 @@
                     <h2 v-for="comment in njihovi" :key="comment.id" class="mess2" v-html="comment"></h2>
                     <div class="mess2-thing"></div>
                     </div>   -->
+                    <div v-for="mess in messes" :key="mess.id">
+                      <div v-if="mess.strana =='desno'"><h5 class="username-d">{{username}}</h5><h3  class="mess1 da1"  v-html="mess.poruka"></h3><div class="mess1-thing"></div></div>
+                      <div v-else><h5 v-html="mess.sender" class="username-l"></h5><h3  class="mess2 da2"  v-html="mess.poruka"></h3><div class="mess2-thing"></div></div>
+                    </div>
                     <div class="messes">
                       <div v-for="comment in nasi" :key="comment.id">
                       <div v-if="comment.strana =='desno'"><h5 class="username-d">{{username}}</h5><h3  class="mess1 da1"  v-html="comment.tekst"></h3><div class="mess1-thing"></div></div>
@@ -132,6 +137,7 @@ var app = new Vue({
       tvoji:[],
       njihovi:[],
       nasi:[],
+      messes:undefined,
       mess1:"mess1",
       mess2:"mess2"
   }, 
