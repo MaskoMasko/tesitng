@@ -25,8 +25,12 @@ def home():
 
 @app.route('/mainTu')
 def mainTu():
-  return render_template("main2.html")
-
+  logStatus = request.cookies.get('logStat')
+  if logStatus == "Logged In":
+    username = request.cookies.get('User')
+    return render_template("main2.html",username=username)
+  else:
+    return render_template("login.html")
 
 @app.route('/chat')
 def chat():
@@ -42,6 +46,13 @@ def chat():
 def signup():
   return render_template("signup.html")
 
+@app.route('/novaObjava')
+def novaObjava():
+  return render_template("novaObjava.html")
+
+@app.route('/novaObjavaTry')
+def novaObjavaTry():
+  return render_template("novaObjava.html")
 
 @app.route('/signout')
 def signout():
