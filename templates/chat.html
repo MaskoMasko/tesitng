@@ -42,8 +42,8 @@
                     </div>   -->
                     <div class="messes">
                       <div v-for="comment in nasi" :key="comment.id">
-                      <div v-if="comment.strana =='desno'"><h3  class="mess1 da1"  v-html="comment.tekst"></h3><div class="mess1-thing"></div></div>
-                      <div v-else><h3  class="mess2 da2"  v-html="comment.tekst"></h3><div class="mess2-thing"></div></div>
+                      <div v-if="comment.strana =='desno'"><h5 v-html="sender"></h5><h3  class="mess1 da1"  v-html="comment.tekst"></h3><div class="mess1-thing"></div></div>
+                      <div v-else><h5 v-html="sender"></h5><h3  class="mess2 da2"  v-html="comment.tekst"></h3><div class="mess2-thing"></div></div>
                     </div>
                       </div>  
                   <!-- <ul v-if="kom3" class="messes">
@@ -89,6 +89,7 @@ var app = new Vue({
   data:{
       kom2:true,
       kom3:false,
+      sender:"",
       ti:"",
       oni:"",
       kom:"ja2",
@@ -99,9 +100,11 @@ var app = new Vue({
       mess2:"mess2"
   }, 
   methods:{
-    zaTebe(poruka, cijaJe){
+    zaTebe(poruka, cijaJe,sender){
       this.ti = poruka;
       this.kom3 = cijaJe; //ako je true si ti
+      this.sender = sender;
+      alert(this.sender);
       if(cijaJe){
         this.nasi.push({strana:"desno", tekst:poruka});
       }else{
@@ -137,7 +140,7 @@ var app = new Vue({
         }else{
             var strana = false;
         }
-        app.zaTebe(poruka,strana)
+        app.zaTebe(poruka,strana,sender)
         // ODAVDJE CALLAM
         //masovaFunkcija(poruka,sender,strana);
     });     // OVAKO PRIMAMO STVARI,PRVA JE KAO ID
