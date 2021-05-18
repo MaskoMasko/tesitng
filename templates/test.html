@@ -10,7 +10,7 @@
         $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
         function deg(){
               $.getJSON($SCRIPT_ROOT + '/testTry', function(data) {
-                alert(data.result)
+                alert(JSON.stringify(data.result))
               });
               return false;
             }
