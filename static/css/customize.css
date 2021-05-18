@@ -1,0 +1,92 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 98vw;
+    height: 98vh;
+    color: #04080F;
+    font-family: 'Lato', sans-serif;
+    background-color: #DAE3E5;
+    font-size: 17px;
+}
+.cust-dio{
+    z-index: 10;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    align-items: center;
+      flex-direction: column;
+    text-align:left;
+    background-color: #A1C6EA;
+    border-radius: 20px;
+    border: 2px solid #507DBC;
+}
+input{
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+    border: 1px solid #507DBC;
+    outline-color: #507DBC;
+}
+  img{
+      width: 50px;
+      height: auto;
+  }
+  .tvoje{
+      margin-bottom: 30px;
+  }
+  .edit div{
+      display: flex;
+  }
+  .edit p{
+      width: 100px !important;
+  }
+  .in-slika{
+      border: none;
+      border-radius: none;
+  }
+  .btns{
+      margin-top: 50px;
+      padding: 15px !important;
+      border: none;
+      border-radius: 15px !important;
+      border: 1px solid black;
+  }
+  .btns:hover{
+      cursor: pointer;
+      background-color: #a2a9b1;
+  }
+  form{
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+  }
+  .za-marg{
+      margin-left: 75px;
+  }
+  .kr1{
+      position: absolute;
+      top: 13%;
+      left: 55%;
+      z-index: 0;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: rgba(80, 125, 188, .7);
+  }
+  .kr2{
+      position: absolute;
+      top: 63%;
+      left: 32%;
+      z-index: 0;
+      width: 200px;
+      height: 200px; 
+      border-radius: 50%;
+      background: rgba(80, 125, 188, .7); 
+  }
+  .val{
+      position: absolute;
+      left: 0%;
+      bottom: 0%;
+  }

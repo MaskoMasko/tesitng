@@ -3,8 +3,8 @@
     font-family: 'Lato', sans-serif;
     padding: 0%;
     box-sizing: border-box;
-    color: rgb(201, 162, 162);
-    background-color: #ACF7C1;
+    color: #04080F;
+    background-color: #BBD1EA;
 }
 .kar-kont{
     width: 100%;
@@ -38,11 +38,12 @@
     background-color: transparent;
 }
 .app-lista li{
+    z-index: 10;
     width: 200px;
     height: 200px;
     margin-left: 40px;
-    background: rgb(92,0,41);
-background: radial-gradient(circle, rgba(92,0,41,1) 0%, rgba(97,48,75,1) 100%);
+    background: #507DBC;
+background: radial-gradient(circle, #507DBC 0%, #435b7c 100%);
 border-radius: 15px;
 font-size: 32px;
 display: flex;
@@ -51,4 +52,36 @@ align-items: center;
 }
 .app-lista li:hover{
     box-shadow: 5px 5px 15px rgb(54, 54, 54);
+}
+.des{
+    position: absolute;
+    top: 5%;
+    left:-7%;
+    transform: rotate(-45deg);
+    width: 600px;
+    height: 100px;
+    background: #04080F;
+    z-index: 2;
+}
+.dr{
+    position: absolute;
+    width: 410px;
+    top: 20%;
+    height: 100px;
+    background-color: #507DBC;
+    z-index: 3;
+}
+.tr{
+    position: absolute;
+    width: 350px;
+    top: -25%;
+    height: 100px;
+    z-index: 1;
+    background-color: #A1C6EA;
+}
+.val{
+    position: absolute;
+    bottom: -10%;
+    left: 0%;
+    transform: scaleY(.7);
 }

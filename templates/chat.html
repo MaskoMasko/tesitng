@@ -104,11 +104,8 @@ var app = new Vue({
       this.kom3 = cijaJe; //ako je true si ti
       if(cijaJe){
         this.nasi.push({strana:"desno", tekst:poruka});
-        alert(this.nasi)
       }else{
         this.nasi.push({strana:"livo", tekst:poruka});
-        alert("livo")
-
       }
     }
   }
@@ -120,8 +117,12 @@ var app = new Vue({
     addEventListener('submit', function(e) {
         e.preventDefault();
         var inputt = document.querySelector('#heil').value;
-        socket.emit('message', inputt);
-        document.querySelector('#heil').value = '';
+        if(inputt == ""){
+          
+        }else{
+          socket.emit('message', inputt);
+          document.querySelector('#heil').value = '';
+        }
       });
 
 
@@ -140,7 +141,6 @@ var app = new Vue({
         // ODAVDJE CALLAM
         //masovaFunkcija(poruka,sender,strana);
     });     // OVAKO PRIMAMO STVARI,PRVA JE KAO ID
-    
 
     function getCookie(name) {
         const value = `; ${document.cookie}`;
