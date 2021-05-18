@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type=text/javascript>
+        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+        function deg(){
+              $.getJSON($SCRIPT_ROOT + '/testTry', function(data) {
+                alert(data.result)
+              });
+              return false;
+            }
+    </script>
+</head>
+<body>
+    <h1>jQuery Example</h1>
+    <p><button onclick="deg()">calculate server side</button></a>
+</body>
+</html>
