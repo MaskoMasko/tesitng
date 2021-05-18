@@ -25,20 +25,21 @@
               var porukaa = Object.values(k[i]);
               var cookieSender = getCookie('User');
               if (cookieSender == senderr){
-                cijaJee = "moja";
+                cijaJee = true;
               }else{
-                cijaJee = "tvoja";
+                cijaJee = false;
               }
-              let yoMama = {
+              var yoMama = {
                 sender:  senderr[0],
                 poruka: porukaa[0],
                 cijaJe: cijaJee,
                 rednjiBroj: i
               };
               poruka.push(yoMama);
-              console.log(poruka);
+              
             }
           });
+          console.log(poruka);
           return false;
         }
     
