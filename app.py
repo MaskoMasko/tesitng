@@ -114,7 +114,9 @@ def profile():
     # YEAH NO BIGGIE
     try:
       brojObjava = objave.split(" , ")
-    brojObjava = len(brojObjava)
+      brojObjava = len(brojObjava)
+    except:
+      brojObjava = 0
     print(brojObjava)
     return render_template("profile.html",username=username,name = name,surname = surname, picture=picture,followers=followers,following=following,bio=bio,objave=brojObjava)
   else:
