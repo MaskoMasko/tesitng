@@ -50,9 +50,24 @@ def signup():
 def novaObjava():
   return render_template("novaObjava.html")
 
-@app.route('/novaObjavaTry')
+@app.route('/novaObjavaTry', methods = ['POST'])
 def novaObjavaTry():
-  return render_template("novaObjava.html")
+  if request.method == 'POST':
+    slika = request.files['slika']
+    opis = str(request.form.get('opis')) #dela
+    connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
+    if connection.is_connected():
+      mycursor = connection.cursor()
+      mycursor.execute(f"INSERT INTO objave (opis) VALUES ('{opis}'')")
+      connection.commit()
+      mycursor.execute(f"UPDATE userssss SET picture='{id}', name='{name}', surname='{surname}', bio='{bio}'  WHERE id='{id}';")
+      connection.commit()
+      mycursor.execute(f"SELECT LAST_INSERT_ID();")
+      id = str(mycursor.fetchall()[0][0])
+      pat = os.path.join("static/objave",id+".jpg") # LOS SOLUTION ZA OVO
+      slika.save(pat)
+
+    return redirect("/mainTu")
 
 @app.route('/signout')
 def signout():
