@@ -20,8 +20,21 @@
             duzina = data.duzina -1;
             //k= k[0];
             for (let i = 0; i < duzina; i++) { 
-              alert(Object.keys(k[i]));
-              alert(Object.values(k[i]));
+              var senderr = Object.keys(k[i]);
+              var porukaa = Object.values(k[i]);
+              var cookieSender = getCookie('User');
+              if (cookieSender == senderr){
+                cijaJee = "moja";
+              }else{
+                cijaJee = "tvoja";
+              }
+              alert(senderr);
+              let yoMama = {
+                sender:  senderr,
+                poruka: porukaa,
+                cijaJe: cijaJee
+              };
+              alert(yoMama);
             }
           });
           return false;
