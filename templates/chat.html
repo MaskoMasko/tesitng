@@ -14,13 +14,13 @@
   var k;
   var poruka = [];
     $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-    function deg(){
+    window.onload = function deg(){
           $.getJSON($SCRIPT_ROOT + '/testTry', function(data) {
             //k = JSON.stringify(data.result);
             k = data.result;
             duzina = data.duzina -1;
             //k= k[0];
-            for (let i = 0; i < duzina; i++) { 
+            for (let i = 0; i <= duzina; i++) { 
               var senderr = Object.keys(k[i]);
               var porukaa = Object.values(k[i]);
               var cookieSender = getCookie('User');
@@ -40,10 +40,10 @@
             }
           });
           app.messes = poruka
+          var prazno = "";
           console.log(app.messes);
           return false;
         }
-    
 </script>
 </head>
 <body>
@@ -107,7 +107,6 @@
             </div>
           </div>
         </div>
-        <p><button onclick="deg()">Dobij sve poruke</button></a>
             <!-- <div class="mess-box">
                 <ul class="messes">
                     <li class="mess1">Tvoja poruka</li>
