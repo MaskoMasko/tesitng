@@ -23,6 +23,14 @@ def home():
   username = request.cookies.get('User')
   return render_template("main.html",logStatus=logStatus,username=username)
 
+@app.route('/test')
+def test():
+  return render_template("test.html")
+
+@app.route('/testTry')
+def add_numbers():
+  return jsonify(result='23')
+
 @app.route('/mainTu')
 def mainTu():
   logStatus = request.cookies.get('logStat')
