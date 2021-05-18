@@ -1,7 +1,7 @@
-from mylib import dodajNaKraj
+from mylib import *
 from flask import *
 from flask_socketio import *
-from json import *
+
 import mysql.connector
 import os
 app = Flask(__name__)
