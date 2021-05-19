@@ -3,6 +3,10 @@
     margin: 0;
     box-sizing: border-box;
 }
+body{
+    font-family: 'Roboto', sans-serif;
+
+}
 /* OBJAVA */
  .objava{
 width: 600px;
@@ -11,7 +15,6 @@ background: white;
 margin-left: auto;
 margin-right: auto;
 margin-bottom: 50px;
-overflow: scroll;
 }
 .user{
 width: 100%;
@@ -47,6 +50,10 @@ margin-left: 30px;
 }
 .komms li{
 display: flex;
+}
+.kom-box{
+    overflow-y: scroll;
+    height: 220px;
 }
 /* STORIES */
 .stories{
@@ -161,4 +168,10 @@ top: 120%;
 height: 150px;
 box-shadow: 0 10px 6px -6px #777;
 background: whitesmoke;
+}
+.siv{
+    margin-left: 0px !important;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: grey;
 }
