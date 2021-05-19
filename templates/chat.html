@@ -76,13 +76,13 @@
                     <div class="mess2-thing"></div>
                     </div>   -->
                     <div v-for="mess in messes" :key="mess.id">
-                      <div v-if="mess.strana =='desno'"><h5 class="username-d">{{username}}</h5><h3  class="mess1 da1"  v-html="mess.poruka"></h3><div class="mess1-thing"></div></div>
-                      <div v-else><h5 v-html="mess.sender" class="username-l"></h5><h3  class="mess2 da2"  v-html="mess.poruka"></h3><div class="mess2-thing"></div></div>
+                      <div v-if="mess.strana =='desno'"><h5 class="username-d">{{username}}</h5><h3  class="mess1 da1"  v-html="mess.poruka"></h3><div class="mess1-thing ine"></div></div>
+                      <div v-else><h5 v-html="mess.sender" class="username-l"></h5><h3  class="mess2 da2"  v-html="mess.poruka"></h3><div class="mess2-thing ida"></div></div>
                     </div>
                     <div class="messes">
                       <div v-for="comment in nasi" :key="comment.id">
-                      <div v-if="comment.strana =='desno'"><h5 class="username-d">{{username}}</h5><h3  class="mess1 da1"  v-html="comment.tekst"></h3><div class="mess1-thing"></div></div>
-                      <div v-else><h5 v-html="comment.ime" class="username-l"></h5><h3  class="mess2 da2"  v-html="comment.tekst"></h3><div class="mess2-thing"></div></div>
+                      <div v-if="comment.strana =='desno'"><h5 class="username-d">{{username}}</h5><h3  class="mess1 da1"  v-html="comment.tekst"></h3><div class="mess1-thing ine"></div></div>
+                      <div v-else><h5 v-html="comment.ime" class="username-l"></h5><h3  class="mess2 da2"  v-html="comment.tekst"></h3><div class="mess2-thing ida"></div></div>
                     </div>
                       </div>  
                   <!-- <ul v-if="kom3" class="messes">
@@ -119,8 +119,9 @@
             </form>
     </div> -->
     <div>
-        <h1><a href="/signout">LOG OUT</a></h1>
+      <h1><a href="/signout" class="lg">LOG OUT</a></h1>
     </div>
+  </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
 <script type="text/javascript" charset="utf-8">
 var app = new Vue({

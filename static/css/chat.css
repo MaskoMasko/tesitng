@@ -174,8 +174,76 @@ background: radial-gradient(circle, #507DBC 0%, #435b7c 100%);height: 100%;
 @media only screen and (max-width:1350px) {
     body{
         transform: scale(.8);
+        
     }
-    
+}
+    @media only screen and (max-width:1060px) {
+        body{
+            width: 95%;
+            margin-left: -240px;
+        }
+    }
+    @media only screen and (max-width:960px) {
+        .users{
+            display: none;
+        }
+        .chat-box{
+            margin-left: -50px;
+        }
+}
+@media only screen and (max-width:860px) {
+    .chat-konta{
+        height: 1000px;
+        width: 1000px;
+        margin-left: -100px;
+    }
+    body{
+        width: 100%;
+        margin: 0;
+    }
+}
+@media only screen and (max-width:630px) {
+    .mess-box{
+        position: absolute;
+        top: 40%;
+        left: 0%;
+        width: 100%;
+        height: 1000px;
+        overflow-y: scroll;
+        margin: 0%;
+        transform: translateY(-400px);
+        padding-bottom: 100px;
+    }
+    .formovi{
+        transform: translate(-250px, 80px);
+    }
+    .upis{
+        width: 550px !important;
+        margin-left: -300px;
+    }
+    .send{
+        width: 100px;
+        transform: translateX(50px);
+    }
+    .mess1{
+        transform: translateX(-200px);
+    }
+    .mess2{
+        transform: translate(-600px, 10px);
+    }
+    .ine{
+        transform: rotate(45deg) translate(-17px, 5px);
+    }
+    .ida{
+        margin-left: -105px;
+    }
+    .username-d{
+        transform: translateX(-150px);
+    }
+    .username-l{
+        transform: translate(-600px, 20px);
+    }
+
 }
 /* @media only screen and (max-width:1060px) {
     .users{
