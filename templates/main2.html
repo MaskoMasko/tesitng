@@ -7,6 +7,9 @@
     <title>Main2</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <link rel="stylesheet" href="/static/css/main2.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+        </style>
 </head>
 <body>
     <!-- NAVABR -->
@@ -52,22 +55,27 @@
             <ul>
               <li>Like</li>
               <li>Share</li>
-              <li @click="zaKom()">Comm</li>
             </ul>
-            <div v-if="kom">
+            <!-- <div>
             <input type="text" placeholder="komentar" v-model="prazan1">
             <button type="submit" @click="subKom()">Relsee</button>
-            </div>
+            </div> -->
             <p>Bookmark</p>
           </div>
           <p>3333 likes</p>
-          <div>
+          <div class="kom-box">
+            <p class="siv">Comments</p>
             <ul class="komms">
               <li v-for="comment in comms" :key="comment.id"><h3 v-html="comment.user" ></h3><p v-html="comment.comm"></p></li>
               <div v-if="objaviKom">
               <li v-for="comment in prazan" :key="comment.id"><h3>Your Username</h3><p v-html="comment"></p></li>
               </div>
             </ul>
+            <div class="formni" v-if="kom">
+                <input type="text" placeholder="komentar" v-model="prazan1">
+                <button type="submit" @click="subKom()">Relsee</button>
+            </div>
+            <button @click="zaKom()">Comm nisto</button>
           </div>
       </div>
       <script>
@@ -106,8 +114,14 @@
         this.kom = true;
         },
         subKom(){
-        this.objaviKom=true;
-        this.prazan.push(this.prazan1)
+            if(this.prazan1 != ""){
+
+                this.objaviKom=true;
+                this.prazan.push(this.prazan1)
+                this.prazan1 = "";
+            }else{
+                
+            }
         },
     }
 })
