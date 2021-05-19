@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="/static/css/profile.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+        </style>
+</head>
+<body>
+    <div class="main-konta">
+        <div class="onaj-dio">
+      <!--   <img src="static/images/cover3.jpg" alt=""> OVAKO SE TO DELA--> 
+         <img src="static/images/{{ picture }}.jpg" alt="">
+          <div class="info-dio">
+              <div class="username">
+                  <h1>{{ username }}</h1>
+              </div>
+              <div class="foll">
+                  <div class="da">
+                  <h2>{{ objave }}</h2>
+                  <h4>posts</h4>
+                </div>
+                <div class="da">
+                  <h2>0</h2>
+                  <h4>followers</h4>
+                </div>
+                <div class="da">
+                  <h2>0</h2>
+                  <h4>following</h4>
+                </div>
+              </div>
+              <div class="desc">
+                  <h5>{{ bio }}</h5>
+              </div>
+          </div>
+        </div>
+        <ul class="yes-lista">
+            <li>POSTS</li>
+            <li>IGTV</li>
+            <li>SAVED</li>
+            <li>TAGED</li>
+        </ul>
+    </div>
+</body>
+</html>
