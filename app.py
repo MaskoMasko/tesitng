@@ -30,6 +30,12 @@ def add_numbers():
   duzina = len(por)
   return jsonify(result=por,duzina=duzina)
 
+@app.route('/followTry')
+def followTry():
+  a = request.args.get('a')
+  print(a)
+  return jsonify(result="following")
+
 @app.route('/mainTu')
 def mainTu():
   logStatus = request.cookies.get('logStat')
