@@ -52,7 +52,6 @@ display: flex;
 .stories{
     width: 600px;
     height: 100px;
-    background: blue;
     overflow-x: scroll;
     margin: 30px;
     margin-left: auto;
@@ -63,7 +62,32 @@ display: flex;
         height: 100%;
         background: linear-gradient(to left, #333, #333 50%, #eee 100%);
     }
+    .storiji{
+        display: flex;
+        list-style: none;
+    }
+    .storiji li{
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+        background-color: pink;
+        display: flex;
+        justify-content: center;
+        border-image:linear-gradient(red, blue) 30;
+        align-items: center;
+    }
+    .storiji img{
+        border-radius: 50%;
+        width: 95%;
+        height: 95%;
+        /* outline: 3px solid blue;
+        -moz-outline-radius: 50%;
+        outline-offset: -4px; */
+        border-image:linear-gradient(#f6b73c, #4d9f0c) 30;
+        border-image-outset: -10px;
 
+    }
+ 
 /* NAVBAR */
 /* .nav-kont{
 position: fixed;
