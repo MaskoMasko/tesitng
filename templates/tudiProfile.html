@@ -12,19 +12,26 @@
         </style>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script type=text/javascript>
+          var followin = {{ following|tojson }};
+          alert(followin);
+            var flaskData = $('#my-data').data();
             $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
             function deg(){
               $.getJSON($SCRIPT_ROOT + '/followTry', {
                 a: getCookie('User'),
+                b: da(),
               }, function(data) {
                 $("#result").text(data.result); 
-                var flaskData = $('#my-data').data();
-                alert(Object.values(flaskData));
+                alert(Object.values(data.b));
               });
               // 19.5 STAO OVDJE DOBIJES KI ID FOLLOWA I KOGA FOLLOWA LP
               return false;
             }
-
+            function da(){
+              var gae =Object.values($('#my-data').data());
+              gae = gae.toString()
+              return gae;
+            }
             function getCookie(name) {
               const value = `; ${document.cookie}`;
               const parts = value.split(`; ${name}=`);
@@ -47,11 +54,11 @@
                   <h4>posts</h4>
                 </div>
                 <div class="da">
-                  <h2>0</h2>
+                  <h2>{{ followers }}</h2>
                   <h4>followers</h4>
                 </div>
                 <div class="da">
-                  <h2>0</h2>
+                  <h2>{{ following }}</h2>
                   <h4>following</h4>
                   <button onclick="deg()" id="result">Follow</button>
                 </div>
