@@ -128,6 +128,7 @@ def profile():
 def show_user_profile(id):
   connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
   if connection.is_connected():
+    cookieUsername = request.cookies.get('User')
     mycursor = connection.cursor()
     mycursor.execute(f"SELECT name,surname,picture,followers,following,bio,objave,username FROM userssss WHERE id='{id}'")
     myresult = mycursor.fetchall()
@@ -145,7 +146,11 @@ def show_user_profile(id):
     else:
       brojObjava = objave.split(" , ")
       brojObjava = len(brojObjava) - 1
-    return render_template("tudiProfile.html",username=username,name = name,surname = surname, picture=picture,followers=followers,following=following,bio=bio,objave=brojObjava)
+    if cookieUsername != username:
+      return render_template("tudiProfile.html",username=username,name = name,surname = surname, picture=picture,followers=followers,following=following,bio=bio,objave=brojObjava)
+    else:
+      return render_template("profile.html",username=username,name = name,surname = surname, picture=picture,followers=followers,following=following,bio=bio,objave=brojObjava)
+
 
 
 @app.route('/cust')
