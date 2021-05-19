@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link rel="stylesheet" href="/static/css/profile.css">
+    <meta id="my-data" data-name="{{id}}">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
         </style>
@@ -14,10 +15,13 @@
             $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
             function deg(){
               $.getJSON($SCRIPT_ROOT + '/followTry', {
-                a: getCookie('User')
+                a: getCookie('User'),
               }, function(data) {
-                $("#result").text(data.result);
+                $("#result").text(data.result); 
+                var flaskData = $('#my-data').data();
+                alert(Object.values(flaskData));
               });
+              // 19.5 STAO OVDJE DOBIJES KI ID FOLLOWA I KOGA FOLLOWA LP
               return false;
             }
 
