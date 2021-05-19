@@ -153,9 +153,9 @@ def show_user_profile(id):
       brojObjava = objave.split(" , ")
       brojObjava = len(brojObjava) - 1
     if cookieUsername != username:
-      return render_template("tudiProfile.html",username=username,name = name,surname = surname, picture=picture,followers=followers,following=following,bio=bio,objave=brojObjava)
+      return render_template("tudiProfile.html",username=username,name = name,surname = surname, picture=picture,followers=followers,following=following,bio=bio,objave=brojObjava,id=id)
     else:
-      return render_template("profile.html",username=username,name = name,surname = surname, picture=picture,followers=followers,following=following,bio=bio,objave=brojObjava)
+      return render_template("profile.html",username=username,name = name,surname = surname, picture=picture,followers=followers,following=following,bio=bio,objave=brojObjava,id=id)
 
 
 
