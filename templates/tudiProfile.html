@@ -9,12 +9,30 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
         </style>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type=text/javascript>
+            $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+            function deg(){
+              $.getJSON($SCRIPT_ROOT + '/followTry', {
+                a: getCookie('User')
+              }, function(data) {
+                $("#result").text(data.result);
+              });
+              return false;
+            }
+
+            function getCookie(name) {
+              const value = `; ${document.cookie}`;
+              const parts = value.split(`; ${name}=`);
+              if (parts.length === 2) return parts.pop().split(';').shift();
+            }
+              </script>
 </head>
 <body>
     <div class="main-konta">
         <div class="onaj-dio">
       <!--   <img src="static/images/cover3.jpg" alt=""> OVAKO SE TO DELA--> 
-         <img src="static/images/{{ picture }}.jpg" alt="">
+         <img src="static/objave/{{ picture }}.jpg" alt="">
           <div class="info-dio">
               <div class="username">
                   <h1>{{ username }}</h1>
@@ -31,7 +49,7 @@
                 <div class="da">
                   <h2>0</h2>
                   <h4>following</h4>
-                  <button>Follow</button>
+                  <button onclick="deg()" id="result">Follow</button>
                 </div>
               </div>
               <div class="desc">
