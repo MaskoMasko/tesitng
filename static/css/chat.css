@@ -108,7 +108,7 @@ background: radial-gradient(circle, #507DBC 0%, #435b7c 100%);height: 100%;
     width: 100%;
     height: auto;
     list-style: none;
-}
+} 
 .messes li{
     margin-top: 50px;
     color: white;
@@ -171,3 +171,48 @@ background: radial-gradient(circle, #507DBC 0%, #435b7c 100%);height: 100%;
 .username-l{
     transform: translate(-500px, 10px);
 }
+@media only screen and (max-width:1350px) {
+    body{
+        transform: scale(.8);
+    }
+    
+}
+/* @media only screen and (max-width:1060px) {
+    .users{
+        display: none;
+    }
+    body{
+        overflow: hidden;
+    }
+    .chat-konta{
+        margin-left: -80px;
+        margin-right: 50px;
+        width: 1200px;
+        height: 1000px;
+    }
+    .mess-box{
+        width: 1000px;
+    }
+    .upis{
+        width: 940px;
+    }
+    .send{
+        margin-right: -60px;
+        width:130px;
+    }
+    .mess2{
+        width: 150px;
+        margin-left: -250px;
+    }
+}
+@media only screen and (max-width:860px) {
+    .mess-box{
+        width: 100%;
+    }
+    .upis, .send{
+        transform: translateX(-220px);
+    }
+    .upis{
+        width: 770px;
+    }
+} */
