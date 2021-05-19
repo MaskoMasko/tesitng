@@ -113,15 +113,40 @@ def profile():
     # DA DISPLAYA TO MALO LIPSE, FOLLOWERE FOLOWERSE I OBJACE TREA COUNTAT NE DISPLAYAT
     # YEAH NO BIGGIE
     print(objave)
-    try:
-      brojObjava = objave.split(" , ")
-      brojObjava = len(brojObjava)
-    except:
+    if objave == None:
       brojObjava = 0
+    else:
+      brojObjava = objave.split(" , ")
+      brojObjava = len(brojObjava) - 1
     print(brojObjava)
     return render_template("profile.html",username=username,name = name,surname = surname, picture=picture,followers=followers,following=following,bio=bio,objave=brojObjava)
   else:
     return render_template("login.html")
+
+
+@app.route('/user/<id>')
+def show_user_profile(id):
+  connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
+  if connection.is_connected():
+    mycursor = connection.cursor()
+    mycursor.execute(f"SELECT name,surname,picture,followers,following,bio,objave,username FROM userssss WHERE id='{id}'")
+    myresult = mycursor.fetchall()
+    myresult = myresult[0]
+    name = myresult[0]
+    surname = myresult[1]
+    picture = myresult[2]
+    followers = myresult[3]
+    following = myresult[4]
+    bio = myresult[5]
+    objave = myresult[6]
+    username = myresult[7]
+    if objave == None:
+      brojObjava = 0
+    else:
+      brojObjava = objave.split(" , ")
+      brojObjava = len(brojObjava) - 1
+    return render_template("tudiProfile.html",username=username,name = name,surname = surname, picture=picture,followers=followers,following=following,bio=bio,objave=brojObjava)
+
 
 @app.route('/cust')
 def cust():
