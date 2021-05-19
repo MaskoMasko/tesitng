@@ -73,8 +73,11 @@ display: flex;
         background-color: pink;
         display: flex;
         justify-content: center;
-        border-image:linear-gradient(red, blue) 30;
+        border: 1px solid blue;
         align-items: center;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-top: 5px;
     }
     .storiji img{
         border-radius: 50%;
@@ -83,9 +86,6 @@ display: flex;
         /* outline: 3px solid blue;
         -moz-outline-radius: 50%;
         outline-offset: -4px; */
-        border-image:linear-gradient(#f6b73c, #4d9f0c) 30;
-        border-image-outset: -10px;
-
     }
  
 /* NAVBAR */
