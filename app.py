@@ -32,9 +32,27 @@ def add_numbers():
 
 @app.route('/followTry')
 def followTry():
-  a = request.args.get('a')
-  print(a)
-  return jsonify(result="following")
+  kiFollowa = request.args.get('a')
+  kegaFollowa = request.args.get('b')
+  connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
+  if connection.is_connected():
+    mycursor = connection.cursor()
+    mycursor.execute(f"SELECT following FROM userssss WHERE username='{kiFollowa}'")
+    bivseSveKegaPrati = str(mycursor.fetchall()[0][0])
+    sviKojePrati = bivseSveKegaPrati + " , " + kegaFollowa
+    mycursor.execute(f"UPDATE userssss SET following = ('{sviKojePrati}') WHERE username='{kiFollowa}';")
+    connection.commit()
+    # OVO GORE DODA COVIKU KOJ ZELI FOLLOWAT U FOLLOWANE
+    mycursor.execute(f"SELECT followers FROM userssss WHERE id='{kegaFollowa}'")
+    bivseSveKiGaPrate = str(mycursor.fetchall()[0][0])
+    mycursor.execute(f"SELECT id FROM userssss WHERE username='{kiFollowa}'")
+    idOnogaKiFollowa = str(mycursor.fetchall()[0][0])
+    sviKiGaFollowaju = bivseSveKiGaPrate + " , " + idOnogaKiFollowa
+    mycursor.execute(f"UPDATE userssss SET followers = ('{sviKiGaFollowaju}') WHERE id='{kegaFollowa}';")
+    connection.commit()
+  print(kiFollowa)
+  print(kegaFollowa)
+  return jsonify(result="following",b=kegaFollowa)
 
 @app.route('/mainTu')
 def mainTu():
@@ -152,10 +170,22 @@ def show_user_profile(id):
     else:
       brojObjava = objave.split(" , ")
       brojObjava = len(brojObjava) - 1
-    if cookieUsername != username:
-      return render_template("tudiProfile.html",username=username,name = name,surname = surname, picture=picture,followers=followers,following=following,bio=bio,objave=brojObjava,id=id)
+
+    if followers == None:
+      brojfollowera = 0
     else:
-      return render_template("profile.html",username=username,name = name,surname = surname, picture=picture,followers=followers,following=following,bio=bio,objave=brojObjava,id=id)
+      brojfollowera = followers.split(" , ")
+      brojfollowera = len(brojfollowera) - 1
+
+    if following == None:
+      brojFollowa = 0
+    else:
+      brojFollowa = following.split(" , ")
+      brojFollowa = len(brojFollowa) - 1
+    if cookieUsername != username:
+      return render_template("tudiProfile.html",username=username,name = name,surname = surname, picture=picture,followers=brojfollowera,following=brojFollowa,bio=bio,objave=brojObjava,id=id)
+    else:
+      return render_template("profile.html",username=username,name = name,surname = surname, picture=picture,followers=brojfollowera,following=brojFollowa,bio=bio,objave=brojObjava,id=id)
 
 
 
