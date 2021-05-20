@@ -28,6 +28,13 @@
               // 19.5 STAO OVDJE DOBIJES KI ID FOLLOWA I KOGA FOLLOWA LP
               return false;
             }
+            var pratimLi = followin;
+            var newArray = pratimLi.split(',');         // ovdje je lista
+            var flaskData = Object.values(flaskData);   // OVDJE JE 2
+            flaskData = flaskData.toString();
+            var jeliPratim = newArray.indexOf(flaskData);
+            console.log(newArray);
+
             function da(){
               var gae =Object.values($('#my-data').data());
               gae = gae.toString()
