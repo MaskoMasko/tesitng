@@ -53,6 +53,39 @@ def followTry():
   print(kiFollowa)
   print(kegaFollowa)
   return jsonify(result="following",b=kegaFollowa)
+@app.route('/unFollowTry')
+def unFollowTry():
+  kiFollowa = request.args.get('a')
+  kegaFollowa = request.args.get('b')
+  connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
+  if connection.is_connected():
+    mycursor = connection.cursor()
+    mycursor.execute(f"SELECT following FROM userssss WHERE username='{kiFollowa}'")
+    bivseSveKegaPrati = str(mycursor.fetchall()[0][0])
+    nesDrugo = bivseSveKegaPrati.split(' , ')
+    if 'None' in nesDrugo:
+      nesDrugo.remove('None')
+    nesDrugo.remove(kegaFollowa)
+    nesDrugoDrugo = " , ".join(nesDrugo)
+    print(nesDrugo)
+    mycursor.execute(f"UPDATE userssss SET following = ('{nesDrugoDrugo}') WHERE username='{kiFollowa}';")
+    connection.commit()
+    # OVO GORE DODA COVIKU KOJ ZELI FOLLOWAT U FOLLOWANE
+    mycursor.execute(f"SELECT followers FROM userssss WHERE id='{kegaFollowa}'")
+    bivseSveKiGaPrate = str(mycursor.fetchall()[0][0])
+    mycursor.execute(f"SELECT id FROM userssss WHERE username='{kiFollowa}'")
+    idOnogaKiFollowa = str(mycursor.fetchall()[0][0])
+    nesTrece = bivseSveKiGaPrate.split(' , ')
+    if 'None' in nesTrece:
+      nesTrece.remove('None')
+    nesTrece.remove(idOnogaKiFollowa)
+    nesTreceTrece = " , ".join(nesTrece)
+    mycursor.execute(f"UPDATE userssss SET followers = ('{nesTreceTrece}') WHERE id='{kegaFollowa}';")
+    connection.commit()
+  print(kiFollowa)
+  print(kegaFollowa)
+  return jsonify(result="following",b=kegaFollowa)
+
 
 @app.route('/mainTu')
 def mainTu():
@@ -169,14 +202,16 @@ def show_user_profile(id):
       brojObjava = 0
     else:
       brojObjava = objave.split(" , ")
-      brojObjava.remove('None')
+      if 'None' in brojObjava:
+        brojObjava.remove('None')
       brojObjava = len(brojObjava)
 
     if followers == None:
       brojfollowera = 0
     else:
       brojfollowera = followers.split(" , ")
-      brojfollowera.remove('None')
+      if 'None' in brojfollowera:
+        brojfollowera.remove('None')
       brojfollowera = len(brojfollowera)
 
     if following == None:
@@ -185,7 +220,8 @@ def show_user_profile(id):
     else:
       brojFollowa = following.split(" , ")
       flw = brojFollowa
-      flw.remove('None')
+      if 'None' in flw:
+        flw.remove('None')
       brojFollowa = len(flw)
 
     usernameOfGuyLookinAtThePage = request.cookies.get('User')
@@ -194,7 +230,8 @@ def show_user_profile(id):
     myresult = myresult[0]
     whoDoIFollow = myresult[4]
     whoDoIFollow = whoDoIFollow.split(" , ")
-    whoDoIFollow.remove('None')
+    if 'None' in whoDoIFollow:
+      whoDoIFollow.remove('None')
     # 19.5 11:27 PM, NEZNAM STA RADIM NITI STO SAM NAPRAVIO ALI DELA
     # NEMOREN VISE GREN SPIT, ZA SUTRA AKO TI VBEC PRATIS TOG USERA NESMIJE
     # PISAT DA GA OPET ZAPRATIS JER MI SE NEDA TO HANDLEAT HVALA LIPA
