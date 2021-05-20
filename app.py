@@ -169,27 +169,30 @@ def show_user_profile(id):
       brojObjava = 0
     else:
       brojObjava = objave.split(" , ")
-      brojObjava = len(brojObjava) - 1
+      brojObjava.remove('None')
+      brojObjava = len(brojObjava)
 
     if followers == None:
       brojfollowera = 0
     else:
       brojfollowera = followers.split(" , ")
-      brojfollowera = len(brojfollowera) - 1
+      brojfollowera.remove('None')
+      brojfollowera = len(brojfollowera)
 
     if following == None:
       brojFollowa = 0
     else:
       brojFollowa = following.split(" , ")
-      brojFollowa = len(brojFollowa) - 1
-
+      flw = brojFollowa
+      flw.remove('None')
+      brojFollowa = len(flw)
     # 19.5 11:27 PM, NEZNAM STA RADIM NITI STO SAM NAPRAVIO ALI DELA
     # NEMOREN VISE GREN SPIT, ZA SUTRA AKO TI VBEC PRATIS TOG USERA NESMIJE
     # PISAT DA GA OPET ZAPRATIS JER MI SE NEDA TO HANDLEAT HVALA LIPA
     # AKO HOCES JOS HUSTLEA NAPRAVI DA AK GA PRATIS MOZES ODPRATIT
     # LKNC
     if cookieUsername != username:
-      return render_template("tudiProfile.html",username=username,name = name,surname = surname, picture=picture,followers=brojfollowera,following=brojFollowa,bio=bio,objave=brojObjava,id=id)
+      return render_template("tudiProfile.html",username=username,name = name,surname = surname, picture=picture,followers=brojfollowera,following=brojFollowa,bio=bio,objave=brojObjava,id=id,doFollow=flw)
     else:
       return render_template("profile.html",username=username,name = name,surname = surname, picture=picture,followers=brojfollowera,following=brojFollowa,bio=bio,objave=brojObjava,id=id)
 
