@@ -181,18 +181,27 @@ def show_user_profile(id):
 
     if following == None:
       brojFollowa = 0
+      flw = brojFollowa
     else:
       brojFollowa = following.split(" , ")
       flw = brojFollowa
       flw.remove('None')
       brojFollowa = len(flw)
+
+    usernameOfGuyLookinAtThePage = request.cookies.get('User')
+    mycursor.execute(f"SELECT name,surname,picture,followers,following,bio,objave,id FROM userssss WHERE username='{usernameOfGuyLookinAtThePage}'")
+    myresult = mycursor.fetchall()
+    myresult = myresult[0]
+    whoDoIFollow = myresult[4]
+    whoDoIFollow = whoDoIFollow.split(" , ")
+    whoDoIFollow.remove('None')
     # 19.5 11:27 PM, NEZNAM STA RADIM NITI STO SAM NAPRAVIO ALI DELA
     # NEMOREN VISE GREN SPIT, ZA SUTRA AKO TI VBEC PRATIS TOG USERA NESMIJE
     # PISAT DA GA OPET ZAPRATIS JER MI SE NEDA TO HANDLEAT HVALA LIPA
     # AKO HOCES JOS HUSTLEA NAPRAVI DA AK GA PRATIS MOZES ODPRATIT
     # LKNC
     if cookieUsername != username:
-      return render_template("tudiProfile.html",username=username,name = name,surname = surname, picture=picture,followers=brojfollowera,following=brojFollowa,bio=bio,objave=brojObjava,id=id,doFollow=flw)
+      return render_template("tudiProfile.html",username=username,name = name,surname = surname, picture=picture,followers=brojfollowera,following=brojFollowa,bio=bio,objave=brojObjava,id=id,doFollow=whoDoIFollow)
     else:
       return render_template("profile.html",username=username,name = name,surname = surname, picture=picture,followers=brojfollowera,following=brojFollowa,bio=bio,objave=brojObjava,id=id)
 
