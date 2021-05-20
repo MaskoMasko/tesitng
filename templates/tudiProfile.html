@@ -12,7 +12,8 @@
         </style>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script type=text/javascript>
-          var followin = {{ following|tojson }};
+          var followin = {{ doFollow|safe }}
+          followin = followin.toString();
           alert(followin);
             var flaskData = $('#my-data').data();
             $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
