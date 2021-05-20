@@ -28,6 +28,17 @@
               // 19.5 STAO OVDJE DOBIJES KI ID FOLLOWA I KOGA FOLLOWA LP
               return false;
             }
+            function otpratie(){
+              $.getJSON($SCRIPT_ROOT + '/unFollowTry', {
+                a: getCookie('User'),
+                b: da(),
+              }, function(data) {
+                $("#result").text(data.result); 
+                alert(Object.values(data.b));
+              });
+              // 19.5 STAO OVDJE DOBIJES KI ID FOLLOWA I KOGA FOLLOWA LP
+              return false;
+            }
             var pratimLi = followin;
             var newArray = pratimLi.split(',');         // ovdje je lista
             var flaskData = Object.values(flaskData);   // OVDJE JE 2
@@ -39,7 +50,7 @@
               document.getElementById("result").setAttribute( "onClick", "javascript: deg();" );
               document.getElementById("result").innerHTML = "Zaprati";
             }else{
-              document.getElementById("result").setAttribute( "onClick", "javascript: otprati();" );
+              document.getElementById("result").setAttribute( "onClick", "javascript: otpratie();" );
               document.getElementById("result").innerHTML = "Otprati";
             }});
             function da(){
