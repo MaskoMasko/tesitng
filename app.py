@@ -94,6 +94,9 @@ def mainTu():
   logStatus = request.cookies.get('logStat')
   if logStatus == "Logged In":
     username = request.cookies.get('User')
+    connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
+    if connection.is_connected():
+      mycursor = connection.cursor()
     return render_template("main2.html",username=username)
   else:
     return render_template("login.html")
@@ -154,7 +157,7 @@ def login():
   else:
     return render_template("login.html")
 
-@app.route('/profile')
+"""@app.route('/profile')
 def profile():
   logStatus = request.cookies.get('logStat')
   if logStatus == "Logged In":
@@ -180,7 +183,7 @@ def profile():
     print(brojObjava)
     return render_template("profile.html",username=username,name = name,surname = surname, picture=picture,followers=followers,following=following,bio=bio,objave=brojObjava)
   else:
-    return render_template("login.html")
+    return render_template("login.html")"""
 
 
 @app.route('/user/<id>')
