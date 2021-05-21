@@ -55,7 +55,9 @@
             }
             var flaskData = Object.values(flaskData);   // OVDJE JE 2
             flaskData = flaskData.toString();
+            if (pratimLi != null){
             var jeliPratim = newArray.indexOf(flaskData);
+            }
             console.log(newArray);
             $( document ).ready(function() {
             if(jeliPratim == -1 ){
