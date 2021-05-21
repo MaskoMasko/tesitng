@@ -17,9 +17,13 @@
           var obje = {{ posts|safe }}
           alert(obje);
           console.log(obje);
-          stvarneObjave = stvarneObjave.toString();
+          if (stvarneObjave != null){
+            stvarneObjave = stvarneObjave.toString();
+          }
           alert(stvarneObjave);
-          followin = followin.toString();
+          if (followin != null){
+            followin = followin.toString();
+          }
          // alert(followin);
             var flaskData = $('#my-data').data();
             $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
