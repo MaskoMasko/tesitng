@@ -13,8 +13,14 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script type=text/javascript>
           var followin = {{ doFollow|safe }}
+          var stvarneObjave = {{ objaveobjave|safe }}
+          var obje = {{ posts|safe }}
+          alert(obje);
+          console.log(obje);
+          stvarneObjave = stvarneObjave.toString();
+          alert(stvarneObjave);
           followin = followin.toString();
-          alert(followin);
+         // alert(followin);
             var flaskData = $('#my-data').data();
             $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
             function deg(){
