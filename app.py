@@ -256,6 +256,8 @@ def show_user_profile(id):
       print(kaLista)
     if objave == None:
       objave = 'null'
+    cookieUsername.lower()
+    username.lower()
     if cookieUsername != username:
       return render_template("tudiProfile.html",username=username,name = name,surname = surname, picture=picture,followers=brojfollowera,following=brojFollowa,bio=bio,objave=brojObjava,id=id,doFollow=whoDoIFollow,objaveobjave=objave,posts=kaLista)
     else:
