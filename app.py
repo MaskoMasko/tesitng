@@ -235,7 +235,7 @@ def show_user_profile(id):
       if 'None' in whoDoIFollow:
         whoDoIFollow.remove('None')
     if whoDoIFollow == None:
-      whoDoIFollow = 'Null'
+      whoDoIFollow = 'null'
     # 19.5 11:27 PM, NEZNAM STA RADIM NITI STO SAM NAPRAVIO ALI DELA
     # NEMOREN VISE GREN SPIT, ZA SUTRA AKO TI VBEC PRATIS TOG USERA NESMIJE
     # PISAT DA GA OPET ZAPRATIS JER MI SE NEDA TO HANDLEAT HVALA LIPA
