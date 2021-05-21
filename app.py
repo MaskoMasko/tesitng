@@ -238,18 +238,19 @@ def show_user_profile(id):
     # PISAT DA GA OPET ZAPRATIS JER MI SE NEDA TO HANDLEAT HVALA LIPA
     # AKO HOCES JOS HUSTLEA NAPRAVI DA AK GA PRATIS MOZES ODPRATIT
     # LKNC
-    objave = objave.split(" , ")
-    if 'None' in objave:
-      objave.remove('None')
-    print(objave)
     kaLista = []
-    for i in objave:
-      mycursor.execute(f"SELECT opis FROM objave WHERE id='{i}'")
-      myresult = mycursor.fetchall()
-      myresult = myresult[0][0]
-      k = {i:myresult}
-      kaLista.append(k)
-    print(kaLista)
+    if objave:
+      objave = objave.split(" , ")
+      if 'None' in objave:
+        objave.remove('None')
+      print(objave)
+      for i in objave:
+        mycursor.execute(f"SELECT opis FROM objave WHERE id='{i}'")
+        myresult = mycursor.fetchall()
+        myresult = myresult[0][0]
+        k = {i:myresult}
+        kaLista.append(k)
+      print(kaLista)
     if cookieUsername != username:
       return render_template("tudiProfile.html",username=username,name = name,surname = surname, picture=picture,followers=brojfollowera,following=brojFollowa,bio=bio,objave=brojObjava,id=id,doFollow=whoDoIFollow,objaveobjave=objave,posts=kaLista)
     else:
