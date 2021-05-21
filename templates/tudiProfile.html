@@ -10,6 +10,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
         </style>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script type=text/javascript>
           var followin = {{ doFollow|safe }}
@@ -24,7 +25,6 @@
           if (followin != null){
             followin = followin.toString();
           }
-         // alert(followin);
             var flaskData = $('#my-data').data();
             $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
             function deg(){
@@ -83,7 +83,7 @@
               </script>
 </head>
 <body>
-    <div class="main-konta">
+    <div class="main-konta" id="tudi">
         <div class="onaj-dio">
       <!--   <img src="static/images/cover3.jpg" alt=""> OVAKO SE TO DELA--> 
          <img src="static/objave/{{ picture }}.jpg" alt="">
@@ -117,6 +117,24 @@
             <li>SAVED</li>
             <li>TAGED</li>
         </ul>
+        <ul>
+          <li v-for="(slika, index) in slike" :key=slika.id>
+             <img :src=`/static/objave/${index+1}.jpg` alt=" slika" class="image">
+          </li>
+        </ul>
     </div>
+    <script>
+      var profApp = new Vue({
+        el:"#tudi",
+        data:{
+          objave:obje,
+          slike:Object.keys(obje)
+        },
+        methods:{
+        }
+      })
+      var slike = document.querySelectorAll(".image")
+      console.log(slike)
+    </script>
 </body>
 </html>
