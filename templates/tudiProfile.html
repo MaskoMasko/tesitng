@@ -50,7 +50,9 @@
               return false;
             }
             var pratimLi = followin;
+            if (pratimLi != null){
             var newArray = pratimLi.split(',');         // ovdje je lista
+            }
             var flaskData = Object.values(flaskData);   // OVDJE JE 2
             flaskData = flaskData.toString();
             var jeliPratim = newArray.indexOf(flaskData);
