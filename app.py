@@ -197,6 +197,7 @@ def show_user_profile(id):
     following = myresult[4]
     bio = myresult[5]
     objave = myresult[6]
+    print(objave)
     username = myresult[7]
     if objave == None:
       brojObjava = 0
@@ -223,7 +224,7 @@ def show_user_profile(id):
       if 'None' in flw:
         flw.remove('None')
       brojFollowa = len(flw)
-
+    print(objave)
     usernameOfGuyLookinAtThePage = request.cookies.get('User')
     mycursor.execute(f"SELECT name,surname,picture,followers,following,bio,objave,id FROM userssss WHERE username='{usernameOfGuyLookinAtThePage}'")
     myresult = mycursor.fetchall()
@@ -237,10 +238,22 @@ def show_user_profile(id):
     # PISAT DA GA OPET ZAPRATIS JER MI SE NEDA TO HANDLEAT HVALA LIPA
     # AKO HOCES JOS HUSTLEA NAPRAVI DA AK GA PRATIS MOZES ODPRATIT
     # LKNC
+    objave = objave.split(" , ")
+    if 'None' in objave:
+      objave.remove('None')
+    print(objave)
+    kaLista = []
+    for i in objave:
+      mycursor.execute(f"SELECT opis FROM objave WHERE id='{i}'")
+      myresult = mycursor.fetchall()
+      myresult = myresult[0][0]
+      k = {i:myresult}
+      kaLista.append(k)
+    print(kaLista)
     if cookieUsername != username:
-      return render_template("tudiProfile.html",username=username,name = name,surname = surname, picture=picture,followers=brojfollowera,following=brojFollowa,bio=bio,objave=brojObjava,id=id,doFollow=whoDoIFollow)
+      return render_template("tudiProfile.html",username=username,name = name,surname = surname, picture=picture,followers=brojfollowera,following=brojFollowa,bio=bio,objave=brojObjava,id=id,doFollow=whoDoIFollow,objaveobjave=objave,posts=kaLista)
     else:
-      return render_template("profile.html",username=username,name = name,surname = surname, picture=picture,followers=brojfollowera,following=brojFollowa,bio=bio,objave=brojObjava,id=id)
+      return render_template("profile.html",username=username,name = name,surname = surname, picture=picture,followers=brojfollowera,following=brojFollowa,bio=bio,objave=brojObjava,id=id,doFollow=whoDoIFollow,objaveobjave=objave,posts=kaLista)
 
 
 
