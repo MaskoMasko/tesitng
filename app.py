@@ -14,6 +14,7 @@ def dbGet(username):
     mycursor = connection.cursor()
     mycursor.execute(f"SELECT name,surname,picture,followers,following,bio,objave,id FROM userssss WHERE username='{username}'")
     myresult = mycursor.fetchall()
+    print(myresult)
     myresult = myresult[0]
     return myresult
 
@@ -53,6 +54,7 @@ def followTry():
   print(kiFollowa)
   print(kegaFollowa)
   return jsonify(result="following",b=kegaFollowa)
+
 @app.route('/unFollowTry')
 def unFollowTry():
   kiFollowa = request.args.get('a')
@@ -297,6 +299,18 @@ def custo():
       bio = request.form.get('bio') #dela
       usernam = request.cookies.get('User')
       myresult = dbGet(usernam)
+      listaZaUpdateat = [{'picture':slika},{'name':name},{'surname':surname},{'username':username},{'bio':bio}]
+      if slika == '':
+        del listaZaUpdateat[0]
+      if name == '':
+        del listaZaUpdateat[-4]
+      if surname == '':
+        del listaZaUpdateat[-3]
+      if username == '':
+        del listaZaUpdateat[-2]
+      if bio == '':
+        del listaZaUpdateat[-1]
+
       id = str(myresult[7])
       pat = os.path.join("static/images",id+".jpg") # LOS SOLUTION ZA OVO
       slika.save(pat)
@@ -306,11 +320,22 @@ def custo():
         mycursor = connection.cursor()
         print("yeah yeah")
         print(id)
-        mycursor.execute(f"UPDATE userssss SET picture='{id}', name='{name}', surname='{surname}', bio='{bio}',username='{username}'  WHERE id='{id}';")
+        #mycursor.execute(f"UPDATE userssss SET picture='{id}', name='{name}', surname='{surname}', bio='{bio}'  WHERE id='{id}';")
         # TREBA DODAT PROTEKCIJU PROTIV DUPOLIH USERNAMEOVA
         connection.commit()
+        for i in listaZaUpdateat:
+          temp = i.keys()
+          temp = list(temp)
+          temp = temp[0]
+          if temp == 'picture':
+            temp1 = id
+          else:
+            temp1 = i.get(temp)
+          print(temp)
+          print(temp1)
+          mycursor.execute(f"UPDATE userssss SET {temp}='{temp1}'  WHERE id='{id}';")
       # OVAJ DIO GORE NE DELA, 16.5 GREN SPIT
-      return redirect('/profile')
+      return redirect('/signout')
 
 @app.route('/signupTry', methods = ['POST'])  
 def signupTry():
