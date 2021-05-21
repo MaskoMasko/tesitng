@@ -306,7 +306,7 @@ def custo():
         mycursor = connection.cursor()
         print("yeah yeah")
         print(id)
-        mycursor.execute(f"UPDATE userssss SET picture='{id}', name='{name}', surname='{surname}', bio='{bio}',username={username}  WHERE id='{id}';")
+        mycursor.execute(f"UPDATE userssss SET picture='{id}', name='{name}', surname='{surname}', bio='{bio}',username='{username}'  WHERE id='{id}';")
         # TREBA DODAT PROTEKCIJU PROTIV DUPOLIH USERNAMEOVA
         connection.commit()
       # OVAJ DIO GORE NE DELA, 16.5 GREN SPIT
