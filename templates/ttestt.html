@@ -6,23 +6,206 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/static/css/mainPage.css">
+    <link rel="stylesheet" href="/static/css/main2.css">
+    <link rel="stylesheet" href="/static/css/chat.css">
+    <link rel="stylesheet" href="/static/css/profile.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+        </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+<script type=text/javascript>
+    var k;
+    var poruka = [];
+      $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+      window.onload = function deg(){
+            $.getJSON($SCRIPT_ROOT + '/testTry', function(data) {
+              //k = JSON.stringify(data.result);
+              k = data.result;
+              duzina = data.duzina -1;
+              //k= k[0];
+              for (let i = 0; i <= duzina; i++) { 
+                var senderr = Object.keys(k[i]);
+                var porukaa = Object.values(k[i]);
+                var cookieSender = getCookie('User');
+                if (cookieSender == senderr){
+                  cijaJee = "desno";
+                }else{
+                  cijaJee = "livo";
+                }
+                var yoMama = {
+                  sender:  senderr[0],
+                  poruka: porukaa[0],
+                  strana: cijaJee,
+                  rednjiBroj: i
+                };
+                poruka.push(yoMama);
+                
+              }
+            });
+            app.messes = poruka
+            console.log(app.messes);
+            return false;
+          }
+  </script>
 
 </head>
 <body>
     <div class="main-view">
 <div class="slideshow-container">
+
+
+
+    <!-- MAIN PAGE-->
     <div class="mySlides fade">
-      <img src="airp.jpg" style="width:100%; height:700px" alt="image1">
+        <div class="nemicise">
+    <!-- STORIES-->
+    <div class="stories">
+        <div class="stor-konta">
+            <!-- Za listu followera-->
+            <ul class="storiji">
+                <li><img src="/static/images/AladeenLogo.png" alt=""></li>
+                <li><img src="/static/images/1.png" alt=""></li>
+                <li><img src="/static/images/AladeenLogo.png" alt=""></li>
+                <li><img src="/static/images/1.png" alt=""></li>
+                <li><img src="/static/images/AladeenLogo.png" alt=""></li>
+                <li><img src="/static/images/1.png" alt=""></li>
+            </ul>
+        </div>
     </div>
+        <!-- OBJAVE -->
+    <div class="objava" id="commApp">
+        <div class="user">
+          <h5>Avatar</h5>
+          <h3>HE_WAS_FUNNY_MEMES</h3>
+        </div>
+          <img src="" alt="">
+          <div class="rate">
+            <ul>
+              <li>Like</li>
+              <li>Share</li>
+            </ul>
+            <p>Bookmark</p>
+          </div>
+          <p>3333 likes</p>
+          <div class="kom-box">
+            <p class="siv">Comments</p>
+            <ul class="komms">
+              <li v-for="comment in comms" :key="comment.id"><h3 v-html="comment.user" ></h3><p v-html="comment.comm"></p></li>
+              <div v-if="objaviKom">
+              <li v-for="comment in prazan" :key="comment.id"><h3>Your Username</h3><p v-html="comment"></p></li>
+              </div>
+            </ul>
+            <div class="formni" v-if="kom">
+                <input type="text" placeholder="komentar" v-model="prazan1">
+                <button type="submit" @click="subKom()">Relsee</button>
+            </div>
+            <button @click="zaKom()">Comm nisto</button>
+          </div>
+      </div>
+    </div>
+    </div>
+
+
+    <!-- CHAT -->
     <div class="mySlides fade">
-      <img src="animals.jpg" style="width:100%; height:700px" alt="image2">
+        <div class="nemicise">
+        <div class="chat-konta">
+            <div class="users">
+                <div class="naslov">
+                <h1>{% if logStatus == "Logged In" %}
+                    {{ username }}
+                    {% endif %}</h1>
+            </div>
+            <ul class="names">
+                <li id="1">user1</li>
+                <li id="2">user2</li>
+                <li id="3">user3</li>
+                <li id="4">user4</li>
+                <li id="5">user5</li>
+            </ul>
+            </div>
+            <div class="chat-box">
+                <div class="mess-box">
+                    <div class="komms">
+                    <div>
+                        <div v-for="mess in messes" :key="mess.id">
+                          <div v-if="mess.strana =='desno'"><h5 class="username-d">{{username}}</h5><h3  class="mess1 da1"  v-html="mess.poruka"></h3><div class="mess1-thing ine"></div></div>
+                          <div v-else><h5 v-html="mess.sender" class="username-l"></h5><h3  class="mess2 da2"  v-html="mess.poruka"></h3><div class="mess2-thing ida"></div></div>
+                        </div>
+                        <div class="messes">
+                          <div v-for="comment in nasi" :key="comment.id">
+                          <div v-if="comment.strana =='desno'"><h5 class="username-d">{{username}}</h5><h3  class="mess1 da1"  v-html="comment.tekst"></h3><div class="mess1-thing ine"></div></div>
+                          <div v-else><h5 v-html="comment.ime" class="username-l"></h5><h3  class="mess2 da2"  v-html="comment.tekst"></h3><div class="mess2-thing ida"></div></div>
+                        </div>
+                          </div>  
+                      <div class="formovi">    
+                        <form action="">
+                          <input type="text" class="upis" id="heil">
+                          <button type="submit" class="send">Submit</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <div>
+          <h1><a href="/signout" class="lg">LOG OUT</a></h1>
+        </div>
+      </div>
     </div>
+</div>
+
+
+    <!--BIG OUNCE-->
     <div class="mySlides fade">
-      <img src="baseball.jpg" style="width:100%; height:700px" alt="image3">
+      <img src="/static/objave/1.jpg" style="width:100%; height:700px" alt="image3">
     </div>
+
+
+    <!-- PROFILE -->
     <div class="mySlides fade">
-      <img src="baseball2.jpg" style="width:100%; height:700px" alt="image4">
+        <div class="nemicise">
+        <div class="main-konta">
+            <div class="onaj-dio">
+          <!--   <img src="static/images/cover3.jpg" alt=""> OVAKO SE TO DELA--> 
+             <img src="static/images/{{ picture }}.jpg" alt="">
+              <div class="info-dio">
+                  <div class="username">
+                      <h1>{{ username }}</h1>
+                      <a href="/cust"><div class="edit">Edit profile</div></a>
+                  </div>
+                  <div class="foll">
+                      <div class="da">
+                      <h2>{{ objave }}</h2>
+                      <h4>posts</h4>
+                    </div>
+                    <div class="da">
+                      <h2>0</h2>
+                      <h4>followers</h4>
+                    </div>
+                    <div class="da">
+                      <h2>0</h2>
+                      <h4>following</h4>
+                    </div>
+                  </div>
+                  <div class="desc">
+                      <h5>{{ bio }}</h5>
+                  </div>
+              </div>
+            </div>
+            <ul class="yes-lista">
+                <li>POSTS</li>
+                <li>IGTV</li>
+                <li>SAVED</li>
+                <li>TAGED</li>
+            </ul>
+        </div>
+        </div>
     </div>
+    
+
     <ul class="nav-lista">
       <li><a class="prev" onclick="plusSlides(-1)">&#10094;</a></li>
       <li onclick="currentSlide(1)">    
@@ -39,7 +222,6 @@
             <div class="cr2"></div>
             <div class="cr3"></div>
         </div>
-        <div class="mali"></div>
     </div>
 </li>
       <li onclick="currentSlide(3)">
@@ -69,5 +251,7 @@
     </div>
     
     <script src="/static/js/mainPage.js"></script>
+    <script src="/static/js/main2.js"></script>
+    <script src="/static/js/chat.js"></script>
 </body>
 </html>
