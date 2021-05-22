@@ -8,7 +8,8 @@
     height: 800px;
     background-color: red;
     margin:auto;
-    margin-top: 80px;
+    display: flex;
+    align-items: flex-end;
 }
 .slideshow-container {
   max-width: 1000px;
@@ -23,26 +24,38 @@
 /* PREV, NEXT */
 .prev, .next {
   cursor: pointer;
+  width: 100px;
   position: absolute;
-  width: auto;
+  height: 80px;
+    background-color: white;
   margin-top: -22px;
-  padding: 16px;
-  color: white;
+  color: rgb(206, 200, 200);
+  padding-right: 20px;
   font-weight: bold;
   font-size: 18px;
   transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
+  bottom: 0%;
+  margin-right: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
+  right: -20%;
 }
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
+.prev{
+    left:-20%
+}
+.prev:hover, .next:hover{
+    background-color: red;
 }
 
 /* DOTS */
+.dots{
+    position: absolute;
+    bottom: 2%;
+    left:48%;
+}
 .dot {
   cursor: pointer;
   height: 15px;
@@ -81,13 +94,13 @@
     position: relative;
     width: 50px;
     height: 50px;
-    background-color: red;
 }
 .krov{
     width: 5px;
 border-left: 2px solid transparent;
 border-right: 2px solid transparent;
-border-bottom: 2px solid blue;
+border-bottom: 2px solid rgb(206, 200, 200);
+;
 border-width:20px;
 position: absolute;
 left: 15%;
@@ -97,7 +110,8 @@ top: 5%;
 width: 30px;
 height: 25px;
 position: absolute;
-background-color: blue;
+background-color: rgb(206, 200, 200);
+
 top: 45%;
 left: 25%;
 }
@@ -107,27 +121,27 @@ height: 15px;
 border-top-left-radius: 5px;
 border-top-right-radius: 5px;
 position:absolute;
+background-color: white;
 bottom: 2%;
 left: 50%;
-background: red;
 }
 /**/
 .chatBtn{
     position: relative;
     width: 70px;
     height: 70px;
-    background-color: red;
 }
 .krug{
     width: 50px;
     height: 30px;
-    background-color: blue;
+    background-color: rgb(206, 200, 200);
+
    
      border-radius: 50px;
      border-bottom-right-radius:0px ;
      position: absolute;
      top: 35%;
-     left: 40%;
+     left: 20%;
 }
 .cr1, .cr2, .cr3{
     width: 50%;
@@ -150,7 +164,6 @@ background: red;
     position: relative;
     width: 100px;
     height: 100px;
-    background-color: red;
     transform: scale(.5);
     margin-top: 20px;
 }
@@ -158,7 +171,8 @@ background: red;
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background-color: blue;
+    background-color: rgb(206, 200, 200);
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -166,14 +180,15 @@ background: red;
 .manji-krug{
     width: 35px;
     height: 35px;
-    background-color: red;
     border-radius: 50%;
+    background-color: white;
 }
 .palica{
     width: 50px;
     height: 15px;
     border-radius: 5px;
-    background-color: blue;
+    background-color: rgb(206, 200, 200);
+
     position: absolute;
     right: 10%;
     bottom: 35%;
@@ -184,7 +199,6 @@ background: red;
     position: relative;
     width: 50px;
     height: 50px;
-    background-color: red;
 }
 .tilo{
     width: 25px;
@@ -193,7 +207,8 @@ background: red;
     bottom: 0;
     left: 20%;
     border-radius: 50%;
-    background-color: blue;
+    background-color: rgb(206, 200, 200);
+
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
 }
@@ -204,13 +219,61 @@ background: red;
     border-radius: 50%;
     top: 15%;
     left: 25%;
-    background-color: blue;
-    border: 4px solid red;
+    background-color: rgb(206, 200, 200);
+    border: 4px solid white;
     z-index: 2;
 
 }
 .nemicise{
-    height: 700px;
+    height: 650px;
     overflow-y: scroll;
-    overflow-x: hidden;
+}
+.mainPage{
+    color: black !important;
+}
+.nego{
+    width: 1100px;
+    margin: auto;
+    margin-left: -50px;
+    height: 650px;
+    background-color: green;
+    margin-top: 70px;
+}
+.stories{
+    margin-top: 0px !important;
+}
+.nav-lista{
+    margin-top: 0px !important;
+    background-color: white;
+    overflow: hidden;
+    height: 80px;
+    width: 1200px;
+    margin-left: -100px;
+}
+.nav-lista li{
+    margin-right: 0% !important;
+    width: 25%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.nav-lista li:hover{
+    background-color: red;
+}
+.npage{
+    position: relative;
+}
+.npage h1{
+    position: absolute;
+    transform: translate(-50px, -40px);
+}
+.greeting{
+    position: relative;
+}
+.greeting h1{
+    position: absolute;
+    transform: translateY(-40px);
+
 }
