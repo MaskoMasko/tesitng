@@ -97,7 +97,10 @@ def mainTu():
     connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
     if connection.is_connected():
       mycursor = connection.cursor()
-    return render_template("main2.html",username=username)
+      mycursor.execute(f"SELECT id,opis FROM objave")
+      bivseSveKegaPrati = mycursor.fetchall()
+      print(bivseSveKegaPrati)
+    return render_template("main2.html",username=username,objave=bivseSveKegaPrati)
   else:
     return render_template("login.html")
 
