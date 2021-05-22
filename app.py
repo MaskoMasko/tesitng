@@ -142,6 +142,10 @@ def novaObjavaTry():
 
     return redirect("/mainTu")
 
+@app.route('/ttestt')
+def ttestt():
+  return render_template("ttestt.html")  
+
 @app.route('/signout')
 def signout():
   resp = make_response(redirect('/login'))
