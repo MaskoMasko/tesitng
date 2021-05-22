@@ -10,6 +10,28 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
         </style>
+        <style>
+          .sve-objave{
+            width: 1000px;
+            margin: auto;
+            height: auto;
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+            margin-left: 20px;
+          }
+          .objave{
+            width: 32%;
+            margin: 3px !important;
+          }
+          .objave img{
+            width: 100% !important;
+            height: 300px !important;
+          }
+          .objave img:hover{
+            filter: grayscale(30%) blur(2px);
+          }
+        </style>
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script type=text/javascript>
@@ -117,8 +139,9 @@
             <li>SAVED</li>
             <li>TAGED</li>
         </ul>
-        <ul>
-          <li v-for="(slika, index) in slike" :key=slika.id>
+        <ul class="sve-objave">
+          <li v-for="(slika, index) in slike" :key=slika.id class="objave">
+            <h3 v-html="opis[index]"></h3>
              <img :src=`/static/objave/${index+1}.jpg` alt=" slika" class="image" width="100px" height="100px">
           </li>
         </ul>
@@ -128,7 +151,8 @@
         el:"#tudi",
         data:{
           objave:obje,
-          slike:Object.keys(obje)
+          slike:Object.keys(obje),
+          opis:Object.values(obje),
         },
         methods:{
         }
