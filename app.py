@@ -272,6 +272,8 @@ def show_user_profile(id):
     username = username.lower()
     print(cookieUsername)
     print(username)
+    if picture == None:
+      picture = 'cover3'
     if cookieUsername != username:
       return render_template("tudiProfile.html",username=username,name = name,surname = surname, picture=picture,followers=brojfollowera,following=brojFollowa,bio=bio,objave=brojObjava,id=id,doFollow=whoDoIFollow,objaveobjave=objave,posts=kaLista)
     else:
@@ -322,7 +324,7 @@ def custo():
         del listaZaUpdateat[-1]
 
       id = str(myresult[7])
-      pat = os.path.join("static/images",id+".jpg") # LOS SOLUTION ZA OVO
+      pat = os.path.join("static/profilePics",id+".jpg") # LOS SOLUTION ZA OVO
       slika.save(pat)
       # STAO SAM OVDJE 16.5, ZNACI DOBIO SAM VALUE TREBAM IH SADA STAVI/UPDATEAT U DATABASSU GL SOLDIER
       connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
