@@ -16,6 +16,9 @@
         var obje = {{ objave|safe }}
         console.log(obje)
         alert(obje);
+        window.onload = function hm(){
+            objApp.objave = obje
+        }
         
     </script>
 </head>
@@ -86,7 +89,45 @@
             <button @click="zaKom()">Comm nisto</button>
           </div>
       </div>
-      <script>
+      <h1 v-html="objava.osoba"></h1>
+    <div id="objavice">
+            <div v-for="(objava, index) in objave">
+            <div class="objava" id="commApp">
+                <div class="user">
+                    <h5>Avatar</h5>
+                    <h3 v-html="objava.osoba"></h3>
+                </div>
+                <img :src=`/static/objave/${index+1}.jpg` alt="">
+                <div class="rate">
+                    <ul>
+                        <li>Like</li>
+                        <li>Share</li>
+                    </ul>
+                    <!-- <div>
+                        <input type="text" placeholder="komentar" v-model="prazan1">
+                        <button type="submit" @click="subKom()">Relsee</button>
+                    </div> -->
+                    <p>Bookmark</p>
+                </div>
+                <p v-html="objava.lajkova"></p><span> lajkova</span>
+                <div class="kom-box">
+                    <p class="siv">Comments</p>
+                    <ul class="komms">
+                        <li v-for="comment in comms" :key="comment.id"><h3 v-html="comment.user" ></h3><p v-html="comment.comm"></p></li>
+                        <div v-if="objaviKom">
+                            <li v-for="comment in prazan" :key="comment.id"><h3>Your Username</h3><p v-html="comment"></p></li>
+                        </div>
+                    </ul>
+                    <div class="formni" v-if="kom">
+                        <input type="text" placeholder="komentar" v-model="prazan1">
+                        <button type="submit" @click="subKom()">Relsee</button>
+                    </div>
+                    <button @click="zaKom()">Comm nisto</button>
+                </div>
+    </div>
+</div>
+    </div>
+            <script>
     var commApp = new Vue({
         el:"#commApp",
         data:{
@@ -152,6 +193,12 @@ var zaNav = new Vue({
         zaActyDrp(){
             this.activity = false;
         }
+    }
+})
+var objApp = new Vue ({
+    el:"#objavice",
+    data:{
+        objave:undefined
     }
 })
       </script>
