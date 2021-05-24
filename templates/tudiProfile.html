@@ -34,75 +34,7 @@
         </style>
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script type=text/javascript>
-          var followin = {{ doFollow|safe }}
-          var stvarneObjave = {{ objaveobjave|safe }}
-          var obje = {{ posts|safe }}
-          alert(obje);
-          console.log(obje);
-          if (stvarneObjave != null){
-            stvarneObjave = stvarneObjave.toString();
-          }
-          alert(stvarneObjave);
-          if (followin != null){
-            followin = followin.toString();
-          }
-            var flaskData = $('#my-data').data();
-            $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-            function deg(){
-              $.getJSON($SCRIPT_ROOT + '/followTry', {
-                a: getCookie('User'),
-                b: da(),
-              }, function(data) {
-                $("#result").text(data.result); 
-                alert(Object.values(data.b));
-              });
-              // 19.5 STAO OVDJE DOBIJES KI ID FOLLOWA I KOGA FOLLOWA LP
-              return false;
-            }
-            function otpratie(){
-              $.getJSON($SCRIPT_ROOT + '/unFollowTry', {
-                a: getCookie('User'),
-                b: da(),
-              }, function(data) {
-                $("#result").text(data.result); 
-                alert(Object.values(data.b));
-              });
-              // 19.5 STAO OVDJE DOBIJES KI ID FOLLOWA I KOGA FOLLOWA LP
-              return false;
-            }
-            var pratimLi = followin;
-            if (pratimLi != null){
-            var newArray = pratimLi.split(',');         // ovdje je lista
-            }
-            var flaskData = Object.values(flaskData);   // OVDJE JE 2
-            flaskData = flaskData.toString();
-            if (pratimLi != null){
-            var jeliPratim = newArray.indexOf(flaskData);
-            }
-            console.log(newArray);
-            $( document ).ready(function() {
-            if(jeliPratim == -1 || jeliPratim == undefined || jeliPratim == null){
-              document.getElementById("result").setAttribute( "onClick", "javascript: deg();" );
-              document.getElementById("result").innerHTML = "Zaprati";
-            }else{
-              document.getElementById("result").setAttribute( "onClick", "javascript: otpratie();" );
-              document.getElementById("result").innerHTML = "Otprati";
-            }});
-            function da(){
-              var gae =Object.values($('#my-data').data());
-              gae = gae.toString()
-              return gae;
-            }
-            function getCookie(name) {
-              const value = `; ${document.cookie}`;
-              const parts = value.split(`; ${name}=`);
-              if (parts.length === 2) return parts.pop().split(';').shift();
-            }
-            function otprati(){
-              alert("otpratio si,ali nisi");
-            }
-              </script>
+       
 </head>
 <body>
     <div class="main-konta" id="tudi">
@@ -144,21 +76,95 @@
             <h3 v-html="opis[index]"></h3>
              <img :src=`/static/objave/${index+1}.jpg` alt=" slika" class="image" width="100px" height="100px">
           </li>
+          <button @click="thisone()">send</button>
         </ul>
     </div>
-    <script>
-      var profApp = new Vue({
+    <script type=text/javascript>
+      const profApp = new Vue({
         el:"#tudi",
         data:{
-          objave:obje,
-          slike:Object.keys(obje),
-          opis:Object.values(obje),
+          objave:undefined,
         },
         methods:{
+          thisone(){
+          },
+          zaTebe(slika, opis){
+            alert("yes")
+          }
         }
       })
       var slike = document.querySelectorAll(".image")
-      console.log(slike)
-    </script>
+      // console.log(slike)
+      var followin = {{ doFollow|safe }}
+      var stvarneObjave = {{ objaveobjave|safe }}
+      var obje = {{ posts|safe }}
+      alert(obje);
+      // profApp.objave = obje
+      var val = Object.values(obje)
+      var dal = Object.values(val)
+      console.log(Object.values(dal[1]));
+      if (stvarneObjave != null){
+        stvarneObjave = stvarneObjave.toString();
+      }
+      alert(stvarneObjave);
+      if (followin != null){
+        followin = followin.toString();
+      }
+        var flaskData = $('#my-data').data();
+        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+        function deg(){
+          $.getJSON($SCRIPT_ROOT + '/followTry', {
+            a: getCookie('User'),
+            b: da(),
+          }, function(data) {
+            $("#result").text(data.result); 
+            alert(Object.values(data.b));
+          });
+          // 19.5 STAO OVDJE DOBIJES KI ID FOLLOWA I KOGA FOLLOWA LP
+          return false;
+        }
+        function otpratie(){
+          $.getJSON($SCRIPT_ROOT + '/unFollowTry', {
+            a: getCookie('User'),
+            b: da(),
+          }, function(data) {
+            $("#result").text(data.result); 
+            alert(Object.values(data.b));
+          });
+          // 19.5 STAO OVDJE DOBIJES KI ID FOLLOWA I KOGA FOLLOWA LP
+          return false;
+        }
+        var pratimLi = followin;
+        if (pratimLi != null){
+        var newArray = pratimLi.split(',');         // ovdje je lista
+        }
+        var flaskData = Object.values(flaskData);   // OVDJE JE 2
+        flaskData = flaskData.toString();
+        if (pratimLi != null){
+        var jeliPratim = newArray.indexOf(flaskData);
+        }
+        // console.log(newArray);
+        $( document ).ready(function() {
+        if(jeliPratim == -1 || jeliPratim == undefined || jeliPratim == null){
+          document.getElementById("result").setAttribute( "onClick", "javascript: deg();" );
+          document.getElementById("result").innerHTML = "Zaprati";
+        }else{
+          document.getElementById("result").setAttribute( "onClick", "javascript: otpratie();" );
+          document.getElementById("result").innerHTML = "Otprati";
+        }});
+        function da(){
+          var gae =Object.values($('#my-data').data());
+          gae = gae.toString()
+          return gae;
+        }
+        function getCookie(name) {
+          const value = `; ${document.cookie}`;
+          const parts = value.split(`; ${name}=`);
+          if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+        function otprati(){
+          alert("otpratio si,ali nisi");
+        }
+          </script>
 </body>
 </html>
