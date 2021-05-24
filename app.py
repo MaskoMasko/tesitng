@@ -97,10 +97,30 @@ def mainTu():
     connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
     if connection.is_connected():
       mycursor = connection.cursor()
-      mycursor.execute(f"SELECT id,opis FROM objave")
-      bivseSveKegaPrati = mycursor.fetchall()
-      print(bivseSveKegaPrati)
-    return render_template("main2.html",username=username,objave=bivseSveKegaPrati)
+      kaLista = []
+
+      mycursor.execute(f"SELECT `image`,`opis`,`komentari`,`lajkova`,`osoba` FROM objavee")
+      myresult = mycursor.fetchall()
+      print(myresult)
+      duzina = len(myresult)
+      for i in range(duzina):
+        temp = myresult[i]
+        print(temp)
+        image = temp[0]
+        opis = temp[1]
+        komentari = temp[2]
+        lajkova = temp[3]
+        osoba = temp[4]
+        if komentari == None:
+          komentari = 'null'
+        if lajkova == None:
+          lajkova = 'null'
+        if opis == None:
+          opis = 'null'
+        k = {'slika':image,'opis':opis,'komentari':komentari,'lajkova':lajkova,'osoba':osoba}
+        kaLista.append(k)
+
+    return render_template("main2.html",username=username,objave=kaLista)
   else:
     return render_template("login.html")
 
@@ -272,13 +292,21 @@ def show_user_profile(id):
         objave.remove('None')
       print(objave)
       for i in objave:
-        mycursor.execute(f"SELECT `image`,`opis`,`komentari`,`lajkova` FROM objave WHERE id='{i}'")
+        mycursor.execute(f"SELECT `image`,`opis`,`komentari`,`lajkova` FROM objavee WHERE id='{i}'")
         myresult = mycursor.fetchall()
+        print(myresult)
         myresult = myresult[0]
+        print(myresult)
         image = myresult[0]
         opis = myresult[1]
         komentari = myresult[2]
         lajkova = myresult[3]
+        if komentari == None:
+          komentari = 'null'
+        if lajkova == None:
+          lajkova = 'null'
+        if opis == None:
+          opis = 'null'
         k = {'slika':image,'opis':opis,'komentari':komentari,'lajkova':lajkova}
         kaLista.append(k)
       print(kaLista)
