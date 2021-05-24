@@ -72,14 +72,15 @@
             <li>TAGED</li>
         </ul>
         <ul class="sve-objave">
-          <li v-for="(slika, index) in slike" :key=slika.id class="objave">
-            <h3 v-html="opis[index]"></h3>
+          <li v-for="(objava, index) in objave" :key=index class="objave">
+            <h3 v-html="objava.opis"></h3>
              <img :src=`/static/objave/${index+1}.jpg` alt=" slika" class="image" width="100px" height="100px">
           </li>
           <button @click="thisone()">send</button>
         </ul>
     </div>
     <script type=text/javascript>
+
       const profApp = new Vue({
         el:"#tudi",
         data:{
@@ -87,26 +88,23 @@
         },
         methods:{
           thisone(){
-          },
-          zaTebe(slika, opis){
-            alert("yes")
-          }
+            } 
         }
       })
+
       var slike = document.querySelectorAll(".image")
       // console.log(slike)
       var followin = {{ doFollow|safe }}
       var stvarneObjave = {{ objaveobjave|safe }}
       var obje = {{ posts|safe }}
-      alert(obje);
+      var dan = Object.values(obje)
+      window.onload = function promjena(){
+        profApp.objave = obje;
+    }
       // profApp.objave = obje
-      var val = Object.values(obje)
-      var dal = Object.values(val)
-      console.log(Object.values(dal[1]));
       if (stvarneObjave != null){
         stvarneObjave = stvarneObjave.toString();
       }
-      alert(stvarneObjave);
       if (followin != null){
         followin = followin.toString();
       }
