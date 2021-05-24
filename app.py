@@ -131,16 +131,28 @@ def novaObjavaTry():
     connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
     if connection.is_connected():
       mycursor = connection.cursor()
-      mycursor.execute(f"INSERT INTO objave (opis) VALUES ('{opis}')")
+      mycursor.execute(f"SELECT objave,id FROM userssss WHERE username='{username}'")
+      tup = mycursor.fetchall()[0]
+      bivseObjave = str(tup[0])
+      id = str(tup[1])
+      mycursor.execute(f"SELECT MAX(id) FROM objavee")
+      newImage = mycursor.fetchall()[0][0]
+      if newImage == None:
+        newImage = 0
+      newImage +=1
+      mycursor.execute(f"INSERT INTO objavee (image,osoba,opis) VALUES ('{newImage}',{id},'{opis}')")
       connection.commit()
-      mycursor.execute(f"SELECT LAST_INSERT_ID();")
-      id = str(mycursor.fetchall()[0][0])
-      mycursor.execute(f"SELECT objave FROM userssss WHERE username='{username}'")
-      bivseObjave = str(mycursor.fetchall()[0][0])
-      sveObjave = bivseObjave + " , " + id
+      # mycursor.execute(f"INSERT INTO objave (opis) VALUES ('{opis}')")
+      # connection.commit()
+      # mycursor.execute(f"SELECT LAST_INSERT_ID();")
+      # id = str(mycursor.fetchall()[0][0])
+      # mycursor.execute(f"SELECT objave FROM userssss WHERE username='{username}'")
+      # bivseObjave = str(mycursor.fetchall()[0][0])
+      newImage = str(newImage)
+      sveObjave = bivseObjave + " , " + newImage
       mycursor.execute(f"UPDATE userssss SET objave = ('{sveObjave}') WHERE username='{username}';")
       connection.commit()
-      pat = os.path.join("static/objave",id+".jpg") # LOS SOLUTION ZA OVO
+      pat = os.path.join("static/objave",newImage+".jpg") # LOS SOLUTION ZA OVO
       slika.save(pat)
 
     return redirect("/mainTu")
@@ -260,10 +272,14 @@ def show_user_profile(id):
         objave.remove('None')
       print(objave)
       for i in objave:
-        mycursor.execute(f"SELECT opis FROM objave WHERE id='{i}'")
+        mycursor.execute(f"SELECT `image`,`opis`,`komentari`,`lajkova` FROM objave WHERE id='{i}'")
         myresult = mycursor.fetchall()
-        myresult = myresult[0][0]
-        k = {i:myresult}
+        myresult = myresult[0]
+        image = myresult[0]
+        opis = myresult[1]
+        komentari = myresult[2]
+        lajkova = myresult[3]
+        k = {'slika':image,'opis':opis,'komentari':komentari,'lajkova':lajkova}
         kaLista.append(k)
       print(kaLista)
     if objave == None:
