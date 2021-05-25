@@ -92,6 +92,7 @@ def unFollowTry():
 @app.route('/mainTu')
 def mainTu():
   logStatus = request.cookies.get('logStat')
+  objaveKeTrebasViditi = []
   if logStatus == "Logged In":
     connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
     if connection.is_connected():
@@ -100,11 +101,11 @@ def mainTu():
 
       mycursor.execute(f"SELECT `image`,`opis`,`komentari`,`lajkova`,`osoba` FROM objavee")
       myresult = mycursor.fetchall()
-      print(myresult)
+      #print(myresult)
       duzina = len(myresult)
       for i in range(duzina):
         temp = myresult[i]
-        print(temp)
+        #print(temp)
         image = temp[0]
         opis = temp[1]
         komentari = temp[2]
@@ -130,13 +131,12 @@ def mainTu():
           whoDoIFollow.remove('None')
       if whoDoIFollow == None:
         whoDoIFollow = 'null'
-      print(whoDoIFollow)
-      testRun = kaLista[0]
-      print(testRun)
-      testRun = testRun.get('osoba')
-      print(testRun)
-
-    return render_template("main2.html",username=usernameOfGuyLookinAtThePage,objave=kaLista)
+      for i in kaLista:
+        testRun = str(i.get('osoba'))
+        if testRun in whoDoIFollow:
+          objaveKeTrebasViditi.append(i)
+      
+    return render_template("main2.html",username=usernameOfGuyLookinAtThePage,objave=objaveKeTrebasViditi)
   else:
     return render_template("login.html")
 
