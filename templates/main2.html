@@ -36,7 +36,7 @@
                     <li @click="zaProfil" class="prof">Profile</li>
                      <div v-if="profile" class="prof-drop" @mouseleave="zaProfDrp()">
                         <div class="taj-thing"></div>
-                        <h3><a href="/profile" class="za-ref">Profile</a></h3>
+                        <h3><a href="/user/{{ tvojID|safe }}" class="za-ref">Profile</a></h3>
                     </div> 
                 </ul>
             </div>
