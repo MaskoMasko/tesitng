@@ -76,7 +76,6 @@
             <h3 v-html="objava.opis"></h3>
              <img :src=`/static/objave/${index+1}.jpg` alt=" slika" class="image" width="100px" height="100px">
           </li>
-          <button @click="thisone()">send</button>
         </ul>
     </div>
     <script type=text/javascript>
@@ -87,8 +86,6 @@
           objave:undefined,
         },
         methods:{
-          thisone(){
-            } 
         }
       })
 
