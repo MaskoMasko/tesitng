@@ -24,6 +24,42 @@ def home():
   username = request.cookies.get('User')
   return render_template("main.html",logStatus=logStatus,username=username)
 
+
+
+
+
+
+
+
+@app.route('/tis')
+def tis():
+  return render_template("tis.html")
+
+@app.route('/tisTry', methods = ['POST'])
+def tisTry():
+  if request.method == 'POST':
+    lista = []
+    upisano=request.form['data']
+    print(upisano)
+    connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
+    if connection.is_connected():
+      mycursor = connection.cursor()
+      mycursor.execute(f"SELECT username,name,surname,picture,followers,following,bio,objave,id FROM userssss WHERE username LIKE '{upisano}%'")
+      myresult = mycursor.fetchall()
+      for i in range(len(myresult)):
+        whatINeed = myresult[i]
+        whatINeedMore = whatINeed[0]
+        lista.append(whatINeedMore)
+      print(myresult)
+    return jsonify(result=lista)
+
+
+
+
+
+
+
+
 @app.route('/testtt/<id>')
 def testtt(id):
   listaKogaPratis = []
