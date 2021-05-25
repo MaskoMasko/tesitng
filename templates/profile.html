@@ -9,9 +9,32 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
         </style>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<style>
+  .sve-objave{
+    width: 1000px;
+    margin: auto;
+    height: auto;
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+    margin-left: 20px;
+  }
+  .objave{
+    width: 32%;
+    margin: 3px !important;
+  }
+  .objave img{
+    width: 100% !important;
+    height: 300px !important;
+  }
+  .objave img:hover{
+    filter: grayscale(30%) blur(2px);
+  }
+</style>
 </head>
 <body>
-    <div class="main-konta">
+    <div class="main-konta" id="tudi">
         <div class="onaj-dio">
       <!--   <img src="static/images/cover3.jpg" alt=""> OVAKO SE TO DELA--> 
          <img src="static/images/{{ picture }}.jpg" alt="">
@@ -45,6 +68,40 @@
             <li>SAVED</li>
             <li>TAGED</li>
         </ul>
-    </div>
+        <ul class="sve-objave">
+          <li v-for="(objava, index) in objave" :key=index class="objave">
+            <h3 v-html="objava.opis"></h3>
+            <img :src=`/static/objave/${index+1}.jpg` alt=" slika" class="image" width="100px" height="100px">
+          </li>
+        </ul>
+      </div>
+      <script type=text/javascript>
+
+        const profApp = new Vue({
+          el:"#tudi",
+          data:{
+            objave:undefined,
+          },
+          methods:{
+          }
+        })
+  
+        var slike = document.querySelectorAll(".image")
+        // console.log(slike)
+        var followin = {{ doFollow|safe }}
+        var stvarneObjave = {{ objaveobjave|safe }}
+        var obje = {{ posts|safe }}
+        var dan = Object.values(obje)
+        window.onload = function promjena(){
+          profApp.objave = obje;
+      }
+        // profApp.objave = obje
+        if (stvarneObjave != null){
+          stvarneObjave = stvarneObjave.toString();
+        }
+        if (followin != null){
+          followin = followin.toString();
+        }
+            </script>
 </body>
 </html>
