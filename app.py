@@ -433,7 +433,7 @@ def show_user_profile(id):
       if 'None' in objave:
         objave.remove('None')
       for i in objave:
-        mycursor.execute(f"SELECT `image`,`opis`,`komentari`,`lajkova` FROM objavee WHERE id='{i}'")
+        mycursor.execute(f"SELECT `image`,`opis`,`komentari`,`lajkova`,id FROM objavee WHERE id='{i}'")
         myresult = mycursor.fetchall()
         myresult = myresult[0]
         image = myresult[0]
@@ -446,7 +446,7 @@ def show_user_profile(id):
           lajkova = 'null'
         if opis == None:
           opis = 'null'
-        k = {'slika':image,'opis':opis,'komentari':komentari,'lajkova':lajkova}
+        k = {'slika':image,'opis':opis,'komentari':komentari,'lajkova':lajkova,'id':i}
         kaLista.append(k)
     if objave == None:
       objave = 'null'
