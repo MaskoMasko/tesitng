@@ -18,6 +18,7 @@
         alert(obje);
         window.onload = function hm(){
             objApp.objave = obje
+            storiji.storici = obje
         }
         
     </script>
@@ -42,9 +43,8 @@
         </div>
     </div>
     <!-- STORIES-->
-    <div class="stories">
+    <!-- <div class="stories">
         <div class="stor-konta">
-            <!-- Za listu followera-->
             <ul class="storiji">
                 <li><img src="/static/images/AladeenLogo.png" alt=""></li>
                 <li><img src="/static/images/1.png" alt=""></li>
@@ -54,27 +54,35 @@
                 <li><img src="/static/images/1.png" alt=""></li>
             </ul>
         </div>
+    </div> -->
+    <div class="stories" id="storiji">
+        <div class="stor-konta">
+            <!-- Za listu followera-->
+            <ul class="storiji">
+                <li v-for="(story, index) in storici" :key="index"><img :src=`/static/objave/${index+1}.jpg` alt=""></li>
+            </ul>
+        </div>
     </div>
         <!-- OBJAVE -->
-    <div class="objava" id="commApp">
-        <div class="user">
+    <div id="commApp">
+        <!-- <div class="user">
           <h5>Avatar</h5>
           <h3>HE_WAS_FUNNY_MEMES</h3>
-        </div>
-          <img src="" alt="">
+        </div> -->
+          <!-- <img src="" alt="">
           <div class="rate">
             <ul>
               <li>Like</li>
               <li>Share</li>
-            </ul>
+            </ul> -->
             <!-- <div>
             <input type="text" placeholder="komentar" v-model="prazan1">
             <button type="submit" @click="subKom()">Relsee</button>
             </div> -->
-            <p>Bookmark</p>
+            <!-- <p>Bookmark</p>
           </div>
-          <p>3333 likes</p>
-          <div class="kom-box">
+          <p>3333 likes</p> -->
+          <!-- <div class="kom-box">
             <p class="siv">Comments</p>
             <ul class="komms">
               <li v-for="comment in comms" :key="comment.id"><h3 v-html="comment.user" ></h3><p v-html="comment.comm"></p></li>
@@ -87,7 +95,7 @@
                 <button type="submit" @click="subKom()">Relsee</button>
             </div>
             <button @click="zaKom()">Comm nisto</button>
-          </div>
+          </div> -->
       </div>
       <h1 v-html="objava.osoba"></h1>
     <div id="objavice">
@@ -109,7 +117,8 @@
                     </div> -->
                     <p>Bookmark</p>
                 </div>
-                <p v-html="objava.lajkova"></p><span> lajkova</span>
+                <p v-if="objava.lajkova == 'null'" v-html="0"></p>
+                <p v-else v-html="objava.lajkova"></p><span> lajkova</span>
                 <div class="kom-box">
                     <p class="siv">Comments</p>
                     <ul class="komms">
@@ -124,9 +133,9 @@
                     </div>
                     <button @click="zaKom()">Comm nisto</button>
                 </div>
-    </div>
-</div>
-    </div>
+            </div>
+        </div>
+            </div>
             <script>
     var commApp = new Vue({
         el:"#commApp",
@@ -199,6 +208,12 @@ var objApp = new Vue ({
     el:"#objavice",
     data:{
         objave:undefined
+    }
+})
+var storiji = new Vue ({
+    el:"#storiji",
+    data:{
+        storici:undefined
     }
 })
       </script>
