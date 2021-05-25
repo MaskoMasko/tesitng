@@ -93,7 +93,6 @@ def unFollowTry():
 def mainTu():
   logStatus = request.cookies.get('logStat')
   if logStatus == "Logged In":
-    username = request.cookies.get('User')
     connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
     if connection.is_connected():
       mycursor = connection.cursor()
@@ -120,7 +119,24 @@ def mainTu():
         k = {'slika':image,'opis':opis,'komentari':komentari,'lajkova':lajkova,'osoba':osoba}
         kaLista.append(k)
 
-    return render_template("main2.html",username=username,objave=kaLista)
+      usernameOfGuyLookinAtThePage = request.cookies.get('User')
+      mycursor.execute(f"SELECT following FROM userssss WHERE username='{usernameOfGuyLookinAtThePage}'")
+      myresult = mycursor.fetchall()
+      myresult = myresult[0]
+      whoDoIFollow = myresult[0]
+      if whoDoIFollow:
+        whoDoIFollow = whoDoIFollow.split(" , ")
+        if 'None' in whoDoIFollow:
+          whoDoIFollow.remove('None')
+      if whoDoIFollow == None:
+        whoDoIFollow = 'null'
+      print(whoDoIFollow)
+      testRun = kaLista[0]
+      print(testRun)
+      testRun = testRun.get('osoba')
+      print(testRun)
+
+    return render_template("main2.html",username=usernameOfGuyLookinAtThePage,objave=kaLista)
   else:
     return render_template("login.html")
 
