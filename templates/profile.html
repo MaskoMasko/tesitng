@@ -6,38 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link rel="stylesheet" href="/static/css/profile.css">
+    <meta id="my-data" data-name="{{id}}">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
         </style>
+        <style>
+          .sve-objave{
+            width: 1000px;
+            margin: auto;
+            height: auto;
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+            margin-left: 20px;
+          }
+          .objave{
+            width: 32%;
+            margin: 3px !important;
+          }
+          .objave img{
+            width: 100% !important;
+            height: 300px !important;
+          }
+          .objave img:hover{
+            filter: grayscale(30%) blur(2px);
+          }
+        </style>
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-<style>
-  .sve-objave{
-    width: 1000px;
-    margin: auto;
-    height: auto;
-    display: flex;
-    list-style: none;
-    flex-wrap: wrap;
-    margin-left: 20px;
-  }
-  .objave{
-    width: 32%;
-    margin: 3px !important;
-  }
-  .objave img{
-    width: 100% !important;
-    height: 300px !important;
-  }
-  .objave img:hover{
-    filter: grayscale(30%) blur(2px);
-  }
-</style>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+       
 </head>
 <body>
     <div class="main-konta" id="tudi">
         <div class="onaj-dio">
       <!--   <img src="static/images/cover3.jpg" alt=""> OVAKO SE TO DELA--> 
-         <img src="static/images/{{ picture }}.jpg" alt="">
+         <img src="/static/profilePics/{{ picture }}.jpg" alt="">
           <div class="info-dio">
               <div class="username">
                   <h1>{{ username }}</h1>
@@ -49,11 +52,11 @@
                   <h4>posts</h4>
                 </div>
                 <div class="da">
-                  <h2>0</h2>
+                  <h2>{{ followers }}</h2>
                   <h4>followers</h4>
                 </div>
                 <div class="da">
-                  <h2>0</h2>
+                  <h2>{{ following }}</h2>
                   <h4>following</h4>
                 </div>
               </div>
@@ -71,37 +74,92 @@
         <ul class="sve-objave">
           <li v-for="(objava, index) in objave" :key=index class="objave">
             <h3 v-html="objava.opis"></h3>
-            <img :src=`/static/objave/${index+1}.jpg` alt=" slika" class="image" width="100px" height="100px">
+             <img :src=`/static/objave/${index+1}.jpg` alt=" slika" class="image" width="100px" height="100px">
           </li>
         </ul>
-      </div>
-      <script type=text/javascript>
+    </div>
+    <script type=text/javascript>
 
-        const profApp = new Vue({
-          el:"#tudi",
-          data:{
-            objave:undefined,
-          },
-          methods:{
-          }
-        })
-  
-        var slike = document.querySelectorAll(".image")
-        // console.log(slike)
-        var followin = {{ doFollow|safe }}
-        var stvarneObjave = {{ objaveobjave|safe }}
-        var obje = {{ posts|safe }}
-        var dan = Object.values(obje)
-        window.onload = function promjena(){
-          profApp.objave = obje;
+      const profApp = new Vue({
+        el:"#tudi",
+        data:{
+          objave:undefined,
+        },
+        methods:{
+        }
+      })
+
+      var slike = document.querySelectorAll(".image");
+      // console.log(slike)
+      var followin = {{ doFollow|safe }};
+      var stvarneObjave = {{ objaveobjave|safe }};
+      var obje = {{ posts|safe }};
+      var dan = Object.values(obje);
+      window.onload = function promjena(){
+        profApp.objave = obje;
+    }
+      // profApp.objave = obje
+      if (stvarneObjave != null){
+        stvarneObjave = stvarneObjave.toString();
       }
-        // profApp.objave = obje
-        if (stvarneObjave != null){
-          stvarneObjave = stvarneObjave.toString();
+      if (followin != null){
+        followin = followin.toString();
+      }
+        var flaskData = $('#my-data').data();
+        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+        function deg(){
+          $.getJSON($SCRIPT_ROOT + '/followTry', {
+            a: getCookie('User'),
+            b: da(),
+          }, function(data) {
+            $("#result").text(data.result); 
+            alert(Object.values(data.b));
+          });
+          // 19.5 STAO OVDJE DOBIJES KI ID FOLLOWA I KOGA FOLLOWA LP
+          return false;
         }
-        if (followin != null){
-          followin = followin.toString();
+        function otpratie(){
+          $.getJSON($SCRIPT_ROOT + '/unFollowTry', {
+            a: getCookie('User'),
+            b: da(),
+          }, function(data) {
+            $("#result").text(data.result); 
+            alert(Object.values(data.b));
+          });
+          // 19.5 STAO OVDJE DOBIJES KI ID FOLLOWA I KOGA FOLLOWA LP
+          return false;
         }
-            </script>
+        var pratimLi = followin;
+        if (pratimLi != null){
+        var newArray = pratimLi.split(',');         // ovdje je lista
+        }
+        var flaskData = Object.values(flaskData);   // OVDJE JE 2
+        flaskData = flaskData.toString();
+        if (pratimLi != null){
+        var jeliPratim = newArray.indexOf(flaskData);
+        }
+        // console.log(newArray);
+        $( document ).ready(function() {
+        if(jeliPratim == -1 || jeliPratim == undefined || jeliPratim == null){
+          document.getElementById("result").setAttribute( "onClick", "javascript: deg();" );
+          document.getElementById("result").innerHTML = "Zaprati";
+        }else{
+          document.getElementById("result").setAttribute( "onClick", "javascript: otpratie();" );
+          document.getElementById("result").innerHTML = "Otprati";
+        }});
+        function da(){
+          var gae =Object.values($('#my-data').data());
+          gae = gae.toString()
+          return gae;
+        }
+        function getCookie(name) {
+          const value = `; ${document.cookie}`;
+          const parts = value.split(`; ${name}=`);
+          if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+        function otprati(){
+          alert("otpratio si,ali nisi");
+        }
+          </script>
 </body>
 </html>
