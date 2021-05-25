@@ -78,7 +78,7 @@
         <ul class="sve-objave">
           <li v-for="(objava, index) in objave" :key=index class="objave">
             <h3 v-html="objava.opis"></h3>
-             <img :src=`/static/objave/${index+1}.jpg` alt=" slika" class="image" width="100px" height="100px">
+             <img :src=`/static/objave/${objava.slika}.jpg` alt=" slika" class="image" width="100px" height="100px">
           </li>
         </ul>
     </div>
