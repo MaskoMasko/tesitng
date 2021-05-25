@@ -44,7 +44,7 @@ def tisTry():
     connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
     if connection.is_connected():
       mycursor = connection.cursor()
-      mycursor.execute(f"SELECT username,name,surname,picture,followers,following,bio,objave,id FROM userssss WHERE username LIKE '{upisano}%'")
+      mycursor.execute(f"SELECT username FROM userssss WHERE username LIKE '{upisano}%'")
       myresult = mycursor.fetchall()
       for i in range(len(myresult)):
         whatINeed = myresult[i]
