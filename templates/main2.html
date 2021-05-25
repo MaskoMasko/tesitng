@@ -127,7 +127,7 @@
                 <img :src=`/static/objave/${objava.slika}.jpg` alt="">
                 <div class="rate">
                     <ul>
-                        <li>Like</li>
+                        <li @click="ova(objava.id)">Like</li>
                         <li>Share</li>
                     </ul>
                     <!-- <div>
@@ -227,7 +227,13 @@ var zaNav = new Vue({
 var objApp = new Vue ({
     el:"#objavice",
     data:{
-        objave:undefined
+        objave:undefined,
+        like:false
+    },
+    methods:{
+        ova(id){
+            alert(id)
+        }
     }
 })
 var storiji = new Vue ({
