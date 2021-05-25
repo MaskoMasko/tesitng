@@ -140,7 +140,7 @@ def mainTu():
         if testRun in whoDoIFollow:
           objaveKeTrebasViditi.append(i)
       
-    return render_template("main2.html",username=usernameOfGuyLookinAtThePage,objave=objaveKeTrebasViditi)
+    return render_template("main2.html",username=usernameOfGuyLookinAtThePage,objave=objaveKeTrebasViditi,tvojID = myID)
   else:
     return render_template("login.html")
 
