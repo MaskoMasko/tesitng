@@ -124,7 +124,7 @@
                     <h5>Avatar</h5>
                     <h3 v-html="objava.osoba"></h3>
                 </div>
-                <img :src=`/static/objave/${index+1}.jpg` alt="">
+                <img :src=`/static/objave/${objava.slika}.jpg` alt="">
                 <div class="rate">
                     <ul>
                         <li>Like</li>
@@ -140,22 +140,23 @@
                 <p v-else v-html="objava.lajkova"></p><span> lajkova</span>
                 <div class="kom-box">
                     <p class="siv">Comments</p>
-                    <ul class="komms">
+                    <!-- <ul class="komms">
                         <li v-for="comment in comms" :key="comment.id"><h3 v-html="comment.user" ></h3><p v-html="comment.comm"></p></li>
                         <div v-if="objaviKom">
                             <li v-for="comment in prazan" :key="comment.id"><h3>Your Username</h3><p v-html="comment"></p></li>
                         </div>
-                    </ul>
+                    </ul> 
                     <div class="formni" v-if="kom">
                         <input type="text" placeholder="komentar" v-model="prazan1">
                         <button type="submit" @click="subKom()">Relsee</button>
                     </div>
                     <button @click="zaKom()">Comm nisto</button>
-                </div>
+                </div> -->
             </div>
         </div>
-            </div>
-            <script>
+    </div>
+    </div>
+<script>
     var commApp = new Vue({
         el:"#commApp",
         data:{
