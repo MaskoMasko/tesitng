@@ -24,6 +24,77 @@ def home():
   username = request.cookies.get('User')
   return render_template("main.html",logStatus=logStatus,username=username)
 
+@app.route('/testtt')
+def testtt():
+  listaKogaPratis = []
+  connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
+  if connection.is_connected():
+    mycursor = connection.cursor()
+    usernameOfGuyLookinAtThePage = request.cookies.get('User')
+    mycursor.execute(f"SELECT name,surname,picture,followers,following,bio,objave,id FROM userssss WHERE username='{usernameOfGuyLookinAtThePage}'")
+    myresult = mycursor.fetchall()
+    print(myresult)
+    myresult = myresult[0]
+    whoDoIFollow = myresult[4]
+    if whoDoIFollow:
+      whoDoIFollow = whoDoIFollow.split(" , ")
+      if 'None' in whoDoIFollow:
+        whoDoIFollow.remove('None')
+      if '' in whoDoIFollow:
+        whoDoIFollow.remove('')
+    else:
+      whoDoIFollow = None
+    if whoDoIFollow == None:
+      whoDoIFollow = 'null'
+    duzina = len(whoDoIFollow)
+    for i in range(duzina):
+      yes = str(whoDoIFollow[i])
+      print(whoDoIFollow)
+      mycursor.execute(f"SELECT username FROM userssss WHERE id='{yes}'")
+      myresult = mycursor.fetchall()
+      try:
+        imeKeMiRabi = myresult[0][0]
+        listaKogaPratis.append(imeKeMiRabi)
+      except:
+        pass
+    print(myresult)
+  return render_template("following.html",following=listaKogaPratis)
+
+@app.route('/te')
+def te():
+  listaKogaPratis = []
+  connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
+  if connection.is_connected():
+    mycursor = connection.cursor()
+    usernameOfGuyLookinAtThePage = request.cookies.get('User')
+    mycursor.execute(f"SELECT name,surname,picture,followers,following,bio,objave,id FROM userssss WHERE username='{usernameOfGuyLookinAtThePage}'")
+    myresult = mycursor.fetchall()
+    print(myresult)
+    myresult = myresult[0]
+    whoDoIFollow = myresult[3]
+    if whoDoIFollow:
+      whoDoIFollow = whoDoIFollow.split(" , ")
+      if 'None' in whoDoIFollow:
+        whoDoIFollow.remove('None')
+      if '' in whoDoIFollow:
+        whoDoIFollow.remove('')
+    else:
+      whoDoIFollow = None
+    if whoDoIFollow == None:
+      whoDoIFollow = 'null'
+    duzina = len(whoDoIFollow)
+    for i in range(duzina):
+      yes = str(whoDoIFollow[i])
+      print(whoDoIFollow)
+      mycursor.execute(f"SELECT username FROM userssss WHERE id='{yes}'")
+      myresult = mycursor.fetchall()
+      try:
+        imeKeMiRabi = myresult[0][0]
+        listaKogaPratis.append(imeKeMiRabi)
+      except:
+        pass
+    print(myresult)
+  return render_template("following.html",following=listaKogaPratis)
 
 @app.route('/testTry')
 def add_numbers():
@@ -279,6 +350,7 @@ def show_user_profile(id):
         brojObjava.remove('None')
       brojObjava = len(brojObjava)
 
+
     if (followers == None) or (followers == ''):
       brojfollowera = 0
     else:
@@ -288,6 +360,7 @@ def show_user_profile(id):
       if '' in brojfollowera:
         brojfollowera.remove('')
       brojfollowera = len(brojfollowera)
+
 
     if (following == None) or (following == ''):
       brojFollowa = 0
@@ -300,6 +373,8 @@ def show_user_profile(id):
       if '' in brojFollowa:
         brojFollowa.remove('')
       brojFollowa = len(flw)
+
+
     usernameOfGuyLookinAtThePage = request.cookies.get('User')
     mycursor.execute(f"SELECT name,surname,picture,followers,following,bio,objave,id FROM userssss WHERE username='{usernameOfGuyLookinAtThePage}'")
     myresult = mycursor.fetchall()
