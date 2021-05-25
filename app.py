@@ -204,7 +204,7 @@ def mainTu():
       mycursor = connection.cursor()
       kaLista = []
 
-      mycursor.execute(f"SELECT `image`,`opis`,`komentari`,`lajkova`,`osoba`,`imeLika` FROM objavee")
+      mycursor.execute(f"SELECT `image`,`opis`,`komentari`,`lajkova`,`osoba`,`imeLika`,`id` FROM objavee")
       myresult = mycursor.fetchall()
       #print(myresult)
       duzina = len(myresult)
@@ -217,13 +217,14 @@ def mainTu():
         lajkova = temp[3] 
         osoba = temp[4]
         imeLikaa = temp[5]
+        imeLikaa = temp[6]
         if komentari == None:
           komentari = 'null'
         if lajkova == None:
           lajkova = 'null'
         if opis == None:
           opis = 'null'
-        k = {'slika':image,'opis':opis,'komentari':komentari,'lajkova':lajkova,'osoba':osoba,'imeLika':imeLikaa}
+        k = {'slika':image,'opis':opis,'komentari':komentari,'lajkova':lajkova,'osoba':osoba,'imeLika':imeLikaa,'id':id}
         kaLista.append(k)
 
       usernameOfGuyLookinAtThePage = request.cookies.get('User')
@@ -446,7 +447,7 @@ def show_user_profile(id):
           lajkova = 'null'
         if opis == None:
           opis = 'null'
-        k = {'slika':image,'opis':opis,'komentari':komentari,'lajkova':lajkova,'id':i}
+        k = {'slika':image,'opis':opis,'komentari':komentari,'lajkova':lajkova}
         kaLista.append(k)
     if objave == None:
       objave = 'null'
