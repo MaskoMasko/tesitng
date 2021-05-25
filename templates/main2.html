@@ -13,6 +13,7 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     
     <script  type=text/javascript>
+        $( document ).ready(function() { 
         var obje = {{ objave|safe }}
         console.log(obje)
         alert(obje);
@@ -20,7 +21,25 @@
             objApp.objave = obje
             storiji.storici = obje
         }
-        
+        function search(){
+            $.ajax({
+                dataType: 'json',
+                url: '/tisTry',
+                type: 'POST',
+                data: {'data':$("#textt").val()},
+                success: function(response) {
+                    console.log(response);
+                }
+              });
+              return false;
+            }
+            var input = document.getElementById('textt');
+            input.addEventListener('keyup', 
+                                    function() {
+                                        search();
+                                    }
+                                );
+                            });
     </script>
 </head>
 <body>
@@ -29,7 +48,7 @@
         <div class="nav">
             <div class="nav-menu">
                 <a href="/"><img src="/static/images/AladeenLogo.png" alt=""></a>
-                <input type="text" placeholder="Search">
+                <input type="text" placeholder="Search" id="textt">
                 <ul class="nav-lista">
                     <li><a class="za-ref" href="/">Home</a></li>
                     <li><a href="/chat" class="za-ref">Chat</a></li>
