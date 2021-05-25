@@ -99,7 +99,7 @@ def mainTu():
       mycursor = connection.cursor()
       kaLista = []
 
-      mycursor.execute(f"SELECT `image`,`opis`,`komentari`,`lajkova`,`osoba` FROM objavee")
+      mycursor.execute(f"SELECT `image`,`opis`,`komentari`,`lajkova`,`osoba`,`imeLika` FROM objavee")
       myresult = mycursor.fetchall()
       #print(myresult)
       duzina = len(myresult)
@@ -117,7 +117,7 @@ def mainTu():
           lajkova = 'null'
         if opis == None:
           opis = 'null'
-        k = {'slika':image,'opis':opis,'komentari':komentari,'lajkova':lajkova,'osoba':osoba}
+        k = {'slika':image,'opis':opis,'komentari':komentari,'lajkova':lajkova,'osoba':osoba,'imeLika':osoba}
         kaLista.append(k)
 
       usernameOfGuyLookinAtThePage = request.cookies.get('User')
@@ -180,7 +180,7 @@ def novaObjavaTry():
       if newImage == None:
         newImage = 0
       newImage +=1
-      mycursor.execute(f"INSERT INTO objavee (image,osoba,opis) VALUES ('{newImage}',{id},'{opis}')")
+      mycursor.execute(f"INSERT INTO objavee (image,osoba,opis,imeLika) VALUES ('{newImage}',{id},'{opis}','{username}')")
       connection.commit()
       # mycursor.execute(f"INSERT INTO objave (opis) VALUES ('{opis}')")
       # connection.commit()
@@ -321,6 +321,7 @@ def show_user_profile(id):
         opis = myresult[1]
         komentari = myresult[2]
         lajkova = myresult[3]
+        imeLikaa = myresult[3]
         if komentari == None:
           komentari = 'null'
         if lajkova == None:
