@@ -51,12 +51,16 @@
                   <h4>posts</h4>
                 </div>
                 <div class="da">
-                  <h2>{{ followers }}</h2>
-                  <h4>followers</h4>
-                </div>
-                <div class="da">
-                  <h2>{{ following }}</h2>
-                  <h4>following</h4>
+                  <a href="/te/{{ id|safe }}">
+                    <h2>{{ followers }}</h2>
+                    <h4>followers</h4>
+                  </a>
+                  </div>
+                  <div class="da">
+                    <a href="/testtt/{{ id|safe }}">
+                    <h2>{{ following }}</h2>
+                    <h4>following</h4>
+                    </a>
                   <button onclick="" id="result">Follow</button>
                 </div>
               </div>
@@ -134,6 +138,7 @@
         var newArray = pratimLi.split(',');         // ovdje je lista
         }
         var flaskData = Object.values(flaskData);   // OVDJE JE 2
+        alert(flaskData);
         flaskData = flaskData.toString();
         if (pratimLi != null){
         var jeliPratim = newArray.indexOf(flaskData);
