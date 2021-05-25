@@ -26,11 +26,6 @@ def home():
 
 
 
-
-
-
-
-
 @app.route('/tis')
 def tis():
   return render_template("tis.html")
@@ -52,9 +47,6 @@ def tisTry():
         lista.append(whatINeedMore)
       print(myresult)
     return jsonify(result=lista)
-
-
-
 
 
 
