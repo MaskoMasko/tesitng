@@ -89,12 +89,12 @@
         }
       })
 
-      var slike = document.querySelectorAll(".image")
+      var slike = document.querySelectorAll(".image");
       // console.log(slike)
-      var followin = {{ doFollow|safe }}
-      var stvarneObjave = {{ objaveobjave|safe }}
-      var obje = {{ posts|safe }}
-      var dan = Object.values(obje)
+      var followin = {{ doFollow|safe }};
+      var stvarneObjave = {{ objaveobjave|safe }};
+      var obje = {{ posts|safe }};
+      var dan = Object.values(obje);
       window.onload = function promjena(){
         profApp.objave = obje;
     }
