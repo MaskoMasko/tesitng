@@ -121,16 +121,20 @@ def mainTu():
         kaLista.append(k)
 
       usernameOfGuyLookinAtThePage = request.cookies.get('User')
-      mycursor.execute(f"SELECT following FROM userssss WHERE username='{usernameOfGuyLookinAtThePage}'")
+      mycursor.execute(f"SELECT following,id FROM userssss WHERE username='{usernameOfGuyLookinAtThePage}'")
       myresult = mycursor.fetchall()
       myresult = myresult[0]
       whoDoIFollow = myresult[0]
+      myID = myresult[1]
+      myID = str(myID)
       if whoDoIFollow:
         whoDoIFollow = whoDoIFollow.split(" , ")
         if 'None' in whoDoIFollow:
           whoDoIFollow.remove('None')
       if whoDoIFollow == None:
-        whoDoIFollow = 'null'
+        whoDoIFollow = [myID]
+      else:
+        whoDoIFollow.append(myID)
       for i in kaLista:
         testRun = str(i.get('osoba'))
         if testRun in whoDoIFollow:
