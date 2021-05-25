@@ -52,13 +52,13 @@
                   <h4>posts</h4>
                 </div>
                 <div class="da">
-                  <a href="/te">
+                  <a href="/te/{{ id|safe }}">
                   <h2>{{ followers }}</h2>
                   <h4>followers</h4>
                 </a>
                 </div>
                 <div class="da">
-                  <a href="/testtt">
+                  <a href="/testtt/{{ id|safe }}">
                   <h2>{{ following }}</h2>
                   <h4>following</h4>
                   </a>
@@ -138,6 +138,7 @@
         var newArray = pratimLi.split(',');         // ovdje je lista
         }
         var flaskData = Object.values(flaskData);   // OVDJE JE 2
+        alert(flaskData);
         flaskData = flaskData.toString();
         if (pratimLi != null){
         var jeliPratim = newArray.indexOf(flaskData);
@@ -161,9 +162,7 @@
           const parts = value.split(`; ${name}=`);
           if (parts.length === 2) return parts.pop().split(';').shift();
         }
-        function otprati(){
-          alert("otpratio si,ali nisi");
-        }
+
           </script>
 </body>
 </html>
