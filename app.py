@@ -298,6 +298,8 @@ def show_user_profile(id):
       whoDoIFollow = whoDoIFollow.split(" , ")
       if 'None' in whoDoIFollow:
         whoDoIFollow.remove('None')
+    else:
+      whoDoIFollow = None
     if whoDoIFollow == None:
       whoDoIFollow = 'null'
     # 19.5 11:27 PM, NEZNAM STA RADIM NITI STO SAM NAPRAVIO ALI DELA
@@ -321,7 +323,6 @@ def show_user_profile(id):
         opis = myresult[1]
         komentari = myresult[2]
         lajkova = myresult[3]
-        imeLikaa = myresult[3]
         if komentari == None:
           komentari = 'null'
         if lajkova == None:
