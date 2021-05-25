@@ -261,8 +261,8 @@ def show_user_profile(id):
     following = myresult[4]
     bio = myresult[5]
     objave = myresult[6]
-    print(objave)
     username = myresult[7]
+    print(followers)
     if objave == None:
       brojObjava = 0
     else:
@@ -271,15 +271,17 @@ def show_user_profile(id):
         brojObjava.remove('None')
       brojObjava = len(brojObjava)
 
-    if followers == None:
+    if (followers == None) or (followers == ''):
       brojfollowera = 0
     else:
       brojfollowera = followers.split(" , ")
       if 'None' in brojfollowera:
         brojfollowera.remove('None')
+      if '' in brojfollowera:
+        brojfollowera.remove('')
       brojfollowera = len(brojfollowera)
 
-    if following == None:
+    if (following == None) or (following == ''):
       brojFollowa = 0
       flw = brojFollowa
     else:
@@ -287,8 +289,9 @@ def show_user_profile(id):
       flw = brojFollowa
       if 'None' in flw:
         flw.remove('None')
+      if '' in brojFollowa:
+        brojFollowa.remove('')
       brojFollowa = len(flw)
-    print(objave)
     usernameOfGuyLookinAtThePage = request.cookies.get('User')
     mycursor.execute(f"SELECT name,surname,picture,followers,following,bio,objave,id FROM userssss WHERE username='{usernameOfGuyLookinAtThePage}'")
     myresult = mycursor.fetchall()
@@ -312,13 +315,10 @@ def show_user_profile(id):
       objave = objave.split(" , ")
       if 'None' in objave:
         objave.remove('None')
-      print(objave)
       for i in objave:
         mycursor.execute(f"SELECT `image`,`opis`,`komentari`,`lajkova` FROM objavee WHERE id='{i}'")
         myresult = mycursor.fetchall()
-        print(myresult)
         myresult = myresult[0]
-        print(myresult)
         image = myresult[0]
         opis = myresult[1]
         komentari = myresult[2]
@@ -331,13 +331,13 @@ def show_user_profile(id):
           opis = 'null'
         k = {'slika':image,'opis':opis,'komentari':komentari,'lajkova':lajkova}
         kaLista.append(k)
-      print(kaLista)
     if objave == None:
       objave = 'null'
     cookieUsername = cookieUsername.lower()
     username = username.lower()
-    print(cookieUsername)
-    print(username)
+    print(followers)
+    if followers == '':
+      print("waeeeooo")
     if picture == None:
       picture = 'cover3'
     if cookieUsername != username:
