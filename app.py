@@ -109,15 +109,16 @@ def mainTu():
         image = temp[0]
         opis = temp[1]
         komentari = temp[2]
-        lajkova = temp[3]
-        osoba = temp[5]
+        lajkova = temp[3] 
+        osoba = temp[4]
+        imeLikaa = temp[5]
         if komentari == None:
           komentari = 'null'
         if lajkova == None:
           lajkova = 'null'
         if opis == None:
           opis = 'null'
-        k = {'slika':image,'opis':opis,'komentari':komentari,'lajkova':lajkova,'osoba':osoba,'imeLika':osoba}
+        k = {'slika':image,'opis':opis,'komentari':komentari,'lajkova':lajkova,'osoba':osoba,'imeLika':imeLikaa}
         kaLista.append(k)
 
       usernameOfGuyLookinAtThePage = request.cookies.get('User')
@@ -131,15 +132,22 @@ def mainTu():
         whoDoIFollow = whoDoIFollow.split(" , ")
         if 'None' in whoDoIFollow:
           whoDoIFollow.remove('None')
+        if '' in whoDoIFollow:
+          whoDoIFollow.remove('')
       if whoDoIFollow == None:
         whoDoIFollow = [myID]
       else:
         whoDoIFollow.append(myID)
+      # DO TU DELA
       for i in kaLista:
         testRun = str(i.get('osoba'))
+        print(f"followam nekog  {testRun}")
+
         if testRun in whoDoIFollow:
+          print(f"followam nekog  {whoDoIFollow}")
           objaveKeTrebasViditi.append(i)
-      
+      print(objaveKeTrebasViditi)
+
     return render_template("main2.html",username=usernameOfGuyLookinAtThePage,objave=objaveKeTrebasViditi,tvojID = myID)
   else:
     return render_template("login.html")
