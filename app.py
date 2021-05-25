@@ -24,14 +24,13 @@ def home():
   username = request.cookies.get('User')
   return render_template("main.html",logStatus=logStatus,username=username)
 
-@app.route('/testtt')
-def testtt():
+@app.route('/testtt/<id>')
+def testtt(id):
   listaKogaPratis = []
   connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
   if connection.is_connected():
     mycursor = connection.cursor()
-    usernameOfGuyLookinAtThePage = request.cookies.get('User')
-    mycursor.execute(f"SELECT name,surname,picture,followers,following,bio,objave,id FROM userssss WHERE username='{usernameOfGuyLookinAtThePage}'")
+    mycursor.execute(f"SELECT name,surname,picture,followers,following,bio,objave,username FROM userssss WHERE id='{id}'")
     myresult = mycursor.fetchall()
     print(myresult)
     myresult = myresult[0]
@@ -60,14 +59,13 @@ def testtt():
     print(myresult)
   return render_template("following.html",following=listaKogaPratis)
 
-@app.route('/te')
-def te():
+@app.route('/te/<id>')
+def te(id):
   listaKogaPratis = []
   connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
   if connection.is_connected():
     mycursor = connection.cursor()
-    usernameOfGuyLookinAtThePage = request.cookies.get('User')
-    mycursor.execute(f"SELECT name,surname,picture,followers,following,bio,objave,id FROM userssss WHERE username='{usernameOfGuyLookinAtThePage}'")
+    mycursor.execute(f"SELECT name,surname,picture,followers,following,bio,objave,username FROM userssss WHERE id='{id}'")
     myresult = mycursor.fetchall()
     print(myresult)
     myresult = myresult[0]
