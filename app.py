@@ -110,7 +110,7 @@ def mainTu():
         opis = temp[1]
         komentari = temp[2]
         lajkova = temp[3]
-        osoba = temp[4]
+        osoba = temp[5]
         if komentari == None:
           komentari = 'null'
         if lajkova == None:
