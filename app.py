@@ -217,14 +217,14 @@ def mainTu():
         lajkova = temp[3] 
         osoba = temp[4]
         imeLikaa = temp[5]
-        imeLikaa = temp[6]
+        idd = temp[6]
         if komentari == None:
           komentari = 'null'
         if lajkova == None:
           lajkova = 'null'
         if opis == None:
           opis = 'null'
-        k = {'slika':image,'opis':opis,'komentari':komentari,'lajkova':lajkova,'osoba':osoba,'imeLika':imeLikaa,'id':id}
+        k = {'slika':image,'opis':opis,'komentari':komentari,'lajkova':lajkova,'osoba':osoba,'imeLika':imeLikaa,'id':idd}
         kaLista.append(k)
 
       usernameOfGuyLookinAtThePage = request.cookies.get('User')
