@@ -120,7 +120,8 @@
             $("#result").text(data.result); 
             alert(Object.values(data.b));
             var u = $('#followe').text();
-            $('#followe').text() = u + 1;
+            var m = (parseInt(u) + 1);
+            $('#followe').text(m);
             alert(u);             
           });
           // 19.5 STAO OVDJE DOBIJES KI ID FOLLOWA I KOGA FOLLOWA LP
@@ -134,7 +135,8 @@
             $("#result").text(data.result); 
             alert(Object.values(data.b));
             var u = $('#followe').text();
-            $('#followe').text() = u - 1;
+            var m = (parseInt(u) - 1);
+            $('#followe').text(m);
             alert(u);    
           });
           // 19.5 STAO OVDJE DOBIJES KI ID FOLLOWA I KOGA FOLLOWA LP
