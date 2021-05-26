@@ -53,7 +53,7 @@
                 </div>
                 <div class="da">
                   <a href="/te/{{ id|safe }}">
-                    <h2>{{ followers }}</h2>
+                    <h2 id="followe">{{ followers }}</h2>
                     <h4>followers</h4>
                   </a>
                   </div>
@@ -119,6 +119,9 @@
           }, function(data) {
             $("#result").text(data.result); 
             alert(Object.values(data.b));
+            var u = $('#followe').text();
+            $('#followe').text() = u + 1;
+            alert(u);             
           });
           // 19.5 STAO OVDJE DOBIJES KI ID FOLLOWA I KOGA FOLLOWA LP
           return false;
@@ -130,6 +133,9 @@
           }, function(data) {
             $("#result").text(data.result); 
             alert(Object.values(data.b));
+            var u = $('#followe').text();
+            $('#followe').text() = u - 1;
+            alert(u);    
           });
           // 19.5 STAO OVDJE DOBIJES KI ID FOLLOWA I KOGA FOLLOWA LP
           return false;
