@@ -183,7 +183,7 @@ def unFollowTry():
     connection.commit()
   print(kiFollowa)
   print(kegaFollowa)
-  return jsonify(result="following",b=kegaFollowa)
+  return jsonify(result="not following",b=kegaFollowa)
 
 
 @app.route('/mainTu')
@@ -224,6 +224,8 @@ def mainTu():
       myresult = mycursor.fetchall()
       myresult = myresult[0]
       whoDoIFollow = myresult[0]
+      if whoDoIFollow == '':
+        whoDoIFollow = []
       myID = myresult[1]
       myID = str(myID)
       if whoDoIFollow:
