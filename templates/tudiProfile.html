@@ -154,13 +154,17 @@
         }
         // console.log(newArray);
         $( document ).ready(function() {
-        if(jeliPratim == -1 || jeliPratim == undefined || jeliPratim == null){
+          function megaGae(){  
+         // alert("MEGAGAE");      
+          if(jeliPratim == -1 || jeliPratim == undefined || jeliPratim == null){
           document.getElementById("result").setAttribute( "onClick", "javascript: deg();" );
           document.getElementById("result").innerHTML = "Zaprati";
         }else{
           document.getElementById("result").setAttribute( "onClick", "javascript: otpratie();" );
           document.getElementById("result").innerHTML = "Otprati";
-        }});
+        }}
+        megaGae();
+      });
         function da(){
           var gae =Object.values($('#my-data').data());
           gae = gae.toString()
