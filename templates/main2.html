@@ -39,11 +39,11 @@
                                         search();
                                     }
                                 );
-            function lajkaj(id){
+            objApp.lajkaj = function lajkaj(id){
                 alert(id);
                 alert("lajkano");
             }
-            function odlajkaj(id){
+            objApp.odlajkaj = function odlajkaj(id){
                 alert(id);
                 alert("odlajkano");
             }
@@ -239,13 +239,15 @@ var objApp = new Vue ({
         objave:undefined,
         like:false,
         prati:false,
+        odlajkaj:undefined,
+        lajkaj:undefined
     },
     methods:{
         ova(id){
-            //lajkaj(id)
+            alert(this.lajkaj(id))
         },
         ona(id){
-            //odlajkaj(id)
+            alert(this.odlajkaj(id))
         }
     }
 })
