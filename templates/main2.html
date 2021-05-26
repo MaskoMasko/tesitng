@@ -39,6 +39,14 @@
                                         search();
                                     }
                                 );
+            function lajkaj(id){
+                alert(id);
+                alert("lajkano");
+            }
+            function odlajkaj(id){
+                alert(id);
+                alert("odlajkano");
+            }
                             });
     </script>
 </head>
@@ -234,10 +242,10 @@ var objApp = new Vue ({
     },
     methods:{
         ova(id){
-            alert("da")
+            lajkaj(id)
         },
         ona(id){
-            alert("ne")
+            odlajkaj(id)
         }
     }
 })
