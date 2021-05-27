@@ -144,9 +144,9 @@
           // 19.5 STAO OVDJE DOBIJES KI ID FOLLOWA I KOGA FOLLOWA LP
           return false;
         }
-        function megaGae(){  
+        function megaGae(jeliPratim){  
           // alert("MEGAGAE");      
-           if(jeliPratim == -1 || jeliPratim == undefined || jeliPratim == null){
+           if(jeliPratim == -1 || jeliPratim == undefined || jeliPratim == null || jeliPratim == 'nofollow'){
            document.getElementById("result").setAttribute( "onClick", "javascript: deg();" );
            document.getElementById("result").innerHTML = "Zaprati";
          }else{
@@ -165,7 +165,7 @@
         }
         // console.log(newArray);
         $( document ).ready(function() {
-        megaGae();
+        doIFollow();
       });
         function da(){
           var gae =Object.values($('#my-data').data());
@@ -178,6 +178,26 @@
           if (parts.length === 2) return parts.pop().split(';').shift();
         }
 
+
+
+
+
+
+
+
+        // OVA FUNKCIJA DOBIJE JEL FOLLOWAS
+        function doIFollow(){
+          $.getJSON($SCRIPT_ROOT + '/doIFollow', {
+            a: getCookie('User'),
+            b: da(),
+          }, function(data) {
+            alert(data.result);
+            megaGae(data.result);
+            //var u = $('#followe').text();
+            //var m = (parseInt(u) - 1);
+           // $('#followe').text(m);
+          //  alert(u);    
+          });}
           </script>
 </body>
 </html>
