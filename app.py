@@ -48,10 +48,38 @@ def tisTry():
       print(myresult)
     return jsonify(result=lista)
 
-
-
-
-
+@app.route('/doIFollow')
+def doIFollow():
+  whoDoIFollow = "nofollow"
+  kiFollowa = request.args.get('a')
+  kegaFollowa = request.args.get('b')
+  connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
+  if connection.is_connected():
+    print("PRVI STEP")
+    mycursor = connection.cursor()
+    mycursor.execute(f"SELECT followers FROM userssss WHERE id='{kegaFollowa}'")
+    myresult = mycursor.fetchall()
+    if myresult:
+      print("DRUGI STEP")
+      myresult = myresult[0]
+      whoDoIFollow = myresult[0]
+      if whoDoIFollow:
+        whoDoIFollow = whoDoIFollow.split(" , ")
+        if 'None' in whoDoIFollow:
+          whoDoIFollow.remove('None')
+        if '' in whoDoIFollow:
+          whoDoIFollow.remove('')
+      else:
+        whoDoIFollow = ['']
+      mycursor.execute(f"SELECT id FROM userssss WHERE username='{kiFollowa}'")
+      myresult = mycursor.fetchall()
+      myresult = myresult[0]
+      myid = myresult[0]
+      myid = str(myid)
+      if myid in whoDoIFollow:
+        print("FUCKING PARTY BIURCH")
+        whoDoIFollow = "yesfollow"
+  return jsonify(result=whoDoIFollow)
 @app.route('/testtt/<id>')
 def testtt(id):
   listaKogaPratis = []
