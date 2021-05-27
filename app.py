@@ -24,7 +24,11 @@ def home():
   username = request.cookies.get('User')
   return render_template("main.html",logStatus=logStatus,username=username)
 
-
+@app.route('/landingPage')
+def landingPage():
+  logStatus = request.cookies.get('logStat')
+  username = request.cookies.get('User')
+  return render_template("landingPage.html",logStatus=logStatus,username=username)
 
 @app.route('/tis')
 def tis():
