@@ -14,6 +14,7 @@
     
     <script  type=text/javascript>
         $( document ).ready(function() { 
+            $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
         var obje = {{ objave|safe }}
         console.log(obje)
         alert(obje);
@@ -42,11 +43,61 @@
             objApp.lajkaj = function lajkaj(id){
                 alert(id);
                 alert("lajkano");
+                doILike(id);
+                $.getJSON($SCRIPT_ROOT + '/likeTry', {
+                    a: getCookie('User'),
+                    b: id,
+                  }, function(data) {
+                    $("#result").text(data.result); 
+                    //alert(Object.values(data.b));
+                    var u = $('#followe').text();
+                    var m = (parseInt(u) + 1);
+                    $('#followe').text(m);
+                    //alert(u);
+                    doIFollow();         
+                  });
             }
             objApp.odlajkaj = function odlajkaj(id){
                 alert(id);
                 alert("odlajkano");
+                doILike(id);
+                $.getJSON($SCRIPT_ROOT + '/unLikeTry', {
+                    a: getCookie('User'),
+                    b: id,
+                  }, function(data) {
+                    $("#result").text(data.result); 
+                    //alert(Object.values(data.b));
+                    var u = $('#followe').text();
+                    var m = (parseInt(u) - 1);
+                    $('#followe').text(m);
+                    doIFollow();  
+                  });
             }
+            function doILike(idObjave){
+                $.getJSON($SCRIPT_ROOT + '/doILike', {
+                  a: getCookie('User'),
+                  b: idObjave,
+                }, function(data) {
+                  alert(data.result);
+                   megaGae(data.result)
+                });}
+
+                function megaGae(jeliPratim){  
+                    alert(jeliPratim);      
+                     if(jeliPratim == "DidLike"){
+                      document.getElementById("result").setAttribute( "onClick", "javascript: otpratie();" ); // tu rabi bit odlajkaj
+                      document.getElementById("result").innerHTML = "Otprati";
+                   }else{
+                     document.getElementById("result").setAttribute( "onClick", "javascript: deg();" ); // tu rabi bit funckija lajkaj
+                     document.getElementById("result").innerHTML = "Zaprati";
+                   }}
+
+                function getCookie(name) {
+                    const value = `; ${document.cookie}`;
+                    const parts = value.split(`; ${name}=`);
+                    if (parts.length === 2) return parts.pop().split(';').shift();
+                  }
+          
                             });
     </script>
 </head>
