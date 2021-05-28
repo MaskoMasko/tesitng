@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Aladeen</title>
     <link rel="stylesheet" href="static/css/login.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com/%22%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+
 </head>
 <body>
     {% if error  %}
@@ -14,17 +17,16 @@
     <div class="sve-kont">
         <div class="login-kont">
             <h1>Login</h1>
-            <form action = "/loginTry" method = "post">
+            <form action = "/loginTry" method = "post" class="formi">
                 <input type="text" class="username" placeholder="Username" name="name"> 
+                {% for message in get_flashed_messages() %}
+                <h4>{{ message}}!</h4>
+                {% endfor %}
                 <input type="password" class="pass" placeholder="Password" name="password">
                 <button type="submit">LOGIN</button>
             </form>
-            <p>Haven't made acc? <a href="/signup">Sign Up</a></p>
+            <p class="sg">Haven't made acc? <a class="sg" href="/signup">Sign Up</a></p>
         </div>
-        {% for message in get_flashed_messages() %}
-        <h2>{{ message}}</h2>
-        {% endfor %}
     </div>
-    <a href="/">Main</a>
 </body>
 </html>
