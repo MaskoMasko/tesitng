@@ -118,24 +118,28 @@
             b: da(),
           }, function(data) {
             $("#result").text(data.result); 
-            alert(Object.values(data.b));
+            //alert(Object.values(data.b));
             var u = $('#followe').text();
             var m = (parseInt(u) + 1);
             $('#followe').text(m);
-            alert(u);    
-            megaGae();         
+            //alert(u);    
+            doIFollow();         
           });
           // 19.5 STAO OVDJE DOBIJES KI ID FOLLOWA I KOGA FOLLOWA LP
           return false;
         }
+
         function otpratie(){
           $.getJSON($SCRIPT_ROOT + '/unFollowTry', {
             a: getCookie('User'),
             b: da(),
           }, function(data) {
             $("#result").text(data.result); 
-            alert(Object.values(data.b));
-            megaGae();
+            //alert(Object.values(data.b));
+            var u = $('#followe').text();
+            var m = (parseInt(u) - 1);
+            $('#followe').text(m);
+            doIFollow();
             //var u = $('#followe').text();
             //var m = (parseInt(u) - 1);
            // $('#followe').text(m);
@@ -145,24 +149,17 @@
           return false;
         }
         function megaGae(jeliPratim){  
-          // alert("MEGAGAE");      
-           if(jeliPratim == -1 || jeliPratim == undefined || jeliPratim == null || jeliPratim == 'nofollow'){
+          //alert(jeliPratim);      
+           if(jeliPratim == -1 || jeliPratim == undefined || jeliPratim == null || jeliPratim == 'nofollow' || jeliPratim == ''){
            document.getElementById("result").setAttribute( "onClick", "javascript: deg();" );
            document.getElementById("result").innerHTML = "Zaprati";
          }else{
            document.getElementById("result").setAttribute( "onClick", "javascript: otpratie();" );
            document.getElementById("result").innerHTML = "Otprati";
          }}
-        var pratimLi = followin;
-        if (pratimLi != null){
-        var newArray = pratimLi.split(',');         // ovdje je lista
-        }
-        var flaskData = Object.values(flaskData);   // OVDJE JE 2
-        alert(flaskData);
-        flaskData = flaskData.toString();
-        if (pratimLi != null){
-        var jeliPratim = newArray.indexOf(flaskData);
-        }
+         
+
+
         // console.log(newArray);
         $( document ).ready(function() {
         doIFollow();
@@ -191,7 +188,7 @@
             a: getCookie('User'),
             b: da(),
           }, function(data) {
-            alert(data.result);
+           // alert(data.result);
             megaGae(data.result);
             //var u = $('#followe').text();
             //var m = (parseInt(u) - 1);
