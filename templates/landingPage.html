@@ -6,53 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main Aladeen</title>
     <link rel="stylesheet" href="static/css/landingPage.css">
-<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js%22%3E"></script>
-<link rel="preconnect" href="https://fonts.gstatic.com/%22%3E">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com/%22%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="sve">
-    <div class="back-pic"></div>
-    <div class="back-pic2"></div>
-    <div class="back-pic3"></div>
+        <div class="back-pic"></div>
+        <div class="back-pic2"></div>
+        <div class="back-pic3"></div>
 </div>
-     <div class="main-stuff">
-        <h2>Welcome to Aladeen!</h2>
-        <h4>List of applications: </h4>
-        <p class="ig-link"><a href="/mainTu">Instagram wannabe aka Aladeen</a></p>
-    </div> 
-    <div class="lga">
+<div class="main-stuff">
+    <h2>Welcome to Aladeen!</h2>
+    <h4>List of applications: </h4>
+    <p class="ig-link"><a href="/mainTu">Instagram wannabe aka Aladeen</a></p>
+</div> 
+<div class="lga">
     <div class="icon" @click="lg()">
         <div class="head"></div>
         <div class="body"></div>
     </div>
     <div>
-    <div v-if="pop" class="dropdown">
-        <h4><a href="/login">Login</a></h4>
-        <h4><a href="/signUp">Sign Up</a></h4>
-        <div class="iks" @click="dg()">
-            <div class="jedan"></div>
-            <div class="dva"></div>
+        <div v-if="pop" class="dropdown">
+            <h4><a href="/login">Login</a></h4>
+            <h4><a href="/signUp">Sign Up</a></h4>
+            <div class="iks" @click="dg()">
+                <div class="jedan"></div>
+                <div class="dva"></div>
+            </div>
+            <div v-else></div>
         </div>
-    <div v-else></div>
-</div>
     </div>
 </div>
-    <script>
-        var app = new Vue({
-            el:".lga",
-            data:{
-                pop:false
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    var app = new Vue({
+        el:".lga",
+        data:{
+            pop:false
+        },
+        methods:{
+            lg(){
+                this.pop = true;
             },
-            methods:{
-                lg(){
-                    this.pop = true;
-                },
-                dg(){
-                    this.pop = false;
-                }
+            dg(){
+                this.pop = false;
             }
-        })
+        }
+    })
     </script>
 </body>
 </html>
