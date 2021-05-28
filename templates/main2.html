@@ -186,8 +186,7 @@
                 <img :src=`/static/objave/${objava.slika}.jpg` alt="">
                 <div class="rate">
                     <ul>
-                        <li v-if="prati" @click="ova(objava.id)">Like</li>
-                        <li v-else @click="ona(objava.id)">Like</li>
+                        <li @click="ova(objava.id)">Like</li>
                         <li>Share</li>
                     </ul>
                     <!-- <div>
@@ -295,11 +294,14 @@ var objApp = new Vue ({
     },
     methods:{
         ova(id){
+            if(!this.like){
+            this.like = true;
             alert(this.lajkaj(id))
-        },
-        ona(id){
+            }else{
+            this.like = false;
             alert(this.odlajkaj(id))
-        }
+            }
+        },
     }
 })
 var storiji = new Vue ({
