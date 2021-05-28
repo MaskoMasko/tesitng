@@ -2,10 +2,11 @@
     padding: 0%;
     margin: 0%;
     box-sizing: border-box;
-    color: rgb(201, 162, 162);
+    font-family: 'Roboto', sans-serif;
+    color: rgb(77, 73, 73);
 }
 html{
-    background: rgb(92,0,41);
+    background-color: rgb(233, 232, 232);
 }
 .sve-kont{
     height: 100vh;
@@ -16,13 +17,23 @@ html{
 .login-kont{
     width: 350px;
     height: 350px;
-    background-color: #ACF7C1;
+    background-color: rgb(77, 73, 73);
     border-radius: 15px;
     text-align: center;
     display: flex;
     flex-direction: column;
 }
 .login-kont h1{
+    margin-top: 30px;
+    color: aliceblue;
+    font-size: 40px;
+}
+.formi h4{
+    font-size: 1.2em !important;
+    font-weight: 100;
+    margin: 0px !important;
+    transform: translateY(17px);
+    color: aliceblue; 
     font-size: 40px;
 }
 input, button{
@@ -32,11 +43,15 @@ input, button{
     padding: 10px;
     margin-top: 30px;
     border-radius: 5px;
-    border: 1px solid rgb(92,0,41);
-    outline-color: rgb(92,0,41);
+    border: 1px solid rgb(77, 73, 73);
+    outline-color: rgb(77, 73, 73);
 }
 button{
     cursor: pointer;
     margin-bottom: 20px;
-    background-color: #857C8D;
+    background-color: rgb(146, 143, 143);
+    color: rgb(249, 252, 255);
+}
+.sg{
+    color: aliceblue;
 }
