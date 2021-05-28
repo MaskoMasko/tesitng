@@ -1,29 +1,41 @@
 *{
     padding: 0%;
     margin: 0%;
+    font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
-    color: rgb(201, 162, 162);
+    color: rgb(77, 73, 73);
 }
 html{
-    background: rgb(92,0,41);
+    background-color: rgb(233, 232, 232);
 }
 .sve-kont{
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 .login-kont{
-    width: 350px;
-    height: 350px;
-    background-color: #ACF7C1;
+    width: 500px;
+    height: 500px;
+    background-color: rgb(77, 73, 73);
     border-radius: 15px;
     text-align: center;
     display: flex;
     flex-direction: column;
 }
 .login-kont h1{
+    color: aliceblue;
     font-size: 40px;
+}
+.err{
+    height: 100px;
+    width: 400px;
+    font-size: 20px;
+    text-align:center;
+}
+.err h3{
+    font-weight: 100;
 }
 input, button{
     width: 85%;
@@ -32,11 +44,17 @@ input, button{
     padding: 10px;
     margin-top: 15px;
     border-radius: 5px;
-    border: 1px solid rgb(92,0,41);
-    outline-color: rgb(92,0,41);
+    border: 1px solid rgb(77, 73, 73);
+    outline-color: rgb(77, 73, 73);
 }
 button{
     cursor: pointer;
     margin-bottom: 20px;
-    background-color: #857C8D;
+    background-color: rgb(146, 143, 143);
+    color: rgb(249, 252, 255);
+}
+.pass-err{
+    color: aliceblue;
+    margin-top: 10px;
+    font-weight: 100;
 }
