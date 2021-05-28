@@ -145,13 +145,13 @@
           return false;
         }
         function megaGae(jeliPratim){  
-          //alert(jeliPratim);      
+          alert(jeliPratim);      
            if(jeliPratim == "yesfollow"){
+            document.getElementById("result").setAttribute( "onClick", "javascript: otpratie();" );
+            document.getElementById("result").innerHTML = "Otprati";
+         }else{
            document.getElementById("result").setAttribute( "onClick", "javascript: deg();" );
            document.getElementById("result").innerHTML = "Zaprati";
-         }else{
-           document.getElementById("result").setAttribute( "onClick", "javascript: otpratie();" );
-           document.getElementById("result").innerHTML = "Otprati";
          }}
          
 
