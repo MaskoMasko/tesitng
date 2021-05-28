@@ -84,6 +84,44 @@ def doIFollow():
         print("FUCKING PARTY BIURCH")
         whoDoIFollow = "yesfollow"
   return jsonify(result=whoDoIFollow)
+
+
+@app.route('/doILike')
+def doILike():
+  whoDoIFollow = "DidNotLike"
+  kiLikea = request.args.get('a')
+  idObjave = request.args.get('b')
+  connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
+  if connection.is_connected():
+    print("PRVI STEP")
+    mycursor = connection.cursor()
+    mycursor.execute(f"SELECT lajkova FROM objavee WHERE id='{idObjave}'")
+    myresult = mycursor.fetchall()
+    if myresult:
+      print("DRUGI STEP")
+      myresult = myresult[0]
+      lajkovi = myresult[0]
+      if lajkovi:
+        lajkovi = lajkovi.split(" , ")
+        if 'None' in lajkovi:
+          lajkovi.remove('None')
+        if '' in lajkovi:
+          lajkovi.remove('')
+      else:
+        lajkovi = ['']
+      
+      mycursor.execute(f"SELECT id FROM userssss WHERE username='{kiLikea}'")
+      myresult = mycursor.fetchall()
+      myresult = myresult[0]
+      myid = myresult[0]
+      myid = str(myid)
+      if myid in lajkovi:
+        print("LIKUJEEEEM")
+        whoDoIFollow = "DidLike"
+  return jsonify(result=whoDoIFollow)
+
+
+
 @app.route('/testtt/<id>')
 def testtt(id):
   listaKogaPratis = []
@@ -183,6 +221,32 @@ def followTry():
   print(kiFollowa)
   print(kegaFollowa)
   return jsonify(result="following",b=kegaFollowa)
+
+@app.route('/likeTry')
+def likeTry():
+  kiLikea = request.args.get('a')
+  idObjave = request.args.get('b')
+  connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
+  if connection.is_connected():
+    mycursor = connection.cursor()
+    mycursor.execute(f"SELECT following FROM userssss WHERE username='{kiLikea}'")
+    bivseSveKegaPrati = str(mycursor.fetchall()[0][0])
+    sviKojePrati = bivseSveKegaPrati + " , " + idObjave
+    mycursor.execute(f"UPDATE userssss SET following = ('{sviKojePrati}') WHERE username='{kiLikea}';")
+    connection.commit()
+    # OVO GORE DODA COVIKU KOJ ZELI FOLLOWAT U FOLLOWANE
+    mycursor.execute(f"SELECT followers FROM userssss WHERE id='{idObjave}'")
+    bivseSveKiGaPrate = str(mycursor.fetchall()[0][0])
+    mycursor.execute(f"SELECT id FROM userssss WHERE username='{kiLikea}'")
+    idOnogakiLikea = str(mycursor.fetchall()[0][0])
+    sviKiGaFollowaju = bivseSveKiGaPrate + " , " + idOnogakiLikea
+    mycursor.execute(f"UPDATE userssss SET followers = ('{sviKiGaFollowaju}') WHERE id='{idObjave}';")
+    connection.commit()
+  print(kiLikea)
+  print(idObjave)
+  return jsonify(result="following",b=idObjave)
+
+
 
 @app.route('/unFollowTry')
 def unFollowTry():
