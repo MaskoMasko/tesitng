@@ -3,11 +3,11 @@
     font-family: 'Lato', sans-serif;
     padding: 0%;
     box-sizing: border-box;
-    color: rgb(238, 232, 232);
+    color: aliceblue;
 }
 html{
-    background: #507DBC;
-background: radial-gradient(circle, #507DBC 0%, #435b7c 100%);height: 100%;
+    background: rgb(233, 232, 232);
+background: radial-gradient(circle, rgb(233, 232, 232) 0%, rgb(187, 186, 186) 100%);height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,7 +15,7 @@ background: radial-gradient(circle, #507DBC 0%, #435b7c 100%);height: 100%;
 .chat-konta{
     width: 1300px;
     height: 700px;
-    background: #8ca9c5;
+    background: rgb(151, 151, 151);
     box-shadow: 5px 5px 15px rgb(54, 54, 54);
     border-radius: 25px;
     display: flex;
@@ -23,7 +23,7 @@ background: radial-gradient(circle, #507DBC 0%, #435b7c 100%);height: 100%;
 .users{
     width: 400px;
     height: 100%;
-    background-color: #354863;
+    background-color: rgb(77, 73, 73);
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
     display: flex;
@@ -38,7 +38,7 @@ background: radial-gradient(circle, #507DBC 0%, #435b7c 100%);height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-bottom:5px solid  #A1C6EA;
+    border-bottom:5px solid  rgb(238, 237, 237);
     margin-bottom: 20px;
 }
 .names{
@@ -48,10 +48,10 @@ background: radial-gradient(circle, #507DBC 0%, #435b7c 100%);height: 100%;
     justify-content: space-around;
 }
 .names li{
-    color: white;
+    color: rgb(77, 73, 73);
     padding:15px;
     margin: 5px;
-    background-color: #A1C6EA;
+    background-color: rgb(238, 237, 237);
 }
 
 
@@ -60,14 +60,16 @@ background: radial-gradient(circle, #507DBC 0%, #435b7c 100%);height: 100%;
 }
 
 .chat-box{
+    background-color: rgb(146, 143, 143);
     width: 100%;
     position: relative;
+    border-top-right-radius: 20px;
 }
 .upis{
     width:82%;
     height: 50px;
     position: absolute;
-    background: #576679;
+    background-color: rgb(100, 100, 100);
     bottom: 10%;
     right: 9%;
     border-radius: 20px;
@@ -82,7 +84,8 @@ background: radial-gradient(circle, #507DBC 0%, #435b7c 100%);height: 100%;
     position: absolute;
     width: 70px;
     height: 50px;
-    background: #434a52;
+    background-color: rgb(77, 73, 73);
+
     right: 9%;
     bottom: 10%;
     border-radius: 5px;
@@ -100,9 +103,10 @@ background: radial-gradient(circle, #507DBC 0%, #435b7c 100%);height: 100%;
     margin-top: 30px;
     padding-bottom: 40px;
     border-top-left-radius: 25px;
-    background-color: #BBD1EA;
+    background-color: rgb(240, 238, 238);
+
 }
-.mess-box::-webkit-scrollbar{width:6px;border:5px solid #A1C6EA;}
+.mess-box::-webkit-scrollbar{width:6px;border:5px solid rgb(180, 180, 180);}
 ::-webkit-scrollbar-thumb{background-color:#434a52;}
 .messes{
     width: 100%;
@@ -120,7 +124,7 @@ background: radial-gradient(circle, #507DBC 0%, #435b7c 100%);height: 100%;
 }
 .mess1{
     transform: translate(-30px, 10px);
-    background-color: #434a52;
+    background-color: rgb(77, 73, 73);
     padding: 10px;
     border-radius: 15px;
     margin-bottom: 10px;
