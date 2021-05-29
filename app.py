@@ -229,18 +229,13 @@ def likeTry():
   connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
   if connection.is_connected():
     mycursor = connection.cursor()
-    mycursor.execute(f"SELECT following FROM userssss WHERE username='{kiLikea}'")
-    bivseSveKegaPrati = str(mycursor.fetchall()[0][0])
-    sviKojePrati = bivseSveKegaPrati + " , " + idObjave
-    mycursor.execute(f"UPDATE userssss SET following = ('{sviKojePrati}') WHERE username='{kiLikea}';")
-    connection.commit()
-    # OVO GORE DODA COVIKU KOJ ZELI FOLLOWAT U FOLLOWANE
-    mycursor.execute(f"SELECT followers FROM userssss WHERE id='{idObjave}'")
-    bivseSveKiGaPrate = str(mycursor.fetchall()[0][0])
+    # ne arbimo zasad znat ca je on lajka il ni
+    mycursor.execute(f"SELECT lajkova FROM objavee WHERE id='{idObjave}'")
+    bivseSveKLajkano = str(mycursor.fetchall()[0][0])
     mycursor.execute(f"SELECT id FROM userssss WHERE username='{kiLikea}'")
     idOnogakiLikea = str(mycursor.fetchall()[0][0])
-    sviKiGaFollowaju = bivseSveKiGaPrate + " , " + idOnogakiLikea
-    mycursor.execute(f"UPDATE userssss SET followers = ('{sviKiGaFollowaju}') WHERE id='{idObjave}';")
+    sviKiGaFollowaju = bivseSveKLajkano + " , " + idOnogakiLikea
+    mycursor.execute(f"UPDATE objavee SET lajkova = ('{sviKiGaFollowaju}') WHERE id='{idObjave}';")
     connection.commit()
   print(kiLikea)
   print(idObjave)
@@ -248,39 +243,65 @@ def likeTry():
 
 
 
-@app.route('/unFollowTry')
-def unFollowTry():
+@app.route('/unLikeTry')
+def unLikeTry():
+  print(" hahashsahdhHSHASHDHASDHASHDSAHDH")
   kiFollowa = request.args.get('a')
   kegaFollowa = request.args.get('b')
   connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
   if connection.is_connected():
     mycursor = connection.cursor()
-    mycursor.execute(f"SELECT following FROM userssss WHERE username='{kiFollowa}'")
-    bivseSveKegaPrati = str(mycursor.fetchall()[0][0])
-    nesDrugo = bivseSveKegaPrati.split(' , ')
-    if 'None' in nesDrugo:
-      nesDrugo.remove('None')
-    nesDrugo.remove(kegaFollowa)
-    nesDrugoDrugo = " , ".join(nesDrugo)
-    print(nesDrugo)
-    mycursor.execute(f"UPDATE userssss SET following = ('{nesDrugoDrugo}') WHERE username='{kiFollowa}';")
-    connection.commit()
     # OVO GORE DODA COVIKU KOJ ZELI FOLLOWAT U FOLLOWANE
-    mycursor.execute(f"SELECT followers FROM userssss WHERE id='{kegaFollowa}'")
+    mycursor.execute(f"SELECT lajkova FROM objavee WHERE id='{kegaFollowa}'")
     bivseSveKiGaPrate = str(mycursor.fetchall()[0][0])
     mycursor.execute(f"SELECT id FROM userssss WHERE username='{kiFollowa}'")
     idOnogaKiFollowa = str(mycursor.fetchall()[0][0])
     nesTrece = bivseSveKiGaPrate.split(' , ')
     if 'None' in nesTrece:
       nesTrece.remove('None')
-    nesTrece.remove(idOnogaKiFollowa)
+    if idOnogaKiFollowa in nesTrece:
+      nesTrece.remove(idOnogaKiFollowa)
+    else:
+      print("AYO WHAT THE FUCK")
     nesTreceTrece = " , ".join(nesTrece)
-    mycursor.execute(f"UPDATE userssss SET followers = ('{nesTreceTrece}') WHERE id='{kegaFollowa}';")
+    mycursor.execute(f"UPDATE objavee SET lajkova = ('{nesTreceTrece}') WHERE id='{kegaFollowa}';")
     connection.commit()
   print(kiFollowa)
   print(kegaFollowa)
   return jsonify(result="not following",b=kegaFollowa)
 
+@app.route('/unFollowTry')
+def unFollowTry():
+  kiUnLikea = request.args.get('a')
+  idObjave = request.args.get('b')
+  connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
+  if connection.is_connected():
+    mycursor = connection.cursor()
+    mycursor.execute(f"SELECT following FROM userssss WHERE username='{kiUnLikea}'")
+    bivseSveKegaPrati = str(mycursor.fetchall()[0][0])
+    nesDrugo = bivseSveKegaPrati.split(' , ')
+    if 'None' in nesDrugo:
+      nesDrugo.remove('None')
+    nesDrugo.remove(idObjave)
+    nesDrugoDrugo = " , ".join(nesDrugo)
+    print(nesDrugo)
+    mycursor.execute(f"UPDATE userssss SET following = ('{nesDrugoDrugo}') WHERE username='{kiUnLikea}';")
+    connection.commit()
+    # OVO GORE DODA COVIKU KOJ ZELI FOLLOWAT U FOLLOWANE
+    mycursor.execute(f"SELECT followers FROM userssss WHERE id='{idObjave}'")
+    bivseSveKiGaPrate = str(mycursor.fetchall()[0][0])
+    mycursor.execute(f"SELECT id FROM userssss WHERE username='{kiUnLikea}'")
+    idOnogaKiFollowa = str(mycursor.fetchall()[0][0])
+    nesTrece = bivseSveKiGaPrate.split(' , ')
+    if 'None' in nesTrece:
+      nesTrece.remove('None')
+    nesTrece.remove(idOnogaKiFollowa)
+    nesTreceTrece = " , ".join(nesTrece)
+    mycursor.execute(f"UPDATE userssss SET followers = ('{nesTreceTrece}') WHERE id='{idObjave}';")
+    connection.commit()
+  print(kiUnLikea)
+  print(idObjave)
+  return jsonify(result="not following",b=idObjave)
 
 @app.route('/mainTu')
 def mainTu():
