@@ -251,7 +251,6 @@ def unLikeTry():
   connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
   if connection.is_connected():
     mycursor = connection.cursor()
-    # OVO GORE DODA COVIKU KOJ ZELI FOLLOWAT U FOLLOWANE
     mycursor.execute(f"SELECT lajkova FROM objavee WHERE id='{kegaFollowa}'")
     bivseSveKiGaPrate = str(mycursor.fetchall()[0][0])
     mycursor.execute(f"SELECT id FROM userssss WHERE username='{kiFollowa}'")
