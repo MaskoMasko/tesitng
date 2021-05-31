@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main2</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <link rel="stylesheet" href="/static/css/main2.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+        </style>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    
+    <script  type=text/javascript>
+        $( document ).ready(function() { 
+            $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+        var obje = {{ objave|safe }}
+        console.log(obje)
+        alert(obje);
+        window.onload = function hm(){
+            objApp.objave = obje
+            storiji.storici = obje
+        }
+        function search(){
+            $.ajax({
+                dataType: 'json',
+                url: '/tisTry',
+                type: 'POST',
+                data: {'data':$("#textt").val()},
+                success: function(response) {
+                    console.log(response);
+                    zaNav.search = response.result;
+                }
+              });
+              return false;
+            }
+            var input = document.getElementById('textt');
+            input.addEventListener('keyup', 
+                                    function() {
+                                        search();
+                                    }
+                                );
+            objApp.lajkaj = function lajkaj(id){
+                alert(id);
+                alert("lajkano");
+                doILike(id);
+                $.getJSON($SCRIPT_ROOT + '/likeTry', {
+                    a: getCookie('User'),
+                    b: id,
+                  }, function(data) {
+                    $("#result").text(data.result); 
+                    //alert(Object.values(data.b));
+                    var u = $('#followe').text();
+                    var m = (parseInt(u) + 1);
+                    $('#followe').text(m);
+                    //alert(u);
+                    doILike();         
+                  });
+            }
+            objApp.odlajkaj = function odlajkaj(id){
+                alert(id);
+                alert("odlajkano");
+                doILike(id);
+                $.getJSON($SCRIPT_ROOT + '/unLikeTry', {
+                    a: getCookie('User'),
+                    b: id,
+                  }, function(data) {
+                    $("#result").text(data.result); 
+                    //alert(Object.values(data.b));
+                    var u = $('#followe').text();
+                    var m = (parseInt(u) - 1);
+                    $('#followe').text(m);
+                    doILike();  
+                  });
+            }
+            function doILike(idObjave){
+                $.getJSON($SCRIPT_ROOT + '/doILike', {
+                  a: getCookie('User'),
+                  b: idObjave,
+                }, function(data) {
+                  alert(data.result);
+                   megaGae(data.result)
+                });}
+
+                function megaGae(jeliPratim){  
+                    alert(jeliPratim);
+                    objApp.ona("like");
+                     if(jeliPratim == "DidLike"){
+                      //document.getElementById("result").setAttribute( "onClick", "javascript: otpratie();" ); // tu rabi bit odlajkaj
+                   }else{
+                     //document.getElementById("result").setAttribute( "onClick", "javascript: deg();" ); // tu rabi bit funckija lajkaj
+                   }}
+
+                function getCookie(name) {
+                    const value = `; ${document.cookie}`;
+                    const parts = value.split(`; ${name}=`);
+                    if (parts.length === 2) return parts.pop().split(';').shift();
+                  }
+          
+                            });
+    </script>
+</head>
+<body>
+    <!-- NAVABR -->
+    <div class="nav-kont">
+        <div class="nav">
+            <div class="nav-menu">
+                <a href="/"><img src="/static/images/AladeenLogo.png" alt=""></a>
+                <input type="text" placeholder="Search" id="textt">
+                <ul>
+                    <li v-for="user in search" :key="user.id" v-html="user"></li>
+                </ul>
+                <ul class="nav-lista">
+                    <li><a class="za-ref" href="/">Home</a></li>
+                    <li><a href="/chat" class="za-ref">Chat</a></li>
+                    <li @click="zaProfil" class="prof">Profile</li>
+                     <div v-if="profile" class="prof-drop" @mouseleave="zaProfDrp()">
+                        <div class="taj-thing"></div>
+                        <h3><a href="/user/{{ tvojID|safe }}" class="za-ref">Profile</a></h3>
+                    </div> 
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- STORIES-->
+    <!-- <div class="stories">
+        <div class="stor-konta">
+            <ul class="storiji">
+                <li><img src="/static/images/AladeenLogo.png" alt=""></li>
+                <li><img src="/static/images/1.png" alt=""></li>
+                <li><img src="/static/images/AladeenLogo.png" alt=""></li>
+                <li><img src="/static/images/1.png" alt=""></li>
+                <li><img src="/static/images/AladeenLogo.png" alt=""></li>
+                <li><img src="/static/images/1.png" alt=""></li>
+            </ul>
+        </div>
+    </div> -->
+    <div class="stories" id="storiji">
+        <div class="stor-konta">
+            <!-- Za listu followera-->
+            <ul class="storiji">
+                <li v-for="(story, index) in storici" :key="index"><img :src=`/static/objave/${index+1}.jpg` alt=""></li>
+            </ul>
+        </div>
+    </div>
+        <!-- OBJAVE -->
+    <div id="commApp">
+        <!-- <div class="user">
+          <h5>Avatar</h5>
+          <h3>HE_WAS_FUNNY_MEMES</h3>
+        </div> -->
+          <!-- <img src="" alt="">
+          <div class="rate">
+            <ul>
+              <li>Like</li>
+              <li>Share</li>
+            </ul> -->
+            <!-- <div>
+            <input type="text" placeholder="komentar" v-model="prazan1">
+            <button type="submit" @click="subKom()">Relsee</button>
+            </div> -->
+            <!-- <p>Bookmark</p>
+          </div>
+          <p>3333 likes</p> -->
+          <!-- <div class="kom-box">
+            <p class="siv">Comments</p>
+            <ul class="komms">
+              <li v-for="comment in comms" :key="comment.id"><h3 v-html="comment.user" ></h3><p v-html="comment.comm"></p></li>
+              <div v-if="objaviKom">
+              <li v-for="comment in prazan" :key="comment.id"><h3>Your Username</h3><p v-html="comment"></p></li>
+              </div>
+            </ul>
+            <div class="formni" v-if="kom">
+                <input type="text" placeholder="komentar" v-model="prazan1">
+                <button type="submit" @click="subKom()">Relsee</button>
+            </div>
+            <button @click="zaKom()">Comm nisto</button>
+          </div> -->
+      </div>
+      <h1 v-html="objava.osoba"></h1>
+    <div id="objavice">
+            <div v-for="(objava, index) in objave">
+            <div class="objava" id="commApp">
+                <div class="user">
+                    <h5>Avatar</h5>
+                    <h3 v-html="objava.imeLika"></h3>
+                </div>
+                <img :src=`/static/objave/${objava.slika}.jpg` alt="">
+                <div class="rate">
+                    <ul>
+                        <li @click="ova(objava.id)">Like</li>
+                        <li>Share</li>
+                    </ul>
+                    <!-- <div>
+                        <input type="text" placeholder="komentar" v-model="prazan1">
+                        <button type="submit" @click="subKom()">Relsee</button>
+                    </div> -->
+                    <p>Bookmark</p>
+                </div>
+                <p v-if="objava.lajkova == 'null'" v-html="0"></p>
+                <p v-else v-html="objava.lajkova"></p><span> lajkova</span>
+                <template v-if="objava.wtf == 'undefined'">
+                    <h1>STRAIGHT</h1>
+                    <p>STRAIGHT 1</p>
+                    <p>STRAIGHT2</p>
+                    <button @click="ona()"></button>
+                  </template>
+
+                  <template v-else>
+                    <h1>GAY</h1>
+                    <p>GAY 1</p>
+                    <p>GAY 2</p>
+                    <button @click="ova()"></button>
+                  </template>
+                <div class="kom-box">
+                    <p class="siv">Comments</p>
+                    <!-- <ul class="komms">
+                        <li v-for="comment in comms" :key="comment.id"><h3 v-html="comment.user" ></h3><p v-html="comment.comm"></p></li>
+                        <div v-if="objaviKom">
+                            <li v-for="comment in prazan" :key="comment.id"><h3>Your Username</h3><p v-html="comment"></p></li>
+                        </div>
+                    </ul> 
+                    <div class="formni" v-if="kom">
+                        <input type="text" placeholder="komentar" v-model="prazan1">
+                        <button type="submit" @click="subKom()">Relsee</button>
+                    </div>
+                    <button @click="zaKom()">Comm nisto</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    </div>
+<script>
+    var commApp = new Vue({
+        el:"#commApp",
+        data:{
+        comms:[
+        {
+            user:"Ivan",
+            comm:"great pic"
+        },
+        {
+            user:"Ivana",
+            comm:"great inage"
+        },
+        {
+            user:"Petar",
+            comm:"fk u"
+        },
+        {
+            user:"Boban",
+            comm:"Nice cock bro!"
+        },
+        {
+            user:"Morty",
+            comm:"nice one mazte"
+        },
+        ],
+        kom:false,
+        objaviKom:false,
+        prazan1:"",
+        prazan:[],
+        },
+    methods:{
+        zaKom(){
+        this.kom = true;
+        },
+        subKom(){
+            if(this.prazan1 != ""){
+
+                this.objaviKom=true;
+                this.prazan.push(this.prazan1)
+                this.prazan1 = "";
+            }else{
+                
+            }
+        },
+    }
+})
+var zaNav = new Vue({
+    el:".nav",
+    data:{
+        profile:false,
+        activity:false,
+        search:undefined,
+    },
+    methods:{
+        zaProfil(){
+            this.profile = true;
+        },
+        zaProfDrp(){
+            this.profile= false;
+        },
+        zaActy(){
+            this.activity = true;
+        },
+        zaActyDrp(){
+            this.activity = false;
+        }
+    }
+})
+var objApp = new Vue ({
+    el:"#objavice",
+    data:{
+        objave:undefined,
+        like:false,
+        prati:false,
+        odlajkaj:undefined,
+        lajkaj:undefined,
+        wtf:undefined,
+    },
+    methods:{
+        ova(id){
+            if(!this.like){
+            this.like = true;
+            alert(this.lajkaj(id))
+            }else{
+            this.like = false;
+            alert(this.odlajkaj(id))
+            }
+        },
+        ona(hmm){
+            this.wtf = hmm;
+            alert(this.wtf)
+        },
+    }
+})
+var storiji = new Vue ({
+    el:"#storiji",
+    data:{
+        storici:undefined
+    }
+})
+      </script>
+</body>
+</html>
