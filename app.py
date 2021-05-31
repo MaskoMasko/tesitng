@@ -824,12 +824,6 @@ def noviKomentarTry():
       newKomentarId +=1
       mycursor.execute(f"INSERT INTO komentari (tekst,osoba,imeLika) VALUES ('{opis}','{id}','{username}')")
       connection.commit()
-      # mycursor.execute(f"INSERT INTO objave (opis) VALUES ('{opis}')")
-      # connection.commit()
-      # mycursor.execute(f"SELECT LAST_INSERT_ID();")
-      # id = str(mycursor.fetchall()[0][0])
-      # mycursor.execute(f"SELECT objave FROM userssss WHERE username='{username}'")
-      # bivseObjave = str(mycursor.fetchall()[0][0])
       mycursor.execute(f"SELECT komentari FROM komentari WHERE id='{idSlike}'")
       tupp = mycursor.fetchall()[0]
       bivsiKomentariNaTojObjavi = str(tupp[0])
