@@ -16,8 +16,11 @@
         $( document ).ready(function() { 
             $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
         var obje = {{ objave|safe }}
+        for(let i=0; i<obje.length; i++){
+            obje[i].wtf = "like"
+        }
         console.log(obje)
-        alert(obje);
+        // alert(obje);
         window.onload = function hm(){
             objApp.objave = obje
             storiji.storici = obje
@@ -42,8 +45,8 @@
                                     }
                                 );
             objApp.lajkaj = function lajkaj(id){
-                alert(id);
-                alert("lajkano");
+                // alert(id);
+                // alert("lajkano");
                 doILike(id);
                 $.getJSON($SCRIPT_ROOT + '/likeTry', {
                     a: getCookie('User'),
@@ -59,8 +62,8 @@
                   });
             }
             objApp.odlajkaj = function odlajkaj(id){
-                alert(id);
-                alert("odlajkano");
+                // alert(id);
+                // alert("odlajkano");
                 doILike(id);
                 $.getJSON($SCRIPT_ROOT + '/unLikeTry', {
                     a: getCookie('User'),
@@ -79,12 +82,12 @@
                   a: getCookie('User'),
                   b: idObjave,
                 }, function(data) {
-                  alert(data.result);
+                //   alert(data.result);
                    megaGae(data.result)
                 });}
 
                 function megaGae(jeliPratim){  
-                    alert(jeliPratim);
+                    // alert(jeliPratim);
                     objApp.ona("like");
                      if(jeliPratim == "DidLike"){
                       //document.getElementById("result").setAttribute( "onClick", "javascript: otpratie();" ); // tu rabi bit odlajkaj
@@ -200,19 +203,18 @@
                 </div>
                 <p v-if="objava.lajkova == 'null'" v-html="0"></p>
                 <p v-else v-html="objava.lajkova"></p><span> lajkova</span>
-                <template v-if="objava.wtf == 'undefined'">
+                <div v-if="objava.wtf == 'like'">
                     <h1>STRAIGHT</h1>
                     <p>STRAIGHT 1</p>
                     <p>STRAIGHT2</p>
-                    <button @click="ona()"></button>
-                  </template>
-
-                  <template v-else>
+                    <button @click="ona(index)">ne</button>
+                  </div>
+                  <div v-else>
                     <h1>GAY</h1>
                     <p>GAY 1</p>
                     <p>GAY 2</p>
-                    <button @click="ova()"></button>
-                  </template>
+                    <button @click="">da</button>
+                  </div>
                 <div class="kom-box">
                     <p class="siv">Comments</p>
                     <!-- <ul class="komms">
@@ -312,17 +314,10 @@ var objApp = new Vue ({
     },
     methods:{
         ova(id){
-            if(!this.like){
-            this.like = true;
-            alert(this.lajkaj(id))
-            }else{
-            this.like = false;
-            alert(this.odlajkaj(id))
-            }
         },
-        ona(hmm){
-            this.wtf = hmm;
-            alert(this.wtf)
+        ona(id){
+            this.objave[id].wtf = "NOT";
+            alert(this.objave[id].wtf)
         },
     }
 })
