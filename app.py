@@ -805,6 +805,40 @@ def handle_message(data):
 
 
 
+@app.route('/noviKomentarTry', methods = ['POST'])
+def noviKomentarTry():
+  if request.method == 'POST':
+    username = request.cookies.get('User')
+    opis = str(request.form.get('opis')) #dela
+    idSlike = str(request.form.get('idSlike')) #dela
+    connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
+    if connection.is_connected():
+      mycursor = connection.cursor()
+      mycursor.execute(f"SELECT id FROM userssss WHERE username='{username}'")
+      tup = mycursor.fetchall()[0]
+      id = str(tup[0])
+      mycursor.execute(f"SELECT MAX(id) FROM komentari")
+      newKomentarId = mycursor.fetchall()[0][0]
+      if newKomentarId == None:
+        newKomentarId = 0
+      newKomentarId +=1
+      mycursor.execute(f"INSERT INTO komentari (tekst,osoba,imeLika) VALUES ('{opis}','{id}','{username}')")
+      connection.commit()
+      # mycursor.execute(f"INSERT INTO objave (opis) VALUES ('{opis}')")
+      # connection.commit()
+      # mycursor.execute(f"SELECT LAST_INSERT_ID();")
+      # id = str(mycursor.fetchall()[0][0])
+      # mycursor.execute(f"SELECT objave FROM userssss WHERE username='{username}'")
+      # bivseObjave = str(mycursor.fetchall()[0][0])
+      mycursor.execute(f"SELECT komentari FROM komentari WHERE id='{idSlike}'")
+      tupp = mycursor.fetchall()[0]
+      bivsiKomentariNaTojObjavi = str(tupp[0])
+      sviKomentariNaTomPostu = bivsiKomentariNaTojObjavi + " , " + newKomentarId
+      mycursor.execute(f"UPDATE objavee SET komentari = ('{sviKomentariNaTomPostu}') WHERE id='{idSlike}';")
+      connection.commit()
+
+    return redirect("/mainTu")
+
 
 if __name__ == '__main__':
     
