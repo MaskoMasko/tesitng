@@ -16,8 +16,11 @@
         $( document ).ready(function() { 
             $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
         var obje = {{ objave|safe }}
+        for(let i=0; i<obje.length; i++){
+            obje[i].wtf = "like"
+        }
         console.log(obje)
-        alert(obje);
+        // alert(obje);
         window.onload = function hm(){
             objApp.objave = obje
             storiji.storici = obje
@@ -42,8 +45,8 @@
                                     }
                                 );
             objApp.lajkaj = function lajkaj(id){
-                alert(id);
-                alert("lajkano");
+                // alert(id);
+                // alert("lajkano");
                 doILike(id);
                 $.getJSON($SCRIPT_ROOT + '/likeTry', {
                     a: getCookie('User'),
@@ -59,8 +62,8 @@
                   });
             }
             objApp.odlajkaj = function odlajkaj(id){
-                alert(id);
-                alert("odlajkano");
+                // alert(id);
+                // alert("odlajkano");
                 doILike(id);
                 $.getJSON($SCRIPT_ROOT + '/unLikeTry', {
                     a: getCookie('User'),
@@ -79,12 +82,12 @@
                   a: getCookie('User'),
                   b: idObjave,
                 }, function(data) {
-                  alert(data.result);
+                //   alert(data.result);
                    megaGae(data.result)
                 });}
 
                 function megaGae(jeliPratim){  
-                    alert(jeliPratim);
+                    // alert(jeliPratim);
                     objApp.ona("like");
                      if(jeliPratim == "DidLike"){
                       //document.getElementById("result").setAttribute( "onClick", "javascript: otpratie();" ); // tu rabi bit odlajkaj
@@ -145,7 +148,7 @@
         </div>
     </div>
         <!-- OBJAVE -->
-    <div id="commApp">
+    <!-- <div id="commApp"> -->
         <!-- <div class="user">
           <h5>Avatar</h5>
           <h3>HE_WAS_FUNNY_MEMES</h3>
@@ -177,11 +180,11 @@
             </div>
             <button @click="zaKom()">Comm nisto</button>
           </div> -->
-      </div>
-      <h1 v-html="objava.osoba"></h1>
-    <div id="objavice">
-            <div v-for="(objava, index) in objave">
-            <div class="objava" id="commApp">
+      <!-- </div> -->
+      <div id="objavice">
+          <div v-for="(objava, index) in objave">
+                <h1 v-html="objava.osoba"></h1>
+            <div class="objava">
                 <div class="user">
                     <h5>Avatar</h5>
                     <h3 v-html="objava.imeLika"></h3>
@@ -200,84 +203,74 @@
                 </div>
                 <p v-if="objava.lajkova == 'null'" v-html="0"></p>
                 <p v-else v-html="objava.lajkova"></p><span> lajkova</span>
-                <template v-if="objava.wtf == 'undefined'">
+                <div v-if="objava.wtf == 'like'">
                     <h1>STRAIGHT</h1>
                     <p>STRAIGHT 1</p>
                     <p>STRAIGHT2</p>
-                    <button @click="ona()"></button>
-                  </template>
-
-                  <template v-else>
+                    <button @click="ona(index)">ne</button>
+                  </div>
+                  <div v-else>
                     <h1>GAY</h1>
                     <p>GAY 1</p>
                     <p>GAY 2</p>
-                    <button @click="ova()"></button>
-                  </template>
+                    <button @click="">da</button>
+                  </div>
                 <div class="kom-box">
                     <p class="siv">Comments</p>
-                    <!-- <ul class="komms">
-                        <li v-for="comment in comms" :key="comment.id"><h3 v-html="comment.user" ></h3><p v-html="comment.comm"></p></li>
-                        <div v-if="objaviKom">
-                            <li v-for="comment in prazan" :key="comment.id"><h3>Your Username</h3><p v-html="comment"></p></li>
+                    <div v-if="objaviKom">
+                        <li v-for="comment in prazan" :key="comment.id"><h3>Your Username</h3><p v-html="comment"></p></li>
                         </div>
-                    </ul> 
-                    <div class="formni" v-if="kom">
-                        <input type="text" placeholder="komentar" v-model="prazan1">
-                        <button type="submit" @click="subKom()">Relsee</button>
-                    </div>
-                    <button @click="zaKom()">Comm nisto</button>
-                </div> -->
+                      </ul>
+                      <div class="formni" v-if="kom">
+                          <input type="text" placeholder="komentar" v-model="prazan1">
+                          <button type="submit" @click="subKom()">Relsee</button>
+                      </div>
+                      <button @click="zaKom(index)">Comm nisto</button>
+                        <!-- <ul class="komms">
+                            <div v-if="objaviKom">
+                                <li v-for="comment in prazan" :key="comment.id"><h3>Your Username</h3><p v-html="comment"></p></li>
+                            </div>
+                        </ul> 
+                        <div class="formni" v-if="kom">
+                            <input type="text" placeholder="komentar" v-model="prazan1">
+                            <button type="submit" @click="subKom()">Relsee</button>
+                        </div>
+                        <button @mouseover="nemojPls()">BUDALA</button></div> -->
+                </div>
             </div>
         </div>
     </div>
-    </div>
+    </div>                    
 <script>
-    var commApp = new Vue({
-        el:"#commApp",
-        data:{
-        comms:[
-        {
-            user:"Ivan",
-            comm:"great pic"
-        },
-        {
-            user:"Ivana",
-            comm:"great inage"
-        },
-        {
-            user:"Petar",
-            comm:"fk u"
-        },
-        {
-            user:"Boban",
-            comm:"Nice cock bro!"
-        },
-        {
-            user:"Morty",
-            comm:"nice one mazte"
-        },
-        ],
-        kom:false,
-        objaviKom:false,
-        prazan1:"",
-        prazan:[],
-        },
-    methods:{
-        zaKom(){
-        this.kom = true;
-        },
-        subKom(){
-            if(this.prazan1 != ""){
+//     var commApp = new Vue({
+//         el:"#commApp",
+//         data:{
+//             kom:false,
+//             objaviKom:false,
+//             prazan1:"",
+//             prazan:[],
+//         },
+//     methods:{
+//         zaKom(id){
+//         alert(id)
+//         this.kom = true;
+//     },
+//     nemojPls(){
+//         alert("necu")
+//     },
+//     subKom(id){
+//             alert(id)
+//             if(this.prazan1 != ""){
 
-                this.objaviKom=true;
-                this.prazan.push(this.prazan1)
-                this.prazan1 = "";
-            }else{
+//                 this.objaviKom=true;
+//                 this.prazan.push(this.prazan1)
+//                 this.prazan1 = "";
+//             }else{
                 
-            }
-        },
-    }
-})
+//             }
+//         },
+//     }
+// })
 var zaNav = new Vue({
     el:".nav",
     data:{
@@ -303,6 +296,10 @@ var zaNav = new Vue({
 var objApp = new Vue ({
     el:"#objavice",
     data:{
+        kom:false,
+        objaviKom:false,
+        prazan1:"",
+        prazan:[],
         objave:undefined,
         like:false,
         prati:false,
@@ -312,17 +309,25 @@ var objApp = new Vue ({
     },
     methods:{
         ova(id){
-            if(!this.like){
-            this.like = true;
-            alert(this.lajkaj(id))
-            }else{
-            this.like = false;
-            alert(this.odlajkaj(id))
-            }
         },
-        ona(hmm){
-            this.wtf = hmm;
-            alert(this.wtf)
+        ona(id){
+            this.objave[id].wtf = "NOT";
+            alert(this.objave[id].wtf)
+        },
+        zaKom(id){
+        alert(id)
+        this.kom = true;
+    },
+    subKom(id){
+            alert(id)
+            if(this.prazan1 != ""){
+
+                this.objaviKom=true;
+                this.prazan.push(this.prazan1)
+                this.prazan1 = "";
+            }else{
+                
+            }
         },
     }
 })
