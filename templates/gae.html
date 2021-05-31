@@ -111,7 +111,7 @@
             <div class="nav-menu">
                 <a href="/"><img src="/static/images/AladeenLogo.png" alt=""></a>
                 <input type="text" placeholder="Search" id="textt">
-                <ul>
+                <ul class="searchLista">
                     <li v-for="user in search" :key="user.id" v-html="user"></li>
                 </ul>
                 <ul class="nav-lista">
@@ -183,7 +183,6 @@
       <!-- </div> -->
       <div id="objavice">
           <div v-for="(objava, index) in objave">
-                <h1 v-html="objava.osoba"></h1>
             <div class="objava">
                 <div class="user">
                     <h5>Avatar</h5>
@@ -277,10 +276,14 @@ var zaNav = new Vue({
         profile:false,
         activity:false,
         search:undefined,
+        evo:true
     },
     methods:{
         zaProfil(){
             this.profile = true;
+        },
+        nika(){
+            this.evo = false;
         },
         zaProfDrp(){
             this.profile= false;
