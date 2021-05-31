@@ -368,6 +368,74 @@ def mainTu():
   else:
     return render_template("login.html")
 
+
+@app.route('/jaja')
+def jaja():
+  logStatus = request.cookies.get('logStat')
+  objaveKeTrebasViditi = []
+  if logStatus == "Logged In":
+    connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
+    if connection.is_connected():
+      mycursor = connection.cursor()
+      kaLista = []
+
+      mycursor.execute(f"SELECT `image`,`opis`,`komentari`,`lajkova`,`osoba`,`imeLika`,`id` FROM objavee")
+      myresult = mycursor.fetchall()
+      #print(myresult)
+      duzina = len(myresult)
+      for i in range(duzina):
+        temp = myresult[i]
+        #print(temp)
+        image = temp[0]
+        opis = temp[1]
+        komentari = temp[2]
+        lajkova = temp[3] 
+        osoba = temp[4]
+        imeLikaa = temp[5]
+        idd = temp[6]
+        if komentari == None:
+          komentari = 'null'
+        if lajkova == None:
+          lajkova = 'null'
+        if opis == None:
+          opis = 'null'
+        k = {'slika':image,'opis':opis,'komentari':komentari,'lajkova':lajkova,'osoba':osoba,'imeLika':imeLikaa,'id':idd}
+        kaLista.append(k)
+
+      usernameOfGuyLookinAtThePage = request.cookies.get('User')
+      mycursor.execute(f"SELECT following,id FROM userssss WHERE username='{usernameOfGuyLookinAtThePage}'")
+      myresult = mycursor.fetchall()
+      myresult = myresult[0]
+      whoDoIFollow = myresult[0]
+      if whoDoIFollow == '':
+        whoDoIFollow = []
+      myID = myresult[1]
+      myID = str(myID)
+      if whoDoIFollow:
+        whoDoIFollow = whoDoIFollow.split(" , ")
+        if 'None' in whoDoIFollow:
+          whoDoIFollow.remove('None')
+        if '' in whoDoIFollow:
+          whoDoIFollow.remove('')
+      if whoDoIFollow == None:
+        whoDoIFollow = [myID]
+      else:
+        whoDoIFollow.append(myID)
+      # DO TU DELA
+      for i in kaLista:
+        testRun = str(i.get('osoba'))
+        print(f"followam nekog  {testRun}")
+
+        if testRun in whoDoIFollow:
+          print(f"followam nekog  {whoDoIFollow}")
+          objaveKeTrebasViditi.append(i)
+      print(objaveKeTrebasViditi)
+
+    return render_template("gae.html",username=usernameOfGuyLookinAtThePage,objave=objaveKeTrebasViditi,tvojID = myID)
+  else:
+    return render_template("login.html")
+
+
 @app.route('/chat')
 def chat():
   logStatus = request.cookies.get('logStat')
