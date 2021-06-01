@@ -16,10 +16,14 @@
         $( document ).ready(function() { 
             $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
         var obje = {{ objave|safe }}
+        for(let i=0; i<obje.length; i++){
+            obje[i].prazno = ""
+        }
         console.log(obje)
         alert(obje);
         window.onload = function hm(){
             objApp.objave = obje
+            objApp.prazno = obje.prazno
             storiji.storici = obje
         }
         function search(){
@@ -30,7 +34,7 @@
                 data: {'data':$("#textt").val()},
                 success: function(response) {
                     console.log(response);
-                    zaNav.search = response.result;
+                    zaNav.search = response.drugiRez;
                 }
               });
               return false;
@@ -108,7 +112,7 @@
                 <a href="/"><img src="/static/images/AladeenLogo.png" alt=""></a>
                 <input type="text" placeholder="Search" id="textt">
                 <ul>
-                    <li v-for="user in search" :key="user.id" v-html="user"></li>
+                    <li v-for="user in search" :key="user.id"><a :href="`/user/${user.idLika}`" v-html="user.imeLika"></a></li>
                 </ul>
                 <ul class="nav-lista">
                     <li><a class="za-ref" href="/">Home</a></li>
@@ -197,10 +201,11 @@
                     </div> -->
                     <p>Bookmark</p>
                 </div>
-                <p v-if="objava.lajkova == 'null'" v-html="0"></p>
-                <p v-else v-html="objava.lajkova"></p><span> lajkova</span>
+                <p v-if="objava.brojLajkova == 'null'" v-html="0"></p>
+                <p v-else v-html="objava.brojLajkova"></p><span> lajkova</span>
                 <div class="kom-box">
                     <p class="siv">Comments</p>
+                    <button @click="koja(objava.id)">Submit</button>
                     <!-- <ul class="komms">
                         <li v-for="comment in comms" :key="comment.id"><h3 v-html="comment.user" ></h3><p v-html="comment.comm"></p></li>
                         <div v-if="objaviKom">
@@ -218,31 +223,16 @@
     </div>
     </div>
 <script>
+//     const input = document.querySelectorAll('.input');
+// const log = document.getElementsById('values');
+
+// input.addEventListener('input', (e)=>{
+//     log.textContent = e.target.value;
+//     alert(e.target.value)
+// });
     var commApp = new Vue({
         el:"#commApp",
         data:{
-        comms:[
-        {
-            user:"Ivan",
-            comm:"great pic"
-        },
-        {
-            user:"Ivana",
-            comm:"great inage"
-        },
-        {
-            user:"Petar",
-            comm:"fk u"
-        },
-        {
-            user:"Boban",
-            comm:"Nice cock bro!"
-        },
-        {
-            user:"Morty",
-            comm:"nice one mazte"
-        },
-        ],
         kom:false,
         objaviKom:false,
         prazan1:"",
@@ -294,6 +284,7 @@ var objApp = new Vue ({
         prati:false,
         odlajkaj:undefined,
         lajkaj:undefined,
+        // prazno:undefined,
     },
     methods:{
         ova(id){
@@ -305,6 +296,9 @@ var objApp = new Vue ({
             alert(this.odlajkaj(id))
             }
         },
+        koja(id){
+            alert(id)
+        }
     }
 })
 var storiji = new Vue ({
