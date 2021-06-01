@@ -88,7 +88,7 @@ def doIFollow():
       myid = myresult[0]
       myid = str(myid)
       if myid in whoDoIFollow:
-        print("FUCKING PARTY BIURCH")
+
         whoDoIFollow = "yesfollow"
   return jsonify(result=whoDoIFollow)
 
