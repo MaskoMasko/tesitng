@@ -597,7 +597,6 @@ def show_user_profile(id):
         brojFollowa.remove('')
       brojFollowa = len(flw)
 
-
     usernameOfGuyLookinAtThePage = request.cookies.get('User')
     mycursor.execute(f"SELECT name,surname,picture,followers,following,bio,objave,id FROM userssss WHERE username='{usernameOfGuyLookinAtThePage}'")
     myresult = mycursor.fetchall()
@@ -633,9 +632,14 @@ def show_user_profile(id):
           komentari = 'null'
         if lajkova == None:
           lajkova = 'null'
+          brojLajkova = ['']
         if opis == None:
           opis = 'null'
-        k = {'slika':image,'opis':opis,'komentari':komentari,'lajkova':lajkova}
+        try:
+          brojLajkova = len((lajkova.split(' , ')))
+        except:
+          brojLajkova = 0
+        k = {'slika':image,'opis':opis,'komentari':komentari,'lajkova':lajkova,'brojLajkova':brojLajkova}
         kaLista.append(k)
     if objave == None:
       objave = 'null'
@@ -845,5 +849,4 @@ def noviKomentarTry():
 
 
 if __name__ == '__main__':
-    
     socketio.run(app)
