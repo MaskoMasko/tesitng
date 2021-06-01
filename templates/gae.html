@@ -112,7 +112,7 @@
                 <a href="/"><img src="/static/images/AladeenLogo.png" alt=""></a>
                 <input type="text" placeholder="Search" id="textt">
                 <ul class="searchLista">
-                    <li v-for="user in search" :key="user.id" v-html="user"></li>
+                    <li v-for="user in search" :key="user.id"><a href="" v-html="user"></a></li>
                 </ul>
                 <ul class="nav-lista">
                     <li><a class="za-ref" href="/">Home</a></li>
