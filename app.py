@@ -40,17 +40,24 @@ def tisTry():
     lista = []
     upisano=request.form['data']
     print(upisano)
+    dicOdSvega = []
     connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
     if connection.is_connected():
       mycursor = connection.cursor()
-      mycursor.execute(f"SELECT username FROM userssss WHERE username LIKE '{upisano}%'")
+      mycursor.execute(f"SELECT username,id FROM userssss WHERE username LIKE '{upisano}%'")
       myresult = mycursor.fetchall()
       for i in range(len(myresult)):
         whatINeed = myresult[i]
         whatINeedMore = whatINeed[0]
+        whatINeedLess = whatINeed[1]
+        oneEntry = {'imeLika':whatINeedMore,'idLika':whatINeedLess}
+        dicOdSvega.append(oneEntry)
         lista.append(whatINeedMore)
       print(myresult)
-    return jsonify(result=lista)
+    print(lista)
+    print(dicOdSvega)
+
+    return jsonify(result=lista,drugiRez = dicOdSvega)
 
 @app.route('/doIFollow')
 def doIFollow():
@@ -330,9 +337,12 @@ def mainTu():
           komentari = 'null'
         if lajkova == None:
           lajkova = 'null'
+          brojLajkova = ['']
         if opis == None:
           opis = 'null'
-        k = {'slika':image,'opis':opis,'komentari':komentari,'lajkova':lajkova,'osoba':osoba,'imeLika':imeLikaa,'id':idd}
+        brojLajkova = len((lajkova.split(' , ')))
+        print(brojLajkova)
+        k = {'slika':image,'opis':opis,'komentari':komentari,'lajkova':lajkova,'osoba':osoba,'imeLika':imeLikaa,'id':idd,'brojLajkova':brojLajkova}
         kaLista.append(k)
 
       usernameOfGuyLookinAtThePage = request.cookies.get('User')
@@ -805,7 +815,7 @@ def handle_message(data):
 
 
 
-@app.route('/noviKomentarTry', methods = ['POST'])
+@app.route('/noviKomentarTry')
 def noviKomentarTry():
   if request.method == 'POST':
     username = request.cookies.get('User')
