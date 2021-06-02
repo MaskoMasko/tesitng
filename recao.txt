@@ -1,0 +1,16 @@
+What I don't like about the backend of this project(and how can I can improve)
+There is a lot of repetitivness, the app.py is over 900 lines long mostly consisting of mySQL queries. Of which at least 400-500 lines could be spared if they were in a function
+I rely too much on cookies, every login, every site, everything needs to fetch cookies, and I am not sure it is desirable
+I used too many workarounds, for example when i update a cell in mySQL it doesn't put a null,rather it gives blank which goes into a list so instead of fixing the database to put
+ -null instead of blank I opted to just remove blanks from the list
+The amount of time it took overall to mak e this project, and the time i wasted because I didnt work out a plan of the project
+I did not comment the code and it is really hard to read
+
+
+What I am proud of in this project:
+I think the search with ajax requests is really good. It is fast and only a few lines of code
+The chat was really easy to implement, webSockets are really powerful
+The naming convention is good. Ie. every route with a Try is for proccesing rather than rendering a website, and other variables have symbolic names(in Croatian)
+This was my first time working with a frontend developer but it went quite smoothly
+I did the backend without many  libraries so I can use the logic I made myself even if it isn't the best
+I gathered a lot of knowledge, mostly about ajax and mySQL
