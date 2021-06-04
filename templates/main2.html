@@ -33,7 +33,6 @@
                 type: 'POST',
                 data: {'data':$("#textt").val()},
                 success: function(response) {
-                    console.log(response);
                     zaNav.search = response.drugiRez;
                 }
               });
@@ -58,7 +57,7 @@
                     var u = $('#followe').text();
                     var m = (parseInt(u) + 1);
                     $('#followe').text(m);
-                    ////alert(u);
+                    // alert(u);
                     doIlike();         
                   });
             }
@@ -83,21 +82,18 @@
                   a: getCookie('User'),
                   b: idObjave,
                 }, function(data) {
-                  //alert(data.result);
+                  alert(data.result);
                    megaGae(data.result)
                 });}
 
                 function megaGae(jeliPratim){  
-<<<<<<< HEAD
                     alert(jeliPratim);      
                     console.log(objApp.odlajkaj)
-=======
                     //alert(jeliPratim);      
->>>>>>> 7c5934b6d431b312e4f29920e10faaf412e8c27a
                      if(jeliPratim == "DidLike"){
-                      document.getElementById("result").addEventListener("click",objApp.odlajkaj()); // tu rabi bit odlajkaj
+                      document.getElementById("result").addEventListener("click",objApp.odlajkaj); // tu rabi bit odlajkaj
                    }else{
-                     document.getElementById("result").addEventListener("click",objApp.lajkaj()) ; // tu rabi bit funckija lajkaj
+                     document.getElementById("result").addEventListener("click",objApp.lajkaj) ; // tu rabi bit funckija lajkaj
                    }}
 
                 function getCookie(name) {
@@ -210,7 +206,8 @@
                 <p v-else v-html="objava.brojLajkova"></p><span> lajkova</span>
                 <div class="kom-box">
                     <p class="siv">Comments</p>
-                    <button @click="koja(objava.id)">Submit</button>
+                    <input type="text" :id=`komentari-input${objava.id}`>
+                    <button  @click="zaKomentare(objava.id)">Submit</button>
                     <!-- <ul class="komms">
                         <li v-for="comment in comms" :key="comment.id"><h3 v-html="comment.user" ></h3><p v-html="comment.comm"></p></li>
                         <div v-if="objaviKom">
@@ -302,8 +299,13 @@ var objApp = new Vue ({
             }
         },
         koja(id){
-            //alert(id)
-        }
+            alert(id)
+            
+        },
+        zaKomentare(id) {
+                var inputKom = document.querySelector(`#komentari-input${id}`)
+                console.log(inputKom.value, id);
+                }
     }
 })
 var storiji = new Vue ({
