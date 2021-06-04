@@ -20,7 +20,7 @@
             obje[i].prazno = ""
         }
         console.log(obje)
-        alert(obje);
+        //alert(obje);
         window.onload = function hm(){
             objApp.objave = obje
             objApp.prazno = obje.prazno
@@ -54,12 +54,12 @@
                     b: id,
                   }, function(data) {
                     $("#result").text(data.result); 
-                    //alert(Object.values(data.b));
+                    ////alert(Object.values(data.b));
                     var u = $('#followe').text();
                     var m = (parseInt(u) + 1);
                     $('#followe').text(m);
-                    //alert(u);
-                    doIFollow();         
+                    ////alert(u);
+                    doIlike();         
                   });
             }
             objApp.odlajkaj = function odlajkaj(id){
@@ -71,11 +71,11 @@
                     b: id,
                   }, function(data) {
                     $("#result").text(data.result); 
-                    //alert(Object.values(data.b));
+                    ////alert(Object.values(data.b));
                     var u = $('#followe').text();
                     var m = (parseInt(u) - 1);
                     $('#followe').text(m);
-                    doIFollow();  
+                    doIlike();  
                   });
             }
             function doILike(idObjave){
@@ -83,17 +83,21 @@
                   a: getCookie('User'),
                   b: idObjave,
                 }, function(data) {
-                  alert(data.result);
+                  //alert(data.result);
                    megaGae(data.result)
                 });}
 
                 function megaGae(jeliPratim){  
+<<<<<<< HEAD
                     alert(jeliPratim);      
                     console.log(objApp.odlajkaj)
+=======
+                    //alert(jeliPratim);      
+>>>>>>> 7c5934b6d431b312e4f29920e10faaf412e8c27a
                      if(jeliPratim == "DidLike"){
-                      document.getElementById("result").setAttribute( "onClick", "javascript: otpratie();" ); // tu rabi bit odlajkaj
+                      document.getElementById("result").addEventListener("click",objApp.odlajkaj()); // tu rabi bit odlajkaj
                    }else{
-                     document.getElementById("result").setAttribute( "onClick", "javascript: deg();" ); // tu rabi bit funckija lajkaj
+                     document.getElementById("result").addEventListener("click",objApp.lajkaj()) ; // tu rabi bit funckija lajkaj
                    }}
 
                 function getCookie(name) {
@@ -229,7 +233,7 @@
 
 // input.addEventListener('input', (e)=>{
 //     log.textContent = e.target.value;
-//     alert(e.target.value)
+//     //alert(e.target.value)
 // });
     var commApp = new Vue({
         el:"#commApp",
@@ -291,14 +295,14 @@ var objApp = new Vue ({
         ova(id){
             if(!this.like){
             this.like = true;
-            alert(this.lajkaj(id))
+            //alert(this.lajkaj(id))
             }else{
             this.like = false;
-            alert(this.odlajkaj(id))
+            //alert(this.odlajkaj(id))
             }
         },
         koja(id){
-            alert(id)
+            //alert(id)
         }
     }
 })
