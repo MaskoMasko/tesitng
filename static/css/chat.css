@@ -78,9 +78,11 @@ background: radial-gradient(circle, rgb(233, 232, 232) 0%, rgb(187, 186, 186) 10
     border-radius: 5px;
     padding-left: 40px;
     color: white;
+    z-index: 25;
     font-size: 14px;
 }
 .send{
+    z-index: 25;
     position: absolute;
     width: 70px;
     height: 50px;
@@ -115,7 +117,6 @@ background: radial-gradient(circle, rgb(233, 232, 232) 0%, rgb(187, 186, 186) 10
 } 
 .messes li{
     margin-top: 50px;
-    color: white;
     width: 200px;
     height: auto;
     padding: 15px;
@@ -126,6 +127,11 @@ background: radial-gradient(circle, rgb(233, 232, 232) 0%, rgb(187, 186, 186) 10
     transform: translate(-30px, 10px);
     background-color: rgb(77, 73, 73);
     padding: 10px;
+    padding-top:25px !important;
+    width: 200px;
+    z-index: 20;
+    position: relative;
+    text-align: end;
     border-radius: 15px;
     margin-bottom: 10px;
     margin-top: 40px;
@@ -171,6 +177,13 @@ background: radial-gradient(circle, rgb(233, 232, 232) 0%, rgb(187, 186, 186) 10
 .username-l, .username-d{
     color: black;
     margin-bottom: -30px;
+    font-size: 20px;
+}
+.username-d{
+    transform: translateY(20px);
+    color: black;
+    text-align: right;
+    margin-right: 40px;
 }
 .username-l{
     transform: translate(-500px, 10px);
