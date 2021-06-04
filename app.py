@@ -347,8 +347,8 @@ def mainTu():
             koments = koments[0]
             koments = ['Null' if d == None else d for d in koments]
         print(f'OVO SU NJEGOVI KOMENTARI {komentari}')
-        if komentari == None:
-          komentari = 'null'
+        if koments == None:
+          koments = 'null'
         if lajkova == None:
           lajkova = 'null'
           brojLajkova = ['']
