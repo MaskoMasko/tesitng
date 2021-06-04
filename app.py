@@ -311,6 +311,7 @@ def unFollowTry():
 
 @app.route('/mainTu')
 def mainTu():
+  koments = []
   logStatus = request.cookies.get('logStat')
   objaveKeTrebasViditi = []
   if logStatus == "Logged In":
