@@ -89,6 +89,7 @@
 
                 function megaGae(jeliPratim){  
                     alert(jeliPratim);      
+                    console.log(objApp.odlajkaj)
                      if(jeliPratim == "DidLike"){
                       document.getElementById("result").setAttribute( "onClick", "javascript: otpratie();" ); // tu rabi bit odlajkaj
                    }else{
@@ -192,7 +193,7 @@
                 <img :src=`/static/objave/${objava.slika}.jpg` alt="">
                 <div class="rate">
                     <ul>
-                        <li @click="ova(objava.id)">Like</li>
+                        <li @click="ova(objava.id)" id="result">Like</li>
                         <li>Share</li>
                     </ul>
                     <!-- <div>
