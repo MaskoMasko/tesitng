@@ -23,6 +23,7 @@
         //alert(obje);
         window.onload = function hm(){
             objApp.objave = obje
+            objApp.komLista = obje
             objApp.prazno = obje.prazno
             storiji.storici = obje
         }
@@ -215,7 +216,13 @@
                 <p v-else v-html="objava.brojLajkova"></p><span> lajkova</span>
                 <div class="kom-box">
                     <p class="siv">Comments</p>
-                    <input type="text" :id=`komentari-input${objava.id}`>
+                    <ul class="komms">
+                        <li v-for="comment in objava.komentari" :key="comment.id"><h3 v-html="comment[4]" ></h3><p v-html="comment[1]"></p></li>
+                    </ul> 
+                    <div v-if="objaviKom">
+                        <li v-for="item in prazan" :key="item.id"><h3 v-html=""></h3><p v-html="item"></p></li>
+                    </div>
+                    <input type="text" :id=`komentari-input${objava.id}` v-model="prazan1">
                     <button  @click="zaKomentare(objava.id)">Submit</button>
                     <!-- <ul class="komms">
                         <li v-for="comment in comms" :key="comment.id"><h3 v-html="comment.user" ></h3><p v-html="comment.comm"></p></li>
@@ -297,6 +304,12 @@ var objApp = new Vue ({
         lajkaj:undefined,
         komentiraj:undefined,
         // prazno:undefined,
+        prazan1:"",
+        prazan:[],
+        prazan2:[],
+        username:undefined,
+        objaviKom:false,
+        komLista:undefined,
     },
     methods:{
         ova(id){
@@ -313,11 +326,28 @@ var objApp = new Vue ({
             
         },
         zaKomentare(id) {
+            if(this.prazan1 != ""){
+                this.objaviKom=true;
+                this.prazan2.push(this.prazan1)
+                console.log(this.komLista[0].komentari.push(this.prazan))
+                this.komlista[0].komentari.push(this.prazan2)
+                this.prazan1 = "";
+            }
+            // console.log(this.prazan)
                 var inputKom = document.querySelector(`#komentari-input${id}`)
-                console.log(inputKom.value, id);
+                // console.log(inputKom.value, id);
                 this.komentiraj(inputKom.value, id);
                 }
-    }
+    },
+    // subKom(){
+    //         if(this.prazan1 != ""){
+    //             this.objaviKom=true;
+    //             this.prazan.push(this.prazan1)
+    //             this.prazan1 = "";
+    //         }else{
+                
+    //         }
+    //     },
 })
 var storiji = new Vue ({
     el:"#storiji",
