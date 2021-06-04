@@ -311,7 +311,6 @@ def unFollowTry():
 
 @app.route('/mainTu')
 def mainTu():
-  koments = []
   logStatus = request.cookies.get('logStat')
   objaveKeTrebasViditi = []
   if logStatus == "Logged In":
@@ -319,17 +318,18 @@ def mainTu():
     if connection.is_connected():
       mycursor = connection.cursor()
       kaLista = []
-
       mycursor.execute(f"SELECT `image`,`opis`,`komentari`,`lajkova`,`osoba`,`imeLika`,`id` FROM objavee")
       myresult = mycursor.fetchall()
       #print(myresult)
       duzina = len(myresult)
       for i in range(duzina):
+        koments = []
+        komentss = []
         temp = myresult[i]
         #print(temp)
         image = temp[0]
         opis = temp[1]
-        komentari = temp[2]
+        komentari = temp[2]   # ovdje dobijem id-ove njegovih komentara
         lajkova = temp[3] 
         osoba = temp[4]
         imeLikaa = temp[5]
@@ -340,13 +340,14 @@ def mainTu():
           if 'None' in komentari:
             komentari.remove('None')
           if '' in komentari:
-            komentari.remove('')
-          for k in komentari:
+            komentari.remove('')  # pretvorim hi u listu
+          for k in komentari: # kroz svaki id komentar
             mycursor.execute(f"SELECT id,tekst,lajkova,subKomentari,imeLika FROM komentari WHERE id='{k}'")
             koments = mycursor.fetchall()
             print(koments)
             koments = koments[0]
             koments = ['Null' if d == None else d for d in koments]
+            komentss.append(koments)
         print(f'OVO SU NJEGOVI KOMENTARI {komentari}')
         if koments == None:
           koments = 'null'
@@ -357,7 +358,7 @@ def mainTu():
           opis = 'null'
         brojLajkova = len((lajkova.split(' , ')))
         #print(brojLajkova)
-        k = {'slika':image,'opis':opis,'komentari':koments,'lajkova':lajkova,'osoba':osoba,'imeLika':imeLikaa,'id':idd,'brojLajkova':brojLajkova}
+        k = {'slika':image,'opis':opis,'komentari':komentss,'lajkova':lajkova,'osoba':osoba,'imeLika':imeLikaa,'id':idd,'brojLajkova':brojLajkova}
         kaLista.append(k)
 
       usernameOfGuyLookinAtThePage = request.cookies.get('User')
