@@ -326,11 +326,11 @@ var objApp = new Vue ({
             
         },
         zaKomentare(id) {
+            console.log(id)
             if(this.prazan1 != ""){
                 this.objaviKom=true;
                 this.prazan2.push(this.prazan1)
-                console.log(this.komLista[0].komentari.push(this.prazan))
-                this.komlista[0].komentari.push(this.prazan2)
+                this.komLista[id].komentari.concat(this.prazan2)
                 this.prazan1 = "";
             }
             // console.log(this.prazan)
