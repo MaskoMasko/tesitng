@@ -44,7 +44,7 @@
                                         search();
                                     }
                                 );
-            objApp.lajkaj = function lajkaj(id){
+/*            objApp.lajkaj = function lajkaj(id){
                 alert(id);
                 alert("lajkano");
                 doILike(id);
@@ -94,13 +94,22 @@
                       document.getElementById("result").addEventListener("click",objApp.odlajkaj); // tu rabi bit odlajkaj
                    }else{
                      document.getElementById("result").addEventListener("click",objApp.lajkaj) ; // tu rabi bit funckija lajkaj
-                   }}
+                   }}*/
 
                 function getCookie(name) {
                     const value = `; ${document.cookie}`;
                     const parts = value.split(`; ${name}=`);
                     if (parts.length === 2) return parts.pop().split(';').shift();
                   }
+                  objApp.komentiraj = function komentiraj(l,i){
+                    $.getJSON($SCRIPT_ROOT + '/noviKomentarTry', {
+                        a: getCookie('User'),
+                        b: l,
+                        c: i,
+                      }, function(data) {
+                        alert(data.result);
+                      });
+                }
           
                             });
     </script>
@@ -286,6 +295,7 @@ var objApp = new Vue ({
         prati:false,
         odlajkaj:undefined,
         lajkaj:undefined,
+        komentiraj:undefined,
         // prazno:undefined,
     },
     methods:{
@@ -305,6 +315,7 @@ var objApp = new Vue ({
         zaKomentare(id) {
                 var inputKom = document.querySelector(`#komentari-input${id}`)
                 console.log(inputKom.value, id);
+                this.komentiraj(inputKom.value, id);
                 }
     }
 })
