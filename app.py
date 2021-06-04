@@ -333,6 +333,20 @@ def mainTu():
         osoba = temp[4]
         imeLikaa = temp[5]
         idd = temp[6]
+        print(f'OVO SU NJEGOVI KOMENTARI {komentari}')
+        if komentari:
+          komentari = komentari.split(" , ")
+          if 'None' in komentari:
+            komentari.remove('None')
+          if '' in komentari:
+            komentari.remove('')
+          for k in komentari:
+            mycursor.execute(f"SELECT id,tekst,lajkova,subKomentari,imeLika FROM komentari WHERE id='{k}'")
+            koments = mycursor.fetchall()
+            print(koments)
+            koments = koments[0]
+            koments = ['Null' if d == None else d for d in koments]
+        print(f'OVO SU NJEGOVI KOMENTARI {komentari}')
         if komentari == None:
           komentari = 'null'
         if lajkova == None:
@@ -341,8 +355,8 @@ def mainTu():
         if opis == None:
           opis = 'null'
         brojLajkova = len((lajkova.split(' , ')))
-        print(brojLajkova)
-        k = {'slika':image,'opis':opis,'komentari':komentari,'lajkova':lajkova,'osoba':osoba,'imeLika':imeLikaa,'id':idd,'brojLajkova':brojLajkova}
+        #print(brojLajkova)
+        k = {'slika':image,'opis':opis,'komentari':koments,'lajkova':lajkova,'osoba':osoba,'imeLika':imeLikaa,'id':idd,'brojLajkova':brojLajkova}
         kaLista.append(k)
 
       usernameOfGuyLookinAtThePage = request.cookies.get('User')
@@ -367,12 +381,12 @@ def mainTu():
       # DO TU DELA
       for i in kaLista:
         testRun = str(i.get('osoba'))
-        print(f"followam nekog  {testRun}")
+        #print(f"followam nekog  {testRun}")
 
         if testRun in whoDoIFollow:
-          print(f"followam nekog  {whoDoIFollow}")
+          #print(f"followam nekog  {whoDoIFollow}")
           objaveKeTrebasViditi.append(i)
-      print(objaveKeTrebasViditi)
+      #print(objaveKeTrebasViditi)
 
     return render_template("main2.html",username=usernameOfGuyLookinAtThePage,objave=objaveKeTrebasViditi,tvojID = myID)
   else:
