@@ -821,31 +821,34 @@ def handle_message(data):
 
 @app.route('/noviKomentarTry')
 def noviKomentarTry():
-  if request.method == 'POST':
-    username = request.cookies.get('User')
-    opis = str(request.form.get('opis')) #dela
-    idSlike = str(request.form.get('idSlike')) #dela
-    connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
-    if connection.is_connected():
-      mycursor = connection.cursor()
-      mycursor.execute(f"SELECT id FROM userssss WHERE username='{username}'")
-      tup = mycursor.fetchall()[0]
-      id = str(tup[0])
-      mycursor.execute(f"SELECT MAX(id) FROM komentari")
-      newKomentarId = mycursor.fetchall()[0][0]
-      if newKomentarId == None:
-        newKomentarId = 0
-      newKomentarId +=1
-      mycursor.execute(f"INSERT INTO komentari (tekst,osoba,imeLika) VALUES ('{opis}','{id}','{username}')")
-      connection.commit()
-      mycursor.execute(f"SELECT komentari FROM komentari WHERE id='{idSlike}'")
-      tupp = mycursor.fetchall()[0]
-      bivsiKomentariNaTojObjavi = str(tupp[0])
-      sviKomentariNaTomPostu = bivsiKomentariNaTojObjavi + " , " + newKomentarId
-      mycursor.execute(f"UPDATE objavee SET komentari = ('{sviKomentariNaTomPostu}') WHERE id='{idSlike}';")
-      connection.commit()
+  kiKomentira = request.args.get('a')
+  opis = request.args.get('b')
+  idSlike = request.args.get('c')#dela
+  print(kiKomentira)
+  print(opis)
+  print(idSlike)
+  connection = mysql.connector.connect(host='localhost',database='electronics',user='root',password='password')
+  if connection.is_connected():
+    mycursor = connection.cursor()
+    mycursor.execute(f"SELECT id FROM userssss WHERE username='{kiKomentira}'")
+    tup = mycursor.fetchall()[0]
+    id = str(tup[0])
+    mycursor.execute(f"SELECT MAX(id) FROM komentari")
+    newKomentarId = mycursor.fetchall()[0][0]
+    if newKomentarId == None:
+      newKomentarId = 0
+    newKomentarId +=1
+    newKomentarId = str(newKomentarId)
+    mycursor.execute(f"INSERT INTO komentari (tekst,osoba,imeLika) VALUES ('{opis}','{id}','{kiKomentira}')")
+    connection.commit()
+    mycursor.execute(f"SELECT komentari FROM objavee WHERE id='{idSlike}'")
+    tupp = mycursor.fetchall()[0]
+    bivsiKomentariNaTojObjavi = str(tupp[0])
+    sviKomentariNaTomPostu = bivsiKomentariNaTojObjavi + " , " + newKomentarId
+    mycursor.execute(f"UPDATE objavee SET komentari = ('{sviKomentariNaTomPostu}') WHERE id='{idSlike}';")
+    connection.commit()
 
-    return redirect("/mainTu")
+  return redirect("/mainTu")
 
 
 if __name__ == '__main__':
