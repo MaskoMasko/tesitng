@@ -106,7 +106,7 @@ body{
 .dropdown{
     position: absolute;
     top: 0%;
-    right:0%;
+    right:-200px;
     background-color: rgb(233, 232, 232);
     padding-top: 50px;
     width: 400px;
@@ -114,6 +114,17 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    animation: menu 1s forwards ;
+}
+@keyframes menu {
+    100%{
+        transform: translateX(-200px);
+    }
+}
+@keyframes menuClose {
+    100%{
+        transform: translateX(0px);
+    }
 }
 .dropdown h4{
     padding: 15px;
@@ -133,6 +144,7 @@ body{
     transform: translateY(500px);
     position: relative;
     margin-left: 70px;
+
 }
 .jedan, .dva{
     position: absolute;
