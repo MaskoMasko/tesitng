@@ -248,30 +248,6 @@
 //     log.textContent = e.target.value;
 //     //alert(e.target.value)
 // });
-    var commApp = new Vue({
-        el:"#commApp",
-        data:{
-        kom:false,
-        objaviKom:false,
-        prazan1:"",
-        prazan:[],
-        },
-    methods:{
-        zaKom(){
-        this.kom = true;
-        },
-        subKom(){
-            if(this.prazan1 != ""){
-
-                this.objaviKom=true;
-                this.prazan.push(this.prazan1)
-                this.prazan1 = "";
-            }else{
-                
-            }
-        },
-    }
-})
 var zaNav = new Vue({
     el:".nav",
     data:{
@@ -306,7 +282,6 @@ var objApp = new Vue ({
         // prazno:undefined,
         prazan1:"",
         prazan:[],
-        prazan2:[],
         username:undefined,
         objaviKom:false,
         komLista:undefined,
@@ -326,28 +301,17 @@ var objApp = new Vue ({
             
         },
         zaKomentare(id) {
-            console.log(id)
-            if(this.prazan1 != ""){
-                this.objaviKom=true;
-                this.prazan2.push(this.prazan1)
-                this.komLista[id].komentari.concat(this.prazan2)
-                this.prazan1 = "";
-            }
+            // if(this.prazan1 != ""){
+            //     this.objaviKom=true;
+            //     this.prazan.push(this.prazan1)
+            //     this.prazan1 = "";
+            // }
             // console.log(this.prazan)
                 var inputKom = document.querySelector(`#komentari-input${id}`)
                 // console.log(inputKom.value, id);
                 this.komentiraj(inputKom.value, id);
                 }
     },
-    // subKom(){
-    //         if(this.prazan1 != ""){
-    //             this.objaviKom=true;
-    //             this.prazan.push(this.prazan1)
-    //             this.prazan1 = "";
-    //         }else{
-                
-    //         }
-    //     },
 })
 var storiji = new Vue ({
     el:"#storiji",
