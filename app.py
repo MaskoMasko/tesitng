@@ -348,7 +348,7 @@ def mainTu():
             if koments:
               koments = koments[0]
               koments = ['Null' if d == None else d for d in koments]
-              komentss.append(koments)
+            komentss.append(koments)
         print(f'OVO SU NJEGOVI KOMENTARI {komentari}')
         if koments == None:
           koments = 'null'
