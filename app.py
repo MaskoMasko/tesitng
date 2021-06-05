@@ -345,9 +345,10 @@ def mainTu():
             mycursor.execute(f"SELECT id,tekst,lajkova,subKomentari,imeLika FROM komentari WHERE id='{k}'")
             koments = mycursor.fetchall()
             print(koments)
-            koments = koments[0]
-            koments = ['Null' if d == None else d for d in koments]
-            komentss.append(koments)
+            if koments:
+              koments = koments[0]
+              koments = ['Null' if d == None else d for d in koments]
+              komentss.append(koments)
         print(f'OVO SU NJEGOVI KOMENTARI {komentari}')
         if koments == None:
           koments = 'null'
