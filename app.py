@@ -862,7 +862,7 @@ def noviKomentarTry():
     tupp = mycursor.fetchall()[0]
     bivsiKomentariNaTojObjavi = str(tupp[0])
     sviKomentariNaTomPostu = bivsiKomentariNaTojObjavi + " , " + newKomentarId
-    mycursor.execute(f"UPDATE objavee SET komentari = ('{sviKomentariNaTomPostu}') WHERE id='{idSlike}';")
+    mycursor.execute(f"UPDATE objavee SET komentari = '{sviKomentariNaTomPostu}' WHERE id='{idSlike}';")
     connection.commit()
 
   return redirect("/mainTu")
