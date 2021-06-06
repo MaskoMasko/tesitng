@@ -357,7 +357,9 @@ def mainTu():
           brojLajkova = ['']
         if opis == None:
           opis = 'null'
-        brojLajkova = len((lajkova.split(' , ')))
+        lajkovi = lajkova.split(' , ')
+        print(lajkovi)
+        brojLajkova = len(lajkovi)
         #print(brojLajkova)
         k = {'slika':image,'opis':opis,'komentari':komentss,'lajkova':lajkova,'osoba':osoba,'imeLika':imeLikaa,'id':idd,'brojLajkova':brojLajkova}
         kaLista.append(k)
