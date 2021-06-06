@@ -865,7 +865,7 @@ def noviKomentarTry():
     mycursor.execute(f"UPDATE objavee SET komentari = '{sviKomentariNaTomPostu}' WHERE id='{idSlike}';")
     connection.commit()
 
-  return redirect("/mainTu")
+  return jsonify(result="whoDoIFollow")
 
 
 if __name__ == '__main__':
